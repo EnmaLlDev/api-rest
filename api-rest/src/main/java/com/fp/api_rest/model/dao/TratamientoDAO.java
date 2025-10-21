@@ -27,37 +27,57 @@ public class TratamientoDAO implements BaseDAO<Treatment, Integer> {
         return query.getResultList();
     }
 
+
+    //TODO revisar QUERY
+    // Id NO DEBIRIA SER INT SINO
+
     @Override
     public Treatment save(Treatment treatment) {
-        if (treatment.getId() == 0) {
-            entityManager.persist(treatment);
-            return treatment;
-        } else {
-            return entityManager.merge(treatment);
+        for (Treatment existingTreatment : findAll()) {
+            if (existingTreatment.getId() == treatment.getId()) {
+                throw new IllegalArgumentException("Ya existe un tratamiento con el ID: " + treatment.getId());
+            }
         }
+        return entityManager.merge(treatment);
     }
 
-    @Override
-    public void deleteById(Integer id) {
-        findById(id).ifPresent(entityManager::remove);
-    }
 
-    @Override
-    public boolean existsById(Integer id) {
-        return findById(id).isPresent();
-    }
+@Override
+public void deleteById(Integer id) {
+    findById(id).ifPresent(entityManager::remove);
+}
 
-    public List<Treatment> findByPacienteId(int pacienteId) {
-        TypedQuery<Treatment> query = entityManager.createQuery(
-            "SELECT t FROM Treatment t WHERE t.patient.id = :pacienteId", Treatment.class);
-        query.setParameter("pacienteId", pacienteId);
-        return query.getResultList();
-    }
+@Override
+public boolean existsById(Integer id) {
+    return findById(id).isPresent();
+}
 
-    public List<Treatment> findByEstado(StateTreatment estado) {
-        TypedQuery<Treatment> query = entityManager.createQuery(
-            "SELECT t FROM Treatment t WHERE t.estado = :estado", Treatment.class);
-        query.setParameter("estado", estado);
-        return query.getResultList();
-    }
+public List<Treatment> findByPacienteId(int pacienteId) {
+    TypedQuery<Treatment> query = entityManager.createQuery(
+            "SELECT t FROM Treatment t WHERE t.patient_id = :pacienteId", Treatment.class);
+    query.setParameter("pacienteId", pacienteId);
+    return query.getResultList();
+}
+
+public List<Treatment> findByEstado(StateTreatment status) {
+    TypedQuery<Treatment> query = entityManager.createQuery(
+            "SELECT t FROM Treatment t WHERE t.status = :status", Treatment.class);
+    query.setParameter("status", status);
+    return query.getResultList();
+}
+
+@Override
+public void beginTransaction() {
+    entityManager.getTransaction().begin();
+}
+
+@Override
+public void commit() {
+    entityManager.getTransaction().commit();
+}
+
+@Override
+public void rollback() {
+    entityManager.getTransaction().rollback();
+}
 }

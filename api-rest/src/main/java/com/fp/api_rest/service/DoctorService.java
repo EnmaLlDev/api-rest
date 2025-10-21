@@ -4,6 +4,7 @@ import com.fp.api_rest.model.Doctor;
 import com.fp.api_rest.repository.DoctorRepository;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
@@ -18,14 +19,17 @@ public class DoctorService {
         this.doctorRepository = doctorRepository;
     }
 
+    @Transactional(readOnly = true)
     public Doctor save(Doctor doctor) {
         return doctorRepository.save(doctor);
     }
 
+    @Transactional(readOnly = true)
     public List<Doctor> getAllDoctors() {
         return doctorRepository.findAll();
     }
 
+    @Transactional(readOnly = true)
     public String getAllNames() {
         List<Doctor> doctors = doctorRepository.findAll();
         StringBuilder names = new StringBuilder();
@@ -45,6 +49,7 @@ public class DoctorService {
         return names.toString();
     }
 
+    @Transactional(readOnly = true)
     public List<String> getAllFirstNames() {
         return doctorRepository.findAll().stream()
                 .map(Doctor::getFirst_name)
@@ -53,17 +58,17 @@ public class DoctorService {
                 .collect(Collectors.toList());
     }
 
-    public void deleteDoctor(Integer id) {
+    @Transactional
+    public void deleteDoctor(int id) {
         doctorRepository.deleteById(id);
     }
 
-    public void updateDoctor(Doctor doctor) {
-        if(doctorRepository.existsById(doctor.getId())) {
-            doctorRepository.save(doctor);
+    @Transactional
+    public Doctor updateDoctor(Doctor doctor) {
+        if (doctorRepository.existsById(doctor.getId())) {
+            return doctorRepository.save(doctor);
+        } else {
+            throw new IllegalArgumentException("Doctor with id " + doctor.getId() + " does not exist.");
         }
-        else {
-            throw new IllegalArgumentException("Doctor with id " + doctor.getId()  + " does not exist.");
-        }
-
     }
 }

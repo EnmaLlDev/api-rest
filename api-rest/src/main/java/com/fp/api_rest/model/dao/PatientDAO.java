@@ -4,12 +4,15 @@ import com.fp.api_rest.model.Patient;
 import com.fp.api_rest.model.dao.base.BaseDAO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class PatientDAO implements BaseDAO<Patient, Integer> {
+
     private final EntityManager entityManager;
 
     public PatientDAO(EntityManager entityManager) {
@@ -51,13 +54,14 @@ public class PatientDAO implements BaseDAO<Patient, Integer> {
         TypedQuery<Patient> query = entityManager.createQuery(
             "SELECT p FROM Patient p WHERE p.dni = :dni", Patient.class);
         query.setParameter("dni", dni);
+
         List<Patient> results = query.getResultList();
         return results.isEmpty() ? Optional.empty() : Optional.of(results.get(0));
     }
 
     public List<Patient> findByFechaNacimientoBetween(LocalDate inicio, LocalDate fin) {
         TypedQuery<Patient> query = entityManager.createQuery(
-            "SELECT p FROM Patient p WHERE p.fechaNacimiento BETWEEN :inicio AND :fin", Patient.class);
+            "SELECT p FROM Patient p WHERE p.birth_date BETWEEN :inicio AND :fin", Patient.class);
         query.setParameter("inicio", inicio);
         query.setParameter("fin", fin);
         return query.getResultList();

@@ -3,6 +3,7 @@ package com.fp.api_rest.controller;
 import com.fp.api_rest.model.Patient;
 import com.fp.api_rest.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,11 +17,22 @@ public class PatientController {
 
     @GetMapping("/getAll")
     public List<Patient> getAllPatients() {
-        return _patientService.findAll();
+        return _patientService.getAllPatients();
     }
 
     @PostMapping("/create")
     public Patient createPatient(@RequestBody Patient patient) {
         return _patientService.save(patient);
+    }
+    @PutMapping("/update/{id}")
+    public void updatePatient(@RequestBody Patient patient) {
+        _patientService.updatePatient(patient);
+        System.out.println("Updated, doctor id  " + patient.getId());
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deletePatient(@PathVariable int id) {
+        _patientService.deletePatient(id);
+        return ResponseEntity.noContent().build();
     }
 }

@@ -6,9 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-
 import java.time.LocalDate;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -24,8 +22,4 @@ public class Patient extends Person {
 
     @Column(length = 200)
     private String address;
-/*
-    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
-    private List<Appointment> appointment;
-*/
 }

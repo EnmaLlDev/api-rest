@@ -20,8 +20,4 @@ public class Doctor extends Person {
 
     @Column(length = 100)
     private String specialty;
-    /*
-    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
-    private List<Appointment> appointments;
-    */
 }
