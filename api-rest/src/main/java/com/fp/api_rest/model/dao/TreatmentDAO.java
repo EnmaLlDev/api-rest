@@ -9,10 +9,10 @@ import jakarta.persistence.TypedQuery;
 import java.util.List;
 import java.util.Optional;
 
-public class TratamientoDAO implements BaseDAO<Treatment, Integer> {
+public class TreatmentDAO implements BaseDAO<Treatment, Integer> {
     private final EntityManager entityManager;
 
-    public TratamientoDAO(EntityManager entityManager) {
+    public TreatmentDAO(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
