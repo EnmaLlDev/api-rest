@@ -1,6 +1,7 @@
 package com.fp.api_rest.service;
 
 import com.fp.api_rest.model.Doctor;
+import com.fp.api_rest.model.dao.DoctorDAOnew;
 import com.fp.api_rest.repository.DoctorRepository;
 
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import java.util.stream.Collectors;
 @Service
 public class DoctorService {
 
+    private DoctorDAOnew doctorDAOnew;
     private final DoctorRepository doctorRepository;
 
     public DoctorService(DoctorRepository doctorRepository) {

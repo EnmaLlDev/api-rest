@@ -5,24 +5,8 @@ import java.util.Optional;
 
 public interface BaseDAO<T, ID> {
     Optional<T> findById(ID id);
-
     List<T> findAll();
-
     T save(T entity);
-
     void deleteById(ID id);
-
     boolean existsById(ID id);
-
-    default void beginTransaction() {
-        // Comportamoientos específicos
-    }
-
-    default void commit() {
-        // Comportamoientos específicos
-    }
-
-    default void rollback() {
-        // Comportamoientos específicos
-    }
 }
