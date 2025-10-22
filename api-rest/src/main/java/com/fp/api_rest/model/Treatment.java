@@ -21,12 +21,12 @@ public class Treatment {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "patient_id", nullable = false)
-    private Patient patient_id;
+    @JoinColumn(name = "patientId", nullable = false)
+    private Patient patientId;
 
     @ManyToOne
-    @JoinColumn(name = "doctor_id", nullable = false)
-    private Doctor doctor_id;
+    @JoinColumn(name = "doctorId", nullable = false)
+    private Doctor doctorId;
 
     @Column(columnDefinition = "TEXT", nullable = false)
     private String description;
@@ -42,6 +42,6 @@ public class Treatment {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private StateTreatment status = StateTreatment.ACTIVE;
+    private StateTreatment status=StateTreatment.PAUSED;
 }
 

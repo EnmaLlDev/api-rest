@@ -1,6 +1,5 @@
 package com.fp.api_rest.controller;
 
-import com.fp.api_rest.model.Doctor;
 import com.fp.api_rest.service.DoctorService;
 import org.springframework.web.bind.annotation.*;
 import com.fp.api_rest.model.dto.DoctorDTO;
@@ -39,5 +38,15 @@ public class DoctorController {
     @GetMapping("/specialty/{specialty}")
     public List<DoctorDTO> getDoctorsBySpecialty(@PathVariable String specialty) {
         return doctorService.findBySpecialty(specialty);
+    }
+
+    @GetMapping("/licenseNumber/{licenseNumber}")
+    public List<DoctorDTO> getDoctorsByLicenseNumber(@PathVariable String licenseNumber) {
+        return doctorService.findByLicenseNumber(licenseNumber);
+    }
+
+    @GetMapping("/search/{terms}")
+    public List<DoctorDTO> getSpecialtyByTerms(@PathVariable String terms) {
+        return doctorService.findBySpecialtyContainingIgnoreCase(terms);
     }
 }

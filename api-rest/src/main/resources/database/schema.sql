@@ -10,7 +10,7 @@ CREATE TABLE doctors
     second_last_name VARCHAR(50),
     email            VARCHAR(100)       NOT NULL,
     phone            VARCHAR(15),
-    license_number   VARCHAR(20)        NOT NULL,
+    licenseNumber   VARCHAR(20)        NOT NULL,
     specialty        VARCHAR(100)
 );
 
@@ -44,8 +44,8 @@ CREATE TABLE appointments
 CREATE TABLE treatments
 (
     id          SERIAL PRIMARY KEY,
-    patient_id  INT            NOT NULL REFERENCES patients (id),
-    doctor_id   INT            NOT NULL REFERENCES doctors (id),
+    patientId  INT            NOT NULL REFERENCES patients (id),
+    doctorId   INT            NOT NULL REFERENCES doctors (id),
     description TEXT           NOT NULL,
     cost        DECIMAL(10, 2) NOT NULL,
     start_date  TIMESTAMP      NOT NULL,

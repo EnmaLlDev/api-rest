@@ -12,7 +12,9 @@ public class DoctorMapper {
         dto.setFirstName(doctor.getFirst_name());
         dto.setLastName(doctor.getLast_name());
         dto.setDni(doctor.getDni());
-        dto.setLicenseNumber(doctor.getLicense_number());
+        dto.setEmail(doctor.getEmail());
+        dto.setPhone(doctor.getPhone());
+        dto.setLicenseNumber(doctor.getLicenseNumber());
         dto.setSpecialty(doctor.getSpecialty());
         return dto;
     }
@@ -23,7 +25,9 @@ public class DoctorMapper {
         doctor.setFirst_name(dto.getFirstName());
         doctor.setSecond_last_name(dto.getLastName());
         doctor.setDni(dto.getDni());
-        doctor.setLicense_number(dto.getLicenseNumber());
+        doctor.setEmail(dto.getEmail());
+        doctor.setPhone(dto.getPhone());
+        doctor.setLicenseNumber(dto.getLicenseNumber());
         doctor.setSpecialty(dto.getSpecialty());
         return doctor;
     }

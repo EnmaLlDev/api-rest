@@ -17,6 +17,5 @@ public class AppointmentService {
     }
 
     public void deleteById(int id) {
-        System.out.println("Deleted appointment id " + id);
     }
 }

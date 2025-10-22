@@ -13,12 +13,12 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TreatmentDTO {
-    private int id;
+    private Integer id;
     private String description;
     private double cost;
     private LocalDateTime start_date;
     private LocalDateTime end_date;
     private StateTreatment status;
-    private int patient_id;
-    private int doctor_id;
+    private int patientId;
+    private int doctorId;
 }

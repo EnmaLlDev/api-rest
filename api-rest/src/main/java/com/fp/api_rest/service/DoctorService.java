@@ -8,12 +8,12 @@ import java.util.List;
 
 import com.fp.api_rest.model.dto.DoctorDTO;
 import com.fp.api_rest.model.dto.mapper.DoctorMapper;
-import com.fp.api_rest.model.dao.DoctorDAOnew;
 import java.util.stream.Collectors;
 
 @Service
 public class DoctorService {
 
+    @Autowired
     private final DoctorDAOnew doctorDAO;
 
     public DoctorService(DoctorDAOnew doctorDAO) {
@@ -49,4 +49,17 @@ public class DoctorService {
                 .map(DoctorMapper::toDTO)
                 .collect(Collectors.toList());
     }
+    public List<DoctorDTO> findBySpecialtyContainingIgnoreCase(String specialty) {
+        return doctorDAO.findBySpecialtyContainingIgnoreCase(specialty)
+                .stream()
+                .map(DoctorMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+    public List<DoctorDTO> findByLicenseNumber (String licenseNumber) {
+        return doctorDAO.findByLicenseNumber(licenseNumber)
+                .stream()
+                .map(DoctorMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
 }

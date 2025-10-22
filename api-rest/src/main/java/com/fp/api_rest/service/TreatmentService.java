@@ -1,38 +1,44 @@
 package com.fp.api_rest.service;
-
 import com.fp.api_rest.model.Treatment;
-import com.fp.api_rest.repository.TreatmentRepository;
+import com.fp.api_rest.model.dao.TreatmentDAOnew;
+import com.fp.api_rest.model.dto.TreatmentDTO;
+import com.fp.api_rest.model.dto.mapper.TreatmentMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TreatmentService {
 
-    private final TreatmentRepository treatmentRepository;
+    @Autowired
+    private final TreatmentDAOnew treatmentDAO;
 
-    public TreatmentService(TreatmentRepository treatmentRepository) {this.treatmentRepository = treatmentRepository;}
-
-    @Transactional(readOnly = true)
-    public Treatment save(Treatment treatment) {return treatmentRepository.save(treatment);}
-
-    @Transactional(readOnly = true)
-    public List<Treatment> getAllTreatments() {
-        return treatmentRepository.findAll();
+    public TreatmentService(TreatmentDAOnew treatmentDAO) {
+        this.treatmentDAO = treatmentDAO;
     }
 
-    @Transactional
-    public void deleteTreatment(int id) {
-        treatmentRepository.deleteById(id);
+    public List<TreatmentDTO> findAll() {
+        return treatmentDAO.findAll()
+                .stream()
+                .map(TreatmentMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
-    @Transactional
-    public Treatment updateTreatment(Treatment treatment) {
-        if (treatmentRepository.existsById(treatment.getId())) {
-            return treatmentRepository.save(treatment);
-        } else {
-            throw new IllegalArgumentException("Doctor with id " + treatment.getId() + " does not exist.");
-        }
+    public TreatmentDTO findById(Integer id) {
+        return treatmentDAO.findById(id)
+                .map(TreatmentMapper::toDTO)
+                .orElse(null);
+    }
+
+    public TreatmentDTO save(TreatmentDTO dto) {
+        Treatment treatment = TreatmentMapper.toEntity(dto);
+        Treatment saved = treatmentDAO.save(treatment);
+        return TreatmentMapper.toDTO(saved);
+    }
+
+    public void deleteById(Integer id) {
+        treatmentDAO.deleteById(id);
     }
 }

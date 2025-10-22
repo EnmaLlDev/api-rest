@@ -29,6 +29,11 @@ public class AppointmentDAO implements BaseDAO<Appointment, Integer> {
     }
 
     @Override
+    public boolean existsById(Integer integer) {
+        return false;
+    }
+
+    @Override
     public <S extends Appointment> List<S> saveAll(Iterable<S> entities) {
         return List.of();
     }
@@ -84,43 +89,6 @@ public class AppointmentDAO implements BaseDAO<Appointment, Integer> {
 
     }
 
-    @Override
-    public boolean existsById(Integer id) {
-        return findById(id).isPresent();
-    }
-
-    public List<Appointment> findByPacienteId(int patientId) {
-        TypedQuery<Appointment> query = entityManager.createQuery(
-            "SELECT a FROM Appointment a WHERE a.patient.id = :pacienteId ORDER BY a.fechaHora DESC",
-            Appointment.class);
-        query.setParameter("pacienteId", patientId);
-        return query.getResultList();
-    }
-
-    public List<Appointment> findByMedicoId(int doctorId) {
-        TypedQuery<Appointment> query = entityManager.createQuery(
-            "SELECT a FROM Appointment a WHERE a.doctor.id = :medicoId ORDER BY a.fechaHora DESC",
-            Appointment.class);
-        query.setParameter("medicoId", doctorId);
-        return query.getResultList();
-    }
-
-    public List<Appointment> findByFechaHoraBetween(LocalDateTime inicio, LocalDateTime fin) {
-        TypedQuery<Appointment> query = entityManager.createQuery(
-            "SELECT a FROM Appointment a WHERE a.fechaHora BETWEEN :inicio AND :fin ORDER BY a.fechaHora",
-            Appointment.class);
-        query.setParameter("inicio", inicio);
-        query.setParameter("fin", fin);
-        return query.getResultList();
-    }
-
-    public List<Appointment> findByEstado(StateAppointment state) {
-        TypedQuery<Appointment> query = entityManager.createQuery(
-            "SELECT a FROM Appointment a WHERE a.status = :estado ORDER BY a.fechaHora",
-            Appointment.class);
-        query.setParameter("estado", state);
-        return query.getResultList();
-    }
     @Override
     public void flush() {
 

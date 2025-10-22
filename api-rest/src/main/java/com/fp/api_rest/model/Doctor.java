@@ -16,7 +16,7 @@ import lombok.experimental.SuperBuilder;
 public class Doctor extends Person {
 
     @Column(nullable = false, length = 20)
-    private String license_number;
+    private String licenseNumber;
 
     @Column(length = 100)
     private String specialty;
