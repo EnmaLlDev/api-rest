@@ -5,10 +5,16 @@ import com.fp.api_rest.model.StateAppointment;
 import com.fp.api_rest.model.dao.base.BaseDAO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.query.FluentQuery;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 
 public class AppointmentDAO implements BaseDAO<Appointment, Integer> {
     private final EntityManager entityManager;
@@ -23,9 +29,24 @@ public class AppointmentDAO implements BaseDAO<Appointment, Integer> {
     }
 
     @Override
+    public <S extends Appointment> List<S> saveAll(Iterable<S> entities) {
+        return List.of();
+    }
+
+    @Override
     public List<Appointment> findAll() {
         TypedQuery<Appointment> query = entityManager.createQuery("SELECT a FROM Appointment a", Appointment.class);
         return query.getResultList();
+    }
+
+    @Override
+    public List<Appointment> findAllById(Iterable<Integer> integers) {
+        return List.of();
+    }
+
+    @Override
+    public long count() {
+        return 0;
     }
 
     @Override
@@ -41,6 +62,26 @@ public class AppointmentDAO implements BaseDAO<Appointment, Integer> {
     @Override
     public void deleteById(Integer id) {
         findById(id).ifPresent(entityManager::remove);
+    }
+
+    @Override
+    public void delete(Appointment entity) {
+
+    }
+
+    @Override
+    public void deleteAllById(Iterable<? extends Integer> integers) {
+
+    }
+
+    @Override
+    public void deleteAll(Iterable<? extends Appointment> entities) {
+
+    }
+
+    @Override
+    public void deleteAll() {
+
     }
 
     @Override
@@ -80,19 +121,93 @@ public class AppointmentDAO implements BaseDAO<Appointment, Integer> {
         query.setParameter("estado", state);
         return query.getResultList();
     }
-
     @Override
-    public void beginTransaction() {
-        entityManager.getTransaction().begin();
+    public void flush() {
+
     }
 
     @Override
-    public void commit() {
-        entityManager.getTransaction().commit();
+    public <S extends Appointment> S saveAndFlush(S entity) {
+        return null;
     }
 
     @Override
-    public void rollback() {
-        entityManager.getTransaction().rollback();
+    public <S extends Appointment> List<S> saveAllAndFlush(Iterable<S> entities) {
+        return List.of();
+    }
+
+    @Override
+    public void deleteAllInBatch(Iterable<Appointment> entities) {
+
+    }
+
+    @Override
+    public void deleteAllByIdInBatch(Iterable<Integer> integers) {
+
+    }
+
+    @Override
+    public void deleteAllInBatch() {
+
+    }
+
+    @Override
+    public Appointment getOne(Integer integer) {
+        return null;
+    }
+
+    @Override
+    public Appointment getById(Integer integer) {
+        return null;
+    }
+
+    @Override
+    public Appointment getReferenceById(Integer integer) {
+        return null;
+    }
+
+    @Override
+    public <S extends Appointment> Optional<S> findOne(Example<S> example) {
+        return Optional.empty();
+    }
+
+    @Override
+    public <S extends Appointment> List<S> findAll(Example<S> example) {
+        return List.of();
+    }
+
+    @Override
+    public <S extends Appointment> List<S> findAll(Example<S> example, Sort sort) {
+        return List.of();
+    }
+
+    @Override
+    public <S extends Appointment> Page<S> findAll(Example<S> example, Pageable pageable) {
+        return null;
+    }
+
+    @Override
+    public <S extends Appointment> long count(Example<S> example) {
+        return 0;
+    }
+
+    @Override
+    public <S extends Appointment> boolean exists(Example<S> example) {
+        return false;
+    }
+
+    @Override
+    public <S extends Appointment, R> R findBy(Example<S> example, Function<FluentQuery.FetchableFluentQuery<S>, R> queryFunction) {
+        return null;
+    }
+
+    @Override
+    public List<Appointment> findAll(Sort sort) {
+        return List.of();
+    }
+
+    @Override
+    public Page<Appointment> findAll(Pageable pageable) {
+        return null;
     }
 }

@@ -2,75 +2,51 @@ package com.fp.api_rest.service;
 
 import com.fp.api_rest.model.Doctor;
 import com.fp.api_rest.model.dao.DoctorDAOnew;
-import com.fp.api_rest.repository.DoctorRepository;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
-import java.util.Objects;
+
+import com.fp.api_rest.model.dto.DoctorDTO;
+import com.fp.api_rest.model.dto.mapper.DoctorMapper;
+import com.fp.api_rest.model.dao.DoctorDAOnew;
 import java.util.stream.Collectors;
 
 @Service
 public class DoctorService {
 
-    private DoctorDAOnew doctorDAOnew;
-    private final DoctorRepository doctorRepository;
+    private final DoctorDAOnew doctorDAO;
 
-    public DoctorService(DoctorRepository doctorRepository) {
-        this.doctorRepository = doctorRepository;
+    public DoctorService(DoctorDAOnew doctorDAO) {
+        this.doctorDAO = doctorDAO;
     }
 
-    @Transactional(readOnly = true)
-    public Doctor save(Doctor doctor) {
-        return doctorRepository.save(doctor);
-    }
-
-    @Transactional(readOnly = true)
-    public List<Doctor> getAllDoctors() {
-        return doctorRepository.findAll();
-    }
-
-    @Transactional(readOnly = true)
-    public String getAllNames() {
-        List<Doctor> doctors = doctorRepository.findAll();
-        StringBuilder names = new StringBuilder();
-        for (Doctor doctor : doctors) {
-            String first = doctor.getFirst_name();
-            String second = doctor.getLast_name();
-            if (first != null && !first.isBlank()) {
-                if (names.length() > 0) names.append(" ");
-                names.append(first);
-            }
-            if (second != null && !second.isBlank()) {
-                if (names.length() > 0) names.append(" ");
-                names.append(second);
-            }
-
-        }
-        return names.toString();
-    }
-
-    @Transactional(readOnly = true)
-    public List<String> getAllFirstNames() {
-        return doctorRepository.findAll().stream()
-                .map(Doctor::getFirst_name)
-                .filter(Objects::nonNull)
-                .filter(s -> !s.isBlank())
+    public List<DoctorDTO> findAll() {
+        return doctorDAO.findAll()
+                .stream()
+                .map(DoctorMapper::toDTO)
                 .collect(Collectors.toList());
     }
 
-    @Transactional
-    public void deleteDoctor(int id) {
-        doctorRepository.deleteById(id);
+    public DoctorDTO findById(Integer id) {
+        return doctorDAO.findById(id)
+                .map(DoctorMapper::toDTO)
+                .orElse(null);
     }
 
-    @Transactional
-    public Doctor updateDoctor(Doctor doctor) {
-        if (doctorRepository.existsById(doctor.getId())) {
-            return doctorRepository.save(doctor);
-        } else {
-            throw new IllegalArgumentException("Doctor with id " + doctor.getId() + " does not exist.");
-        }
+    public DoctorDTO save(DoctorDTO dto) {
+        Doctor doctor = DoctorMapper.toEntity(dto);
+        Doctor saved = doctorDAO.save(doctor);
+        return DoctorMapper.toDTO(saved);
+    }
+
+    public void deleteById(Integer id) {
+        doctorDAO.deleteById(id);
+    }
+
+    public List<DoctorDTO> findBySpecialty(String specialty) {
+        return doctorDAO.findBySpecialty(specialty)
+                .stream()
+                .map(DoctorMapper::toDTO)
+                .collect(Collectors.toList());
     }
 }

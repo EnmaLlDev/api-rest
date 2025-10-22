@@ -2,52 +2,42 @@ package com.fp.api_rest.controller;
 
 import com.fp.api_rest.model.Doctor;
 import com.fp.api_rest.service.DoctorService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import com.fp.api_rest.model.dto.DoctorDTO;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/doctor")
+@RequestMapping("/doctors")
 public class DoctorController {
-    @Autowired
-    private DoctorService _doctorService;
 
-    @GetMapping("/getAll")
-    public List<Doctor> getAllDoctors() {
-        return _doctorService.getAllDoctors();
+    private final DoctorService doctorService;
+
+    public DoctorController(DoctorService doctorService) {
+        this.doctorService = doctorService;
     }
 
-    @GetMapping("/getFirstNames")
-    public ResponseEntity<List<String>> getAllNames() {
-        List<String> names = _doctorService.getAllFirstNames();
-        if (names.isEmpty()) return ResponseEntity.noContent().build();
-        return ResponseEntity.ok(names);
+    @GetMapping
+    public List<DoctorDTO> getAllDoctors() {
+        return doctorService.findAll();
     }
 
-    @GetMapping("/getNames")
-    public ResponseEntity<String> getNames() {
-        String names = _doctorService.getAllNames();
-        if (names.isBlank()) return ResponseEntity.noContent().build();
-        return ResponseEntity.ok(names);
+    @GetMapping("/{id}")
+    public DoctorDTO getDoctorById(@PathVariable Integer id) {
+        return doctorService.findById(id);
     }
 
-    @PostMapping("/create")
-    public Doctor createDoctor(@RequestBody Doctor doctor) {
-        return _doctorService.save(doctor);
+    @PostMapping
+    public DoctorDTO createDoctor(@RequestBody DoctorDTO doctorDTO) {
+        return doctorService.save(doctorDTO);
     }
 
-    @PutMapping("/update/{id}")
-    public void updateDoctor(@RequestBody Doctor doctor) {
-        _doctorService.updateDoctor(doctor);
-        System.out.println("Updated, doctor id  " + doctor.getId());
+    @DeleteMapping("/{id}")
+    public void deleteDoctor(@PathVariable Integer id) {
+        doctorService.deleteById(id);
     }
 
-
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteDoctor(@PathVariable int id) {
-        _doctorService.deleteDoctor(id);
-        return ResponseEntity.noContent().build();
+    @GetMapping("/specialty/{specialty}")
+    public List<DoctorDTO> getDoctorsBySpecialty(@PathVariable String specialty) {
+        return doctorService.findBySpecialty(specialty);
     }
 }

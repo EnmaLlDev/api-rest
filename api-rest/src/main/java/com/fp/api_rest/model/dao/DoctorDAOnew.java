@@ -4,10 +4,10 @@ import com.fp.api_rest.model.Doctor;
 import com.fp.api_rest.model.dao.base.BaseDAO;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface DoctorDAOnew extends BaseDAO<Doctor, Integer> {
-    public List<Doctor> getAll();
-    public Doctor getDoctor();
-    public String getNumberLicense(Doctor doctor);
-    public String getSpecialty(Doctor doctor);
+    List<Doctor> findBySpecialty(String specialty);
+    Optional<Doctor> findByLicenseNumber(String licenseNumber);
+    List<Doctor> findBySpecialtyContainingIgnoreCase(String keyword);
 }

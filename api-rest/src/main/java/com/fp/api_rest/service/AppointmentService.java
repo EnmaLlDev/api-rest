@@ -12,8 +12,11 @@ public class AppointmentService {
         List<Appointment> appointments = new ArrayList<>();
         return appointments;
     }
-
     public Appointment save(Appointment appointment) {
         return appointment;
+    }
+
+    public void deleteById(int id) {
+        System.out.println("Deleted appointment id " + id);
     }
 }

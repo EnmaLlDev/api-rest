@@ -27,13 +27,13 @@ public class AppointmentController {
 
     @PutMapping("/update/{id}")
     public void updatePatient(@RequestBody Appointment appointment) {
-        _appointmentService.updateAppointment(appointment);
+        _appointmentService.save(appointment);
         System.out.println("Updated, doctor id  " + appointment.getId());
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deletePatient(@PathVariable int id) {
-        _appointmentService.deleteAppointment(id);
+        _appointmentService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 }
