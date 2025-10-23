@@ -16,11 +16,11 @@ public class AppointmentConverter {
                 .patient_id(appointment.getPatient_id() != null ?
                         appointment.getPatient_id().getId() : 0)
                 .patient_name(appointment.getPatient_id() != null ?
-                        appointment.getPatient_id().getFirst_name() + " " + appointment.getPatient_id().getLast_name() : null)
+                        appointment.getPatient_id().getFirstName() + " " + appointment.getPatient_id().getFirstName() : null)
                 .doctor_id(appointment.getDoctor_id() != null ?
                         appointment.getDoctor_id().getId() : 0)
                 .doctor_name(appointment.getDoctor_id() != null ?
-                        appointment.getDoctor_id().getFirst_name() + " " + appointment.getDoctor_id().getLast_name() : null)
+                        appointment.getDoctor_id().getLastName() + " " + appointment.getDoctor_id().getLastName() : null)
                 .reason(appointment.getReason())
                 .status(appointment.getStatus())
                 .build();

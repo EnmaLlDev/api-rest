@@ -21,11 +21,11 @@ public class Treatment {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "patientId", nullable = false)
+    @JoinColumn(name = "patientid", nullable = false)
     private Patient patientId;
 
     @ManyToOne
-    @JoinColumn(name = "doctorId", nullable = false)
+    @JoinColumn(name = "doctorid", nullable = false)
     private Doctor doctorId;
 
     @Column(columnDefinition = "TEXT", nullable = false)
@@ -35,10 +35,10 @@ public class Treatment {
     private double cost;
 
     @Column(nullable = false)
-    private LocalDateTime start_date;
+    private LocalDateTime startDate;
 
     @Column
-    private LocalDateTime end_date;
+    private LocalDateTime endDate;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

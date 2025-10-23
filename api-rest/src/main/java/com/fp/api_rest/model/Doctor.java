@@ -15,9 +15,9 @@ import lombok.experimental.SuperBuilder;
 @Table(name = "doctors")
 public class Doctor extends Person {
 
-    @Column(nullable = false, length = 20)
+    @Column(name = "licensenumber", nullable = false, length = 20)
     private String licenseNumber;
 
-    @Column(length = 100)
+    @Column(name = "specialty", length = 100)
     private String specialty;
 }

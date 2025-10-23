@@ -18,7 +18,7 @@ public class Patient extends Person {
 
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
-    private LocalDate birth_date;
+    private LocalDate birthDate;
 
     @Column(length = 200)
     private String address;

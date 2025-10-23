@@ -15,7 +15,7 @@ public class DoctorController {
         this.doctorService = doctorService;
     }
 
-    @GetMapping
+    @GetMapping("/getAll")
     public List<DoctorDTO> getAllDoctors() {
         return doctorService.findAll();
     }

@@ -61,5 +61,4 @@ public class DoctorService {
                 .map(DoctorMapper::toDTO)
                 .collect(Collectors.toList());
     }
-
 }

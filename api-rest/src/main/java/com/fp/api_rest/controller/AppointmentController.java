@@ -1,7 +1,6 @@
 package com.fp.api_rest.controller;
 
 import com.fp.api_rest.model.Appointment;
-import com.fp.api_rest.model.Patient;
 import com.fp.api_rest.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

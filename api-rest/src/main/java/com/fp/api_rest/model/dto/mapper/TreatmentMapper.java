@@ -11,8 +11,8 @@ public class TreatmentMapper {
         dto.setId(treatment.getId());
         dto.setDescription(treatment.getDescription());
         dto.setCost(treatment.getCost());
-        dto.setStart_date(treatment.getStart_date());
-        dto.setEnd_date(treatment.getEnd_date());
+        dto.setStart_date(treatment.getStartDate());
+        dto.setEnd_date(treatment.getEndDate());
         dto.setStatus(treatment.getStatus());
         dto.setPatientId(treatment.getPatientId() != null ?
                 treatment.getPatientId().getId() : 0);
@@ -27,8 +27,8 @@ public class TreatmentMapper {
         treatment.setId(dto.getId());
         treatment.setDescription(dto.getDescription());
         treatment.setCost(dto.getCost());
-        treatment.setStart_date(dto.getStart_date());
-        treatment.setEnd_date(dto.getEnd_date());
+        treatment.setStartDate(dto.getStart_date());
+        treatment.setEndDate(dto.getEnd_date());
         treatment.setStatus(dto.getStatus());
 
         // fetch Patient and Doctor by their IDs

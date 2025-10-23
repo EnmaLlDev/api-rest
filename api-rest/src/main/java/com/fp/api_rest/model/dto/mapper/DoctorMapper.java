@@ -9,8 +9,8 @@ public class DoctorMapper {
     public static DoctorDTO toDTO(Doctor doctor) {
         DoctorDTO dto = new DoctorDTO();
         dto.setId(doctor.getId());
-        dto.setFirstName(doctor.getFirst_name());
-        dto.setLastName(doctor.getLast_name());
+        dto.setFirstName(doctor.getFirstName());
+        dto.setLastName(doctor.getLastName());
         dto.setDni(doctor.getDni());
         dto.setEmail(doctor.getEmail());
         dto.setPhone(doctor.getPhone());
@@ -22,8 +22,8 @@ public class DoctorMapper {
     public static Doctor toEntity(DoctorDTO dto) {
         Doctor doctor = new Doctor();
         doctor.setId(dto.getId());
-        doctor.setFirst_name(dto.getFirstName());
-        doctor.setSecond_last_name(dto.getLastName());
+        doctor.setFirstName(dto.getFirstName());
+        doctor.setSecondLastName(dto.getLastName());
         doctor.setDni(dto.getDni());
         doctor.setEmail(dto.getEmail());
         doctor.setPhone(dto.getPhone());

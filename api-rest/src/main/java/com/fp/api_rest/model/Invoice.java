@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -19,15 +18,15 @@ public class Invoice {
     private int id;
 
     @OneToOne
-    @JoinColumn(name = "treatment_id", nullable = false)
-    private Treatment treatment_id;
+    @JoinColumn(name = "treatmentid", nullable = false)
+    private Treatment treatmentId;
 
-    @Column(name = "total_amount", nullable = false)
-    private double total_amount;
+    @Column(name = "totalamount", nullable = false)
+    private double totalAmount;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "issue_date", nullable = false)
-    private LocalDateTime issue_date;
+    @Column(name = "issuedate", nullable = false)
+    private LocalDateTime issueDate;
 
     @Column(nullable = false)
     private int status; // 0: pendiente, 1: pagada, 2: cancelada

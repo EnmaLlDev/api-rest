@@ -26,12 +26,12 @@ public class Diagnostic {
     private LocalDateTime date;
 
     @ManyToOne
-    @JoinColumn(name = "id_medico", nullable = false)
-    private Doctor doctor_id;
+    @JoinColumn(name = "doctorid", nullable = false)
+    private Doctor doctorId;
 
     @ManyToOne
-    @JoinColumn(name = "id_paciente", nullable = false)
-    private Patient patient_id;
+    @JoinColumn(name = "patientid", nullable = false)
+    private Patient patientId;
 
     @PrePersist
     protected void onCreate() {
