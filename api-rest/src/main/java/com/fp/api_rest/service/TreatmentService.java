@@ -1,6 +1,6 @@
 package com.fp.api_rest.service;
 import com.fp.api_rest.model.Treatment;
-import com.fp.api_rest.model.dao.TreatmentDAOnew;
+import com.fp.api_rest.model.dao.TreatmentDAO;
 import com.fp.api_rest.model.dto.TreatmentDTO;
 import com.fp.api_rest.model.dto.mapper.TreatmentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +13,9 @@ import java.util.stream.Collectors;
 public class TreatmentService {
 
     @Autowired
-    private final TreatmentDAOnew treatmentDAO;
+    private final TreatmentDAO treatmentDAO;
 
-    public TreatmentService(TreatmentDAOnew treatmentDAO) {
+    public TreatmentService(TreatmentDAO treatmentDAO) {
         this.treatmentDAO = treatmentDAO;
     }
 
@@ -41,4 +41,6 @@ public class TreatmentService {
     public void deleteById(Integer id) {
         treatmentDAO.deleteById(id);
     }
+
+
 }

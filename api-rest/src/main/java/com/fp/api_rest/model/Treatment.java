@@ -34,10 +34,10 @@ public class Treatment {
     @Column(nullable = false)
     private double cost;
 
-    @Column(nullable = false)
+    @Column(name = "startdate", nullable = false)
     private LocalDateTime startDate;
 
-    @Column
+    @Column(name = "enddate")
     private LocalDateTime endDate;
 
     @Enumerated(EnumType.STRING)

@@ -29,6 +29,10 @@ public class DoctorController {
     public DoctorDTO createDoctor(@RequestBody DoctorDTO doctorDTO) {
         return doctorService.save(doctorDTO);
     }
+    @PutMapping
+    public DoctorDTO updateDoctor(@RequestBody DoctorDTO doctorDTO) {
+        return doctorService.save(doctorDTO);
+    }
 
     @DeleteMapping("/{id}")
     public void deleteDoctor(@PathVariable Integer id) {
@@ -40,7 +44,7 @@ public class DoctorController {
         return doctorService.findBySpecialty(specialty);
     }
 
-    @GetMapping("/licenseNumber/{licenseNumber}")
+    @GetMapping("/license/{licenseNumber}")
     public List<DoctorDTO> getDoctorsByLicenseNumber(@PathVariable String licenseNumber) {
         return doctorService.findByLicenseNumber(licenseNumber);
     }

@@ -13,12 +13,12 @@ import java.time.LocalDate;
 public class PatientDTO {
     private int id;
     private String dni;
-    private String first_name;
-    private String second_name;
-    private String last_name;
-    private String second_last_name;
+    private String firstName;
+    private String secondName;
+    private String lastName;
+    private String secondLastName;
     private String email;
     private String phone;
-    private LocalDate birth_date;
+    private LocalDate birthDate;
     private String address;
 }

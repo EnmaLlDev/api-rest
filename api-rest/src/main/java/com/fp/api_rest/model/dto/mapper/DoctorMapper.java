@@ -10,7 +10,9 @@ public class DoctorMapper {
         DoctorDTO dto = new DoctorDTO();
         dto.setId(doctor.getId());
         dto.setFirstName(doctor.getFirstName());
+        dto.setSecondName(doctor.getSecondName());
         dto.setLastName(doctor.getLastName());
+        dto.setSecondLastName(doctor.getSecondLastName());
         dto.setDni(doctor.getDni());
         dto.setEmail(doctor.getEmail());
         dto.setPhone(doctor.getPhone());
@@ -23,6 +25,8 @@ public class DoctorMapper {
         Doctor doctor = new Doctor();
         doctor.setId(dto.getId());
         doctor.setFirstName(dto.getFirstName());
+        doctor.setSecondName(dto.getSecondName());
+        doctor.setLastName(dto.getLastName());
         doctor.setSecondLastName(dto.getLastName());
         doctor.setDni(dto.getDni());
         doctor.setEmail(dto.getEmail());

@@ -16,8 +16,8 @@ public class TreatmentDTO {
     private Integer id;
     private String description;
     private double cost;
-    private LocalDateTime start_date;
-    private LocalDateTime end_date;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
     private StateTreatment status;
     private int patientId;
     private int doctorId;

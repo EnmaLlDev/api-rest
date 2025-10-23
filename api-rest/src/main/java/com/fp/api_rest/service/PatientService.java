@@ -1,38 +1,49 @@
 package com.fp.api_rest.service;
 
 import com.fp.api_rest.model.Patient;
-import com.fp.api_rest.repository.PatientRepository;
+import com.fp.api_rest.model.dao.PatientDAO;
+import com.fp.api_rest.model.dto.PatientDTO;
+import com.fp.api_rest.model.dto.mapper.PatientMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 public class PatientService {
-    private final PatientRepository patientRepository;
+    @Autowired
+    private final PatientDAO patientDAO;
 
-    public PatientService(PatientRepository patientRepository) {
-        this.patientRepository = patientRepository;
+    public PatientService(PatientDAO patientDAO) {
+        this.patientDAO = patientDAO;
     }
 
-    @Transactional(readOnly = true)
-    public Patient save(Patient patient) {return patientRepository.save(patient);}
-
-    @Transactional(readOnly = true)
-    public List<Patient> getAllPatients() {
-        return patientRepository.findAll();
+    public List<PatientDTO> getAllPatients() {
+        return patientDAO.findAll()
+                .stream()
+                .map(PatientMapper::toDTO)
+                .toList();
     }
 
-    @Transactional
-    public void deletePatient(int id) {
-        patientRepository.deleteById(id);}
-
-    @Transactional
-    public Patient updatePatient(Patient patient) {
-        if (patientRepository.existsById(patient.getId())) {
-            return patientRepository.save(patient);
-        } else {
-            throw new IllegalArgumentException("Doctor with id " + patient.getId() + " does not exist.");
-        }
+    public PatientDTO findById(Integer id) {
+        return patientDAO.findById(id)
+                .map(PatientMapper::toDTO)
+                .orElse(null);
     }
+
+    public PatientDTO save(PatientDTO dto) {
+        Patient patient = PatientMapper.toEntity(dto);
+        Patient saved = patientDAO.save(patient);
+        return PatientMapper.toDTO(saved);
+    }
+    public void deletePatient(Integer id) {
+        patientDAO.deleteById(id);
+    }
+    public List<PatientDTO> findByAddress(String address ) {
+        return patientDAO.findByAddress( address)
+                .stream()
+                .map(PatientMapper::toDTO)
+                .toList();
+    }
+
 }

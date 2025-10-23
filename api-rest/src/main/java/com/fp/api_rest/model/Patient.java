@@ -15,9 +15,8 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "patients")
 public class Patient extends Person {
-
     @Temporal(TemporalType.DATE)
-    @Column(nullable = false)
+    @Column(name = "birthdate", nullable = false)
     private LocalDate birthDate;
 
     @Column(length = 200)

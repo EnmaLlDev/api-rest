@@ -1,11 +1,19 @@
 package com.fp.api_rest.model.dto;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class DoctorDTO {
     private Integer id;              // acepta nulos
     private String firstName;
+    private String secondName;
     private String lastName;
+    private String secondLastName;
     private String email;
     private String phone;
     private String dni;

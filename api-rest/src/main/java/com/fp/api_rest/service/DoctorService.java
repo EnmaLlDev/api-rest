@@ -1,7 +1,7 @@
 package com.fp.api_rest.service;
 
 import com.fp.api_rest.model.Doctor;
-import com.fp.api_rest.model.dao.DoctorDAOnew;
+import com.fp.api_rest.model.dao.DoctorDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -14,9 +14,9 @@ import java.util.stream.Collectors;
 public class DoctorService {
 
     @Autowired
-    private final DoctorDAOnew doctorDAO;
+    private final DoctorDAO doctorDAO;
 
-    public DoctorService(DoctorDAOnew doctorDAO) {
+    public DoctorService(DoctorDAO doctorDAO) {
         this.doctorDAO = doctorDAO;
     }
 

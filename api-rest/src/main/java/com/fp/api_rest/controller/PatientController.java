@@ -1,6 +1,6 @@
 package com.fp.api_rest.controller;
 
-import com.fp.api_rest.model.Patient;
+import com.fp.api_rest.model.dto.PatientDTO;
 import com.fp.api_rest.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,17 +16,21 @@ public class PatientController {
     private PatientService _patientService;
 
     @GetMapping("/getAll")
-    public List<Patient> getAllPatients() {
+    public List<PatientDTO> getAllPatients() {
         return _patientService.getAllPatients();
+    }
+    @GetMapping("/get/{id}")
+    public PatientDTO getPatientById(@PathVariable int id) {
+        return _patientService.findById(id);
     }
 
     @PostMapping("/create")
-    public Patient createPatient(@RequestBody Patient patient) {
+    public PatientDTO createPatient(@RequestBody PatientDTO patient) {
         return _patientService.save(patient);
     }
     @PutMapping("/update/{id}")
-    public void updatePatient(@RequestBody Patient patient) {
-        _patientService.updatePatient(patient);
+    public void updatePatient(@RequestBody PatientDTO patient) {
+        _patientService.save(patient);
         System.out.println("Updated, doctor id  " + patient.getId());
     }
 
@@ -34,5 +38,9 @@ public class PatientController {
     public ResponseEntity<Void> deletePatient(@PathVariable int id) {
         _patientService.deletePatient(id);
         return ResponseEntity.noContent().build();
+    }
+    @GetMapping("/adress/{address}")
+    public List<PatientDTO> getPatientsByAddress(@PathVariable String address) {
+        return _patientService.findByAddress(address);
     }
 }

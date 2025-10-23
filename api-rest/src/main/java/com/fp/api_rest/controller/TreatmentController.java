@@ -14,18 +14,22 @@ public class TreatmentController {
         this.treatmentService = treatmentService;
     }
 
-    @GetMapping
-    public List<TreatmentDTO> getAllDoctors() {
+    @GetMapping("/getAll")
+    public List<TreatmentDTO> getAllTreatment() {
         return treatmentService.findAll();
     }
 
     @GetMapping("/{id}")
-    public TreatmentDTO getDoctorById(@PathVariable Integer id) {
+    public TreatmentDTO getTreatmentById(@PathVariable Integer id) {
         return treatmentService.findById(id);
     }
 
     @PostMapping
-    public TreatmentDTO createDoctor(@RequestBody TreatmentDTO treatmentDTO) {
+    public TreatmentDTO createTreatment(@RequestBody TreatmentDTO treatmentDTO) {
+        return treatmentService.save(treatmentDTO);
+    }
+    @PutMapping
+    public TreatmentDTO updateTreatment(@RequestBody TreatmentDTO treatmentDTO) {
         return treatmentService.save(treatmentDTO);
     }
 
