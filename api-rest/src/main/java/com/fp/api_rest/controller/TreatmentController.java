@@ -16,7 +16,7 @@ public class TreatmentController {
 
     @GetMapping("/getAll")
     public List<TreatmentDTO> getAllTreatment() {
-        return treatmentService.findAll();
+            return treatmentService.findAll();
     }
 
     @GetMapping("/{id}")

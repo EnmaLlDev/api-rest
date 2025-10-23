@@ -15,7 +15,10 @@ import java.time.LocalDateTime;
 public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
+
+    @Column(name = "description", nullable = false)
+    private String description;
 
     @OneToOne
     @JoinColumn(name = "treatmentid", nullable = false)
@@ -29,5 +32,5 @@ public class Invoice {
     private LocalDateTime issueDate;
 
     @Column(nullable = false)
-    private int status; // 0: pendiente, 1: pagada, 2: cancelada
+    private Integer status; // 0: pendiente, 1: pagada, 2: cancelada
 }

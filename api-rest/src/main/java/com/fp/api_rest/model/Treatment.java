@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 public class Treatment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "patientid", nullable = false)

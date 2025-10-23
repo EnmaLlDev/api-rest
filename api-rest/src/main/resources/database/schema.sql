@@ -54,9 +54,9 @@ CREATE TABLE treatments
 );
 
 -- Tabla invoices
-CREATE TABLE invoices
-(
+CREATE TABLE invoices(
     id           SERIAL PRIMARY KEY,
+    description  TEXT           NOT NULL,
     treatmentId INT            NOT NULL REFERENCES treatments (id),
     totalAmount DECIMAL(10, 2) NOT NULL,
     issueDate   TIMESTAMP      NOT NULL,
@@ -98,10 +98,10 @@ VALUES (1, 1, 'Tratamiento de presión arterial', 150.00, '2025-10-01', '2025-10
        (2, 2, 'Antibióticos para infección respiratoria', 80.00, '2025-10-10', NULL, 'ACTIVE'),
        (3, 3, 'Crema dermatológica para irritación', 60.00, '2025-09-25', '2025-10-05', 'ACTIVE');
 
-INSERT INTO invoices (treatmentId, totalAmount, issueDate, status)
-VALUES (1, 150.00, '2025-10-16', 1),
-       (2, 80.00, '2025-10-17', 0),
-       (3, 60.00, '2025-10-06', 1);
+INSERT INTO invoices (treatmentId, description, totalAmount, issueDate, status)
+VALUES (1, 'Consulta ordinaria',150.00, '2025-10-16', 1),
+       (2, 'Revision', 80.00, '2025-10-17', 0),
+       (3, 'Analiticas',60.00, '2025-10-06', 1);
 
 INSERT INTO diagnostics (description, date, doctorId, patientId)
 VALUES ('Hipertensión controlada', '2025-10-01', 1, 1),

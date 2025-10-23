@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="clinica_db@localhost" uuid="79f4cfa5-2ad9-46c7-b5be-7a48100344af">
+    <data-source source="LOCAL" name="clinica_db@localhost" uuid="c87bcc4c-08b0-493a-ac12-fa9fc5c1c80a">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
+      <remarks>DataBase by UDAM2 Project</remarks>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/clinica_db</jdbc-url>
       <jdbc-additional-properties>

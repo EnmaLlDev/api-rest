@@ -41,6 +41,4 @@ public class TreatmentService {
     public void deleteById(Integer id) {
         treatmentDAO.deleteById(id);
     }
-
-
 }
