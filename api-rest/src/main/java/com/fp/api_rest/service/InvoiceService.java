@@ -4,7 +4,6 @@ import com.fp.api_rest.model.Invoice;
 import com.fp.api_rest.model.dao.InvoiceDAO;
 import com.fp.api_rest.model.dto.InvoiceDTO;
 import com.fp.api_rest.model.dto.mapper.InvoiceMapper;
-import com.fp.api_rest.model.dto.mapper.TreatmentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

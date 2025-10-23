@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 public class Diagnostic {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(columnDefinition = "TEXT", nullable = false)
     private String description;
@@ -33,10 +33,4 @@ public class Diagnostic {
     @JoinColumn(name = "patientid", nullable = false)
     private Patient patientId;
 
-    @PrePersist
-    protected void onCreate() {
-        if (date == null) {
-            date = LocalDateTime.now();
-        }
-    }
 }
