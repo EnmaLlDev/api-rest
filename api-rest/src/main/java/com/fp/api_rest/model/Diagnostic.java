@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -23,7 +24,7 @@ public class Diagnostic {
     private String description;
 
     @Column(nullable = false)
-    private LocalDateTime date;
+    private LocalDate date;
 
     @ManyToOne
     @JoinColumn(name = "doctorid", nullable = false)

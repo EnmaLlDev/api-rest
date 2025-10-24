@@ -14,6 +14,7 @@ public class TreatmentMapper {
         dto.setStartDate(treatment.getStartDate());
         dto.setEndDate(treatment.getEndDate());
         dto.setStatus(treatment.getStatus());
+
         dto.setPatientId(treatment.getPatientId() != null ?
                 treatment.getPatientId().getId() : 0);
         dto.setDoctorId(treatment.getDoctorId() != null ?

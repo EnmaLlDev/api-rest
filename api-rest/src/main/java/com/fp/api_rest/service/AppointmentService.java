@@ -8,6 +8,7 @@ import java.util.List;
 
 @Service
 public class AppointmentService {
+
     public List<Appointment> findAll() {
         List<Appointment> appointments = new ArrayList<>();
         return appointments;
