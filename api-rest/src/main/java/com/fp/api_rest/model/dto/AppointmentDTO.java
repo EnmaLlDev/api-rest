@@ -15,11 +15,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class AppointmentDTO {
     private int id;
-    private LocalDateTime date_time;
-    private int patient_id;
-    private String patient_name;
-    private int doctor_id;
-    private String doctor_name;
+    private LocalDateTime dateTime;
+    private int patientDTO;
+    private int doctorDTO;
     private String reason;
     private StateAppointment status;
 }

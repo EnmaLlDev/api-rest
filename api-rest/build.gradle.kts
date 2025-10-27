@@ -28,6 +28,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation ("org.postgresql:postgresql:42.7.7")
 	implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.apache.commons:commons-csv:1.9.0")
 	compileOnly("org.projectlombok:lombok")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("org.postgresql:postgresql")

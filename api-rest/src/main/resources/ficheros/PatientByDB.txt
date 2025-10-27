@@ -1,0 +1,15 @@
+Patients to be converted from CSV to JSON format.
+Peticion HTTP Post
+http://localhost:8080/api/convert/patient/csv
+
+dni,firstname,secondname,lastname,secondlastname,email,phone,birthdate,address
+12345678A,Ana,Maria,Gomez,Perez,ana.gomez@mail.com,611223344,1990-01-15,"Calle Mayor, 10"
+23456789B,Carlos,Javier,Lopez,Sanchez,carlos.lopez@mail.com,622334455,1985-05-20,"Avenida Libertad, 5"
+34567890C,Elena,Isabel,Ruiz,Fernandez,elena.ruiz@mail.com,633445566,1998-11-30,"Plaza Central, 2"
+45678901D,David,Andres,Martin,Gil,david.martin@mail.com,644556677,1976-03-08,"Paseo de Gracia, 45"
+56789012E,Sofia,Esther,Vargas,Nunez,sofia.vargas@mail.com,655667788,2002-07-12,"Ronda Universitat, 7"
+67890123F,Javier,Antonio,Sanz,Prieto,javier.sanz@mail.com,666778899,1981-09-25,"Gran Vía, 123"
+78901234G,Laura,Beatriz,Herrera,Cano,laura.herrera@mail.com,677889900,1995-02-18,"Calle de Toledo, 50"
+89012345H,Miguel,Angel,Flores,Diez,miguel.flores@mail.com,688990011,1969-12-03,"Carrer de la Pau, 8"
+90123456I,Irene,Cristina,Blanco,Vega,irene.blanco@mail.com,699001122,1993-04-22,"Avenida del Mar, 21"
+01234567J,Pablo,Luis,Mendez,Cruz,pablo.mendez@mail.com,601122334,1970-08-01,"Calle Sol, 3"

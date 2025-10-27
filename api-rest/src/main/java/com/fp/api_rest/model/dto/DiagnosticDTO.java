@@ -15,6 +15,6 @@ public class DiagnosticDTO {
     private Integer id;
     private String description;
     private LocalDate date;
-    private DoctorDTO doctor;
-    private PatientDTO patient;
+    private DoctorDTO doctorDTO;
+    private PatientDTO patientDTO;
 }

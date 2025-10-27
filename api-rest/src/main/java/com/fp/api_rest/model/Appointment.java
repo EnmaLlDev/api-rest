@@ -20,21 +20,21 @@ public class Appointment {
     private int id;
 
     @Column(nullable = false)
-    private LocalDateTime date_time;
+    private LocalDateTime dateTime;
 
     @ManyToOne
     @JoinColumn(name = "patientid", nullable = false)
-    private Patient patient_id;
+    private Patient patientId;
 
     @ManyToOne
     @JoinColumn(name = "doctorid", nullable = false)
-    private Doctor doctor_id;
+    private Doctor doctorId;
 
     @Column(length = 500)
     private String reason;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    public StateAppointment status = StateAppointment.SCHEDULED;
+    public StateAppointment status = StateAppointment.NO_ATTEND;
 }
 

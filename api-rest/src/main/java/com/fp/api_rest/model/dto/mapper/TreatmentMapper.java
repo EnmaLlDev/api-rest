@@ -6,6 +6,7 @@ import com.fp.api_rest.model.Treatment;
 import com.fp.api_rest.model.dto.TreatmentDTO;
 
 public class TreatmentMapper {
+
     public static TreatmentDTO toDTO(Treatment treatment) {
         TreatmentDTO dto = new TreatmentDTO();
         dto.setId(treatment.getId());
