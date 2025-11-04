@@ -20,7 +20,7 @@ public class Appointment {
     private int id;
 
     @Column(nullable = false)
-    private LocalDateTime dateTime;
+    private LocalDateTime datetime;
 
     @ManyToOne
     @JoinColumn(name = "patientid", nullable = false)

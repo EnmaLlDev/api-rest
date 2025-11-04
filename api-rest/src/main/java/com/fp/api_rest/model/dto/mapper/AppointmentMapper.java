@@ -10,7 +10,7 @@ public class AppointmentMapper {
     public static AppointmentDTO toDTO (Appointment appointment) {
         AppointmentDTO dto = new AppointmentDTO();
         dto.setId(appointment.getId());
-        dto.setDateTime(appointment.getDateTime());
+        dto.setDateTime(appointment.getDatetime());
         dto.setPatientDTO(appointment.getPatientId() != null ?
                 PatientMapper.toDTO(appointment.getPatientId()).getId() : null);
         dto.setDoctorDTO(appointment.getDoctorId() != null ?
@@ -20,17 +20,17 @@ public class AppointmentMapper {
         return dto;
     }
 
-    public static Appointment toEntity(Appointment dto) {
+    public static Appointment toEntity(AppointmentDTO dto) {
         Appointment appointment = new Appointment();
         appointment.setId(dto.getId());
-        appointment.setDateTime(dto.getDateTime());
+        appointment.setDatetime(dto.getDateTime());
         appointment.setReason(dto.getReason());
         appointment.setStatus(dto.getStatus());
         Patient patient = new Patient();
-            patient.setId(dto.getPatientId().getId());
+            patient.setId(dto.getPatientDTO());
             appointment.setPatientId(patient);
         Doctor doctor = new Doctor();
-            doctor.setId(dto.getDoctorId().getId());
+            doctor.setId(dto.getDoctorDTO());
             appointment.setDoctorId(doctor);
         return appointment;
     }

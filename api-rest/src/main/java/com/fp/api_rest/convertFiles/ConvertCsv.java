@@ -20,7 +20,7 @@ import java.util.List;
 
 
 @Service
-public class ConvertMain {
+public class ConvertCsv {
 
     @Autowired
     private PatientDAO patientDAO;

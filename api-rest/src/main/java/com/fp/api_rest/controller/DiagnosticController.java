@@ -24,14 +24,15 @@ public class DiagnosticController {
         return diagnosticService.findById(id);
     }
 
-    @PostMapping
-    public DiagnosticDTO createDiagnostic(@RequestBody DiagnosticDTO diagnosticDTO) {
-        return diagnosticService.save(diagnosticDTO);
+    @PostMapping( "/create")
+    public DiagnosticDTO createDiagnostic(@RequestBody DiagnosticDTO diagnostic) {
+        return diagnosticService.save(diagnostic);
     }
 
-    @PutMapping
-    public DiagnosticDTO updateDiagnostic(@RequestBody DiagnosticDTO diagnosticDTO) {
-        return diagnosticService.save(diagnosticDTO);
+    @PutMapping("/update/{id}")
+    public DiagnosticDTO updateDiagnostic(@RequestBody DiagnosticDTO diagnostic) {
+        return diagnosticService.save(diagnostic);
+
     }
 
     @DeleteMapping("delete/{id}")

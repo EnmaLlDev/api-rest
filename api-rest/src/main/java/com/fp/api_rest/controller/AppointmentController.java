@@ -1,6 +1,8 @@
 package com.fp.api_rest.controller;
 
 import com.fp.api_rest.model.Appointment;
+import com.fp.api_rest.model.dao.AppointmentDAO;
+import com.fp.api_rest.model.dto.AppointmentDTO;
 import com.fp.api_rest.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,27 +14,28 @@ import java.util.List;
 @RequestMapping("/api/appointment")
 public class AppointmentController {
     @Autowired
-    private AppointmentService _appointmentService;
+    private AppointmentService appointmentService;
 
+    public AppointmentController(AppointmentService appointmentService) {
+        this.appointmentService = appointmentService;
+    }
     @GetMapping("/getAll")
-    public List<Appointment> getAllAppointments() {
-        return _appointmentService.findAll();
+    public List<AppointmentDTO> getAllAppointments() {
+        return appointmentService.findAll();
     }
 
     @PostMapping( "/create")
-    public Appointment createAppointment(@RequestBody Appointment appointment) {
-        return _appointmentService.save(appointment);
+    public AppointmentDTO createAppointment(@RequestBody AppointmentDTO appointment) {
+        return appointmentService.save(appointment);
     }
 
     @PutMapping("/update/{id}")
-    public void updatePatient(@RequestBody Appointment appointment) {
-        _appointmentService.save(appointment);
-        System.out.println("Updated, doctor id  " + appointment.getId());
+    public AppointmentDTO updatePatient(@RequestBody AppointmentDTO appointment) {
+        return appointmentService.save(appointment);
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deletePatient(@PathVariable int id) {
-        _appointmentService.deleteById(id);
-        return ResponseEntity.noContent().build();
+    public void deletePatient(@PathVariable int id) {
+        appointmentService.deleteById(id);
     }
 }
