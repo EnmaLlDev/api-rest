@@ -1,11 +1,9 @@
 package com.fp.api_rest.service;
 
 import com.fp.api_rest.model.Diagnostic;
-import com.fp.api_rest.model.Doctor;
 import com.fp.api_rest.model.dao.DiagnosticDAO;
 import com.fp.api_rest.model.dto.DiagnosticDTO;
 import com.fp.api_rest.model.dto.mapper.DiagnosticMapper;
-import com.fp.api_rest.model.dto.mapper.DoctorMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

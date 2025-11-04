@@ -4,6 +4,7 @@ import com.fp.api_rest.model.Patient;
 import com.fp.api_rest.model.dao.PatientDAO;
 import com.fp.api_rest.model.dto.PatientDTO;
 import com.fp.api_rest.model.dto.mapper.PatientMapper;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,14 +32,29 @@ public class PatientService {
                 .orElse(null);
     }
 
-    public PatientDTO save(PatientDTO dto) {
-        Patient patient = PatientMapper.toEntity(dto);
-        Patient saved = patientDAO.save(patient);
-        return PatientMapper.toDTO(saved);
+    public Patient save(Patient patient) {
+        return  patientDAO.save(patient);
     }
+
+    public Patient update(Integer id, Patient data) {
+        Patient existing = patientDAO.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Patient not found with id " + id));
+        existing.setDni(data.getDni());
+        existing.setFirstName(data.getFirstName());
+        existing.setSecondName(data.getSecondName());
+        existing.setLastName(data.getLastName());
+        existing.setSecondLastName(data.getSecondLastName());
+        existing.setEmail(data.getEmail());
+        existing.setPhone(data.getPhone());
+        existing.setBirthDate(data.getBirthDate());
+        existing.setAddress(data.getAddress());
+        return patientDAO.save(existing);
+    }
+
     public void deletePatient(Integer id) {
         patientDAO.deleteById(id);
     }
+
     public List<PatientDTO> findByAddress(String address ) {
         return patientDAO.findByAddress( address)
                 .stream()

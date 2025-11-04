@@ -34,8 +34,8 @@ CREATE TABLE appointments
 (
     id         SERIAL PRIMARY KEY,
     dateTime  TIMESTAMP   NOT NULL,
-    patientId INT         NOT NULL REFERENCES patients (id),
-    doctorId  INT         NOT NULL REFERENCES doctors (id),
+    patientId INT         NOT NULL REFERENCES patients (id) ON DELETE CASCADE,
+    doctorId  INT         NOT NULL REFERENCES doctors (id) ON DELETE CASCADE,
     reason     VARCHAR(500),
     status     VARCHAR(50) NOT NULL
 );
@@ -44,8 +44,8 @@ CREATE TABLE appointments
 CREATE TABLE treatments
 (
     id          SERIAL PRIMARY KEY,
-    patientId  INT            NOT NULL REFERENCES patients (id),
-    doctorId   INT            NOT NULL REFERENCES doctors (id),
+    patientId  INT            NOT NULL REFERENCES patients (id) ON DELETE CASCADE,
+    doctorId   INT            NOT NULL REFERENCES doctors (id) ON DELETE CASCADE,
     description TEXT           NOT NULL,
     cost        DECIMAL(10, 2) NOT NULL,
     startDate  TIMESTAMP      NOT NULL,
@@ -57,7 +57,7 @@ CREATE TABLE treatments
 CREATE TABLE invoices(
     id           SERIAL PRIMARY KEY,
     description  TEXT           NOT NULL,
-    treatmentId INT            NOT NULL REFERENCES treatments (id),
+    treatmentId INT            NOT NULL REFERENCES treatments (id) ON DELETE CASCADE,
     totalAmount DECIMAL(10, 2) NOT NULL,
     issueDate   TIMESTAMP      NOT NULL,
     status       INT            NOT NULL DEFAULT 0
@@ -69,8 +69,8 @@ CREATE TABLE diagnostics
     id          SERIAL PRIMARY KEY,
     description TEXT      NOT NULL,
     date        TIMESTAMP NOT NULL,
-    doctorId   INT       NOT NULL REFERENCES doctors (id),
-    patientId  INT       NOT NULL REFERENCES patients (id)
+    doctorId   INT       NOT NULL REFERENCES doctors (id) ON DELETE CASCADE,
+    patientId  INT       NOT NULL REFERENCES patients (id) ON DELETE CASCADE
 );
 
 -- Datos de prueba

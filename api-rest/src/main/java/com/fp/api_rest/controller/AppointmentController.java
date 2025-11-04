@@ -1,7 +1,6 @@
 package com.fp.api_rest.controller;
 
 import com.fp.api_rest.model.Appointment;
-import com.fp.api_rest.model.dao.AppointmentDAO;
 import com.fp.api_rest.model.dto.AppointmentDTO;
 import com.fp.api_rest.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,18 +23,25 @@ public class AppointmentController {
         return appointmentService.findAll();
     }
 
+    @GetMapping("/{id}")
+    public AppointmentDTO getAppointmentById(@PathVariable int id) {
+        return appointmentService.findById(id);
+    }
+
     @PostMapping( "/create")
     public AppointmentDTO createAppointment(@RequestBody AppointmentDTO appointment) {
         return appointmentService.save(appointment);
     }
 
     @PutMapping("/update/{id}")
-    public AppointmentDTO updatePatient(@RequestBody AppointmentDTO appointment) {
-        return appointmentService.save(appointment);
+    public void updatePatient(@RequestBody AppointmentDTO appointment) {
+        appointmentService.save(appointment);
+        System.out.println("Updated, doctor id  " + appointment.getId());
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deletePatient(@PathVariable int id) {
+    public ResponseEntity<Void> deletePatient(@PathVariable int id) {
         appointmentService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }

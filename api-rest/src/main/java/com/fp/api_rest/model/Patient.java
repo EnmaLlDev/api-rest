@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -15,10 +16,12 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "patients")
 public class Patient extends Person {
-    @Temporal(TemporalType.DATE)
     @Column(name = "birthdate", nullable = false)
     private LocalDate birthDate;
 
     @Column(length = 200)
     private String address;
+
+    @OneToMany(mappedBy = "patientId", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Appointment> appointments;
 }

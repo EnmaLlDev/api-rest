@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -20,4 +21,8 @@ public class Doctor extends Person {
 
     @Column(name = "specialty", length = 100)
     private String specialty;
+
+    @OneToMany(mappedBy = "doctorId", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Appointment> appointments;
+
 }
