@@ -4,7 +4,7 @@ import com.fp.api_rest.convertFiles.ConvertCsv;
 import com.fp.api_rest.convertFiles.manager.ManagerFiles;
 import com.fp.api_rest.model.Patient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus; // Importación necesaria
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
@@ -12,22 +12,22 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/convert")
-public class FilesController { // 1. Renombrar la clase a "FilesController" (convención)
+public class FilesController {
 
     @Autowired
     private final ConvertCsv convertMain;
     private final ManagerFiles fileService;
-    private static final String URL_EXPORT = "C:/Users/34633/IdeaProjects/api-rest/api-rest/src/main/resources/ficheros";
+    private static final String URL_FILES = "C:/Users/34633/IdeaProjects/api-rest/api-rest/src/main/resources/ficheros";
 
     public FilesController(ConvertCsv convertMain, ManagerFiles fileService) {
         this.convertMain = convertMain;
         this.fileService = fileService;
     }
 
-    @PostMapping("/patient/csv/import")
-    public ResponseEntity<String> importPatientsCsv() {
-        // 4. Mejorar: Esta ruta está 'hardcodeada'. Lo ideal es recibir el archivo por MultipartFile.
-        String absolutePath = "C:/Users/34633/IdeaProjects/api-rest/api-rest/src/main/resources/ficheros/prueba.csv";
+    @PostMapping("/patient/import/{fileName}")
+    public ResponseEntity<String> importPatientsCsv(@PathVariable String fileName) {
+
+        String absolutePath = URL_FILES +  "/" + fileName + ".csv";
 
         try {
             System.out.println("Iniciando importación desde: " + absolutePath);
@@ -49,7 +49,7 @@ public class FilesController { // 1. Renombrar la clase a "FilesController" (con
     @GetMapping("/patients/export/{fileName}")
     public ResponseEntity<String> exportPatientsToCsv(@PathVariable String fileName) {
 
-        String fullPath = URL_EXPORT + "/" + fileName + ".csv";
+        String fullPath = URL_FILES + "/" + fileName + ".csv";
 
         try {
             String resultMessage = convertMain.convertPatientsToCsvFile(fullPath);

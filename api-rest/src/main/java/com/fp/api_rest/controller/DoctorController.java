@@ -6,7 +6,7 @@ import com.fp.api_rest.model.dto.DoctorDTO;
 import java.util.List;
 
 @RestController
-@RequestMapping("/doctors")
+@RequestMapping("/api/doctors")
 public class DoctorController {
 
     private final DoctorService doctorService;
@@ -25,15 +25,16 @@ public class DoctorController {
         return doctorService.findById(id);
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public DoctorDTO createDoctor(@RequestBody DoctorDTO doctorDTO) {
         return doctorService.save(doctorDTO);
     }
+/*
     @PutMapping
     public DoctorDTO updateDoctor(@RequestBody DoctorDTO doctorDTO) {
         return doctorService.save(doctorDTO);
     }
-
+*/
     @DeleteMapping("/{id}")
     public void deleteDoctor(@PathVariable Integer id) {
         doctorService.deleteById(id);

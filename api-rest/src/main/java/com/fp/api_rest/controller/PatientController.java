@@ -4,7 +4,6 @@ import com.fp.api_rest.model.Patient;
 import com.fp.api_rest.model.dto.PatientDTO;
 import com.fp.api_rest.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -44,6 +43,6 @@ public class PatientController {
 
     @GetMapping("/adress/{address}")
     public List<PatientDTO> getPatientsByAddress(@PathVariable String address) {
-        return _patientService.findByAddress(address);
+        return _patientService.findByAddressContaining(address);
     }
 }

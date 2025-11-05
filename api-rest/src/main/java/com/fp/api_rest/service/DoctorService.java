@@ -1,14 +1,11 @@
 package com.fp.api_rest.service;
-
 import com.fp.api_rest.model.Doctor;
 import com.fp.api_rest.model.dao.DoctorDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
-
 import com.fp.api_rest.model.dto.DoctorDTO;
 import com.fp.api_rest.model.dto.mapper.DoctorMapper;
-import java.util.stream.Collectors;
 
 @Service
 public class DoctorService {
@@ -24,7 +21,7 @@ public class DoctorService {
         return doctorDAO.findAll()
                 .stream()
                 .map(DoctorMapper::toDTO)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public DoctorDTO findById(Integer id) {
@@ -47,18 +44,18 @@ public class DoctorService {
         return doctorDAO.findBySpecialty(specialty)
                 .stream()
                 .map(DoctorMapper::toDTO)
-                .collect(Collectors.toList());
+                .toList();
     }
     public List<DoctorDTO> findBySpecialtyContainingIgnoreCase(String specialty) {
         return doctorDAO.findBySpecialtyContainingIgnoreCase(specialty)
                 .stream()
                 .map(DoctorMapper::toDTO)
-                .collect(Collectors.toList());
+                .toList();
     }
     public List<DoctorDTO> findByLicenseNumber (String licenseNumber) {
         return doctorDAO.findByLicenseNumber(licenseNumber)
                 .stream()
                 .map(DoctorMapper::toDTO)
-                .collect(Collectors.toList());
+                .toList();
     }
 }

@@ -12,6 +12,7 @@ import java.util.List;
 
 @Service
 public class PatientService {
+
     @Autowired
     private final PatientDAO patientDAO;
 
@@ -55,11 +56,10 @@ public class PatientService {
         patientDAO.deleteById(id);
     }
 
-    public List<PatientDTO> findByAddress(String address ) {
-        return patientDAO.findByAddress( address)
+    public List<PatientDTO> findByAddressContaining(String address ) {
+        return patientDAO.findByAddressContaining( address)
                 .stream()
                 .map(PatientMapper::toDTO)
                 .toList();
     }
-
 }

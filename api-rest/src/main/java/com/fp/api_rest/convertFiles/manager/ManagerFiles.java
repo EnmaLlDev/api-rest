@@ -49,11 +49,12 @@ public class ManagerFiles {
     public void deleteIfExists(Path path) throws IOException {
         Files.deleteIfExists(path);
         Path parent = path.getParent();
+
         if (parent != null && Files.isDirectory(parent) && parent.getFileName().toString().startsWith("upload-")) {
             try {
                 Files.deleteIfExists(parent);
             } catch (IOException ignored) {
             }
         }
-    };
+    }
 }

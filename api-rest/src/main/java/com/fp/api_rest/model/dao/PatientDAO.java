@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface PatientDAO extends BaseDAO<Patient, Integer> {
     List<Patient> findByBirthDateGreaterThan(LocalDate date);
-    List<Patient> findByAddress(String address);
+    List<Patient> findByAddressContaining(String address);
 }
