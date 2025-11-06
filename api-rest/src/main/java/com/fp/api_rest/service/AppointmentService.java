@@ -1,20 +1,18 @@
 package com.fp.api_rest.service;
 
 import com.fp.api_rest.model.Appointment;
-import com.fp.api_rest.model.dao.AppointmentDAO;
+import com.fp.api_rest.repository.dao.AppointmentDAO;
 import com.fp.api_rest.model.dto.AppointmentDTO;
 import com.fp.api_rest.model.dto.mapper.AppointmentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class AppointmentService {
 
-    @Autowired
     private final AppointmentDAO appointmentDAO;
 
     public AppointmentService(AppointmentDAO appointmentDAO) {

@@ -40,18 +40,13 @@ public class DoctorController {
         doctorService.deleteById(id);
     }
 
-    @GetMapping("/specialty/{specialty}")
-    public List<DoctorDTO> getDoctorsBySpecialty(@PathVariable String specialty) {
-        return doctorService.findBySpecialty(specialty);
-    }
-
     @GetMapping("/license/{licenseNumber}")
     public List<DoctorDTO> getDoctorsByLicenseNumber(@PathVariable String licenseNumber) {
         return doctorService.findByLicenseNumber(licenseNumber);
     }
 
     @GetMapping("/search/{terms}")
-    public List<DoctorDTO> getSpecialtyByTerms(@PathVariable String terms) {
+    public List<DoctorDTO> findBySpecialtyContainingIgnoreCase(@PathVariable String terms) {
         return doctorService.findBySpecialtyContainingIgnoreCase(terms);
     }
 }

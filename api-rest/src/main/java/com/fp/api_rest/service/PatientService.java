@@ -1,7 +1,7 @@
 package com.fp.api_rest.service;
 
 import com.fp.api_rest.model.Patient;
-import com.fp.api_rest.model.dao.PatientDAO;
+import com.fp.api_rest.repository.dao.PatientDAO;
 import com.fp.api_rest.model.dto.PatientDTO;
 import com.fp.api_rest.model.dto.mapper.PatientMapper;
 import jakarta.persistence.EntityNotFoundException;

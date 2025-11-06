@@ -1,9 +1,7 @@
 package com.fp.api_rest.controller.files;
 
-import com.fp.api_rest.convertFiles.ConvertCsv;
-import com.fp.api_rest.convertFiles.manager.ManagerFiles;
+import com.fp.api_rest.convertFiles.*;
 import com.fp.api_rest.model.Patient;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,14 +12,11 @@ import java.util.List;
 @RequestMapping("/api/convert")
 public class FilesController {
 
-    @Autowired
     private final ConvertCsv convertMain;
-    private final ManagerFiles fileService;
     private static final String URL_FILES = "C:/Users/34633/IdeaProjects/api-rest/api-rest/src/main/resources/ficheros";
 
-    public FilesController(ConvertCsv convertMain, ManagerFiles fileService) {
+    public FilesController(ConvertCsv convertMain) {
         this.convertMain = convertMain;
-        this.fileService = fileService;
     }
 
     @PostMapping("/patient/import/{fileName}")

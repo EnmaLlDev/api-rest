@@ -1,6 +1,6 @@
 package com.fp.api_rest.service;
 import com.fp.api_rest.model.Doctor;
-import com.fp.api_rest.model.dao.DoctorDAO;
+import com.fp.api_rest.repository.dao.DoctorDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -39,21 +39,17 @@ public class DoctorService {
     public void deleteById(Integer id) {
         doctorDAO.deleteById(id);
     }
+    
 
-    public List<DoctorDTO> findBySpecialty(String specialty) {
-        return doctorDAO.findBySpecialty(specialty)
-                .stream()
-                .map(DoctorMapper::toDTO)
-                .toList();
-    }
-    public List<DoctorDTO> findBySpecialtyContainingIgnoreCase(String specialty) {
-        return doctorDAO.findBySpecialtyContainingIgnoreCase(specialty)
-                .stream()
-                .map(DoctorMapper::toDTO)
-                .toList();
-    }
     public List<DoctorDTO> findByLicenseNumber (String licenseNumber) {
         return doctorDAO.findByLicenseNumber(licenseNumber)
+                .stream()
+                .map(DoctorMapper::toDTO)
+                .toList();
+    }
+
+    public List<DoctorDTO> findBySpecialtyContainingIgnoreCase(String specialty) {
+        return doctorDAO.findBySpecialtyContainingIgnoreCase(specialty)
                 .stream()
                 .map(DoctorMapper::toDTO)
                 .toList();

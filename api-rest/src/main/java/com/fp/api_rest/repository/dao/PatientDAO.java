@@ -1,12 +1,13 @@
-package com.fp.api_rest.model.dao;
+package com.fp.api_rest.repository.dao;
 
 import com.fp.api_rest.model.Patient;
-import com.fp.api_rest.model.dao.base.BaseDAO;
+import com.fp.api_rest.repository.dao.base.BaseDAO;
 
-import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public interface PatientDAO extends BaseDAO<Patient, Integer> {
-    List<Patient> findByBirthDateGreaterThan(LocalDate date);
+
+    Optional<Patient> findById(Long id);
     List<Patient> findByAddressContaining(String address);
 }
