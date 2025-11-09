@@ -1,0 +1,4 @@
+dni,firstname,secondname,lastname,secondlastname,email,phone,birthdate,address
+11111111A,Ana,María,López,García,ana.lopez@example.com,+34 600 111 111,1990-05-12,C/ Mayor 1, Madrid
+22222222B,Carlos,,Pérez,Sánchez,carlos.perez@example.com,+34 600 222 222,1985-09-30,Av. Andalucía 23, Sevilla
+33333333C,Lucía,Sofía,Gómez,Ruiz,lucia.gomez@example.com,+34 600 333 333,2001-12-01,C/ Valencia 12, Valencia

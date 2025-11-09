@@ -1,7 +1,7 @@
 package com.fp.api_rest.convertFiles;
 
 import com.fp.api_rest.model.Patient;
-import com.fp.api_rest.model.dao.PatientDAO;
+import com.fp.api_rest.repository.dao.PatientDAO;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVPrinter;
@@ -17,15 +17,13 @@ import java.io.Reader;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
-
 @Service
 public class ConvertCsv {
 
     @Autowired
     private PatientDAO patientDAO;
 
-    private static final String[] CSV_HEADERS = {"dni", "firstname", "secondname", "lastname", "secondlastname", "email", "phone", "birthdate", "adress"};
+    private static final String[] CSV_HEADERS = {"dni", "firstname", "secondname", "lastname", "secondlastname", "email", "phone", "birthdate", "address"};
     @Transactional
     public List<Patient> convertAndSavePatients(String filePath) throws IOException {
         List<Patient> patients = new ArrayList<>();
@@ -62,7 +60,7 @@ public class ConvertCsv {
         String birthDateStr = record.get("birthdate");
         LocalDate birthDate = LocalDate.parse(birthDateStr);
         patient.setBirthDate(birthDate);
-        patient.setAddress(record.get("adress"));
+        patient.setAddress(record.get("address"));
 
         patient.setBirthDate(birthDate);
 
@@ -92,14 +90,11 @@ public class ConvertCsv {
                         patient.getSecondLastName(),
                         patient.getEmail(),
                         patient.getPhone(),
-                        // Convertimos LocalDate a String, que es el formato guardado en el CSV
                         patient.getBirthDate().toString(),
                         patient.getAddress()
                 );
             }
-
             return "Archivo CSV generado exitosamente en: " + filePath;
-
         } catch (IOException e) {
             throw new IOException("Error al escribir el fichero CSV: " + e.getMessage(), e);
         }
