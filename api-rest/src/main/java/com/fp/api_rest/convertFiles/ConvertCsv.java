@@ -23,7 +23,7 @@ public class ConvertCsv {
     @Autowired
     private PatientDAO patientDAO;
 
-    private static final String[] CSV_HEADERS = {"dni", "firstname", "secondname", "lastname", "secondlastname", "email", "phone", "birthdate", "adress"};
+    private static final String[] CSV_HEADERS = {"dni", "firstname", "secondname", "lastname", "secondlastname", "email", "phone", "birthdate", "address"};
     @Transactional
     public List<Patient> convertAndSavePatients(String filePath) throws IOException {
         List<Patient> patients = new ArrayList<>();
@@ -60,7 +60,7 @@ public class ConvertCsv {
         String birthDateStr = record.get("birthdate");
         LocalDate birthDate = LocalDate.parse(birthDateStr);
         patient.setBirthDate(birthDate);
-        patient.setAddress(record.get("adress"));
+        patient.setAddress(record.get("address"));
 
         patient.setBirthDate(birthDate);
 

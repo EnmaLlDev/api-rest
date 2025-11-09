@@ -1,8 +1,10 @@
 package com.fp.api_rest.convertFiles;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 @Service
+@Profile("files")
 public class ManagerFiles {
 
     private final CsvProperties csvProperties;
@@ -18,7 +20,9 @@ public class ManagerFiles {
         System.out.println("Iniciando Sesión CSV. Archivo: " + fullPath + " Delimitador: " + delimiter);
 
         // 2. Usar la lógica de ConvertCsv/ManagerCsv
+
         // convertCsv.read(fullPath, delimiter, ...);
+
 
         // 3. Pasar los datos leídos a ManagerJDBC o repository.dao para la Sesión DB
         // managerJDBC.saveAll(datosLeidos);
