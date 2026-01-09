@@ -4,37 +4,32 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
-
 import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@SuperBuilder
 @Entity
 @Table(name = "appointments")
 public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
-    @Column(nullable = false)
-    private LocalDateTime datetime;
+    @Column(name = "datetime", nullable = false)
+    private LocalDateTime dateTime;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "patientid", nullable = false)
-    private Patient patientId;
+    private Patient patient;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "doctorid", nullable = false)
-    private Doctor doctorId;
+    private Doctor doctor;
 
     @Column(length = 500)
     private String reason;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    public StateAppointment status = StateAppointment.NO_ATTEND;
+    @Column(length = 50, nullable = false)
+    private StateAppointment status;
 }
-
