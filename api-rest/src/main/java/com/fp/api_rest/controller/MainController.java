@@ -9,7 +9,7 @@ public class MainController {
 @GetMapping("/home")
     public String homePath() {
         String messageHardcode= "API REST by UDAM2 PROJECT. Developed by: ";
-        String authorName= "Enmauel Lledo";
+        String authorName= "Enmanuel Lledo";
         return messageHardcode + authorName;
     }
 }

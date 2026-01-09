@@ -25,7 +25,7 @@ CREATE TABLE patients
     secondLastName VARCHAR(50),
     email            VARCHAR(100)       NOT NULL,
     phone            VARCHAR(15),
-    birthDate       TIMESTAMP          NOT NULL,
+    birthDate       TIMESTAMP            NULL,
     address          VARCHAR(200)
 );
 
@@ -40,38 +40,6 @@ CREATE TABLE appointments
     status     VARCHAR(50) NOT NULL
 );
 
--- Tabla treatments
-CREATE TABLE treatments
-(
-    id          SERIAL PRIMARY KEY,
-    patientId  INT            NOT NULL REFERENCES patients (id) ON DELETE CASCADE,
-    doctorId   INT            NOT NULL REFERENCES doctors (id) ON DELETE CASCADE,
-    description TEXT           NOT NULL,
-    cost        DECIMAL(10, 2) NOT NULL,
-    startDate  TIMESTAMP      NOT NULL,
-    endDate    TIMESTAMP,
-    status      VARCHAR(50)    NOT NULL
-);
-
--- Tabla invoices
-CREATE TABLE invoices(
-    id           SERIAL PRIMARY KEY,
-    description  TEXT           NOT NULL,
-    treatmentId INT            NOT NULL REFERENCES treatments (id) ON DELETE CASCADE,
-    totalAmount DECIMAL(10, 2) NOT NULL,
-    issueDate   TIMESTAMP      NOT NULL,
-    status       INT            NOT NULL DEFAULT 0
-);
-
--- Tabla diagnostics
-CREATE TABLE diagnostics
-(
-    id          SERIAL PRIMARY KEY,
-    description TEXT      NOT NULL,
-    date        TIMESTAMP NOT NULL,
-    doctorId   INT       NOT NULL REFERENCES doctors (id) ON DELETE CASCADE,
-    patientId  INT       NOT NULL REFERENCES patients (id) ON DELETE CASCADE
-);
 
 -- Datos de prueba
 INSERT INTO doctors (dni, firstName, secondName, lastName, secondLastName, email, phone, licenseNumber, specialty)
@@ -92,20 +60,3 @@ INSERT INTO appointments (dateTime, patientId, doctorId, reason, status)
 VALUES ('2025-10-18 10:00:00', 1, 1, 'Chequeo general', 'SCHEDULED'),
        ('2025-10-18 11:30:00', 2, 2, 'Dolor de garganta', 'SCHEDULED'),
        ('2025-10-19 09:00:00', 3, 3, 'Revisión de piel', 'SCHEDULED');
-
-INSERT INTO treatments (patientId, doctorId, description, cost, startDate, endDate, status)
-VALUES (1, 1, 'Tratamiento de presión arterial', 150.00, '2025-10-01', '2025-10-15', 'ACTIVE'),
-       (2, 2, 'Antibióticos para infección respiratoria', 80.00, '2025-10-10', NULL, 'ACTIVE'),
-       (3, 3, 'Crema dermatológica para irritación', 60.00, '2025-09-25', '2025-10-05', 'ACTIVE');
-
-INSERT INTO invoices (treatmentId, description, totalAmount, issueDate, status)
-VALUES (1, 'Consulta ordinaria',150.00, '2025-10-16', 1),
-       (2, 'Revision', 80.00, '2025-10-17', 0),
-       (3, 'Analiticas',60.00, '2025-10-06', 1);
-
-INSERT INTO diagnostics (description, date, doctorId, patientId)
-VALUES ('Hipertensión controlada', '2025-10-01', 1, 1),
-       ('Amigdalitis leve', '2025-10-12', 2, 2),
-       ('Dermatitis tratada', '2025-09-26', 3, 3);
-
-
