@@ -1,10 +1,11 @@
 package com.fp.api_rest.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
@@ -16,8 +17,9 @@ public class Appointment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @Column(name = "dateTime", nullable = false)
-    private LocalDateTime dateTime;
+    private LocalDate dateTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "patientId", nullable = false)

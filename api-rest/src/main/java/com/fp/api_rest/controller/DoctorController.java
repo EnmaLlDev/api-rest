@@ -1,5 +1,6 @@
 package com.fp.api_rest.controller;
 
+import com.fp.api_rest.model.Doctor;
 import com.fp.api_rest.service.DoctorService;
 import org.springframework.web.bind.annotation.*;
 import com.fp.api_rest.model.dto.DoctorDTO;
@@ -29,12 +30,13 @@ public class DoctorController {
     public DoctorDTO createDoctor(@RequestBody DoctorDTO doctorDTO) {
         return doctorService.save(doctorDTO);
     }
-/*
-    @PutMapping
-    public DoctorDTO updateDoctor(@RequestBody DoctorDTO doctorDTO) {
-        return doctorService.save(doctorDTO);
+
+    @PutMapping("/update/{id}")
+    public void updateDoctor(@PathVariable Integer id,@RequestBody DoctorDTO doctorDTO) {
+        doctorService.update(id, doctorDTO);
+        System.out.println("Doctor updated");
     }
-*/
+
     @DeleteMapping("/{id}")
     public void deleteDoctor(@PathVariable Integer id) {
         doctorService.deleteById(id);
