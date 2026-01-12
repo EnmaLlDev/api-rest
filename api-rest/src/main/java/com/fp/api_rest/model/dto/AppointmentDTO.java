@@ -1,13 +1,14 @@
 package com.fp.api_rest.model.dto;
 
 import com.fp.api_rest.model.StateAppointment;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Data
 @Builder
@@ -15,7 +16,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class AppointmentDTO {
     private int id;
-    private LocalDateTime dateTime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate dateTime;
     private int patientDTO;
     private int doctorDTO;
     private String reason;

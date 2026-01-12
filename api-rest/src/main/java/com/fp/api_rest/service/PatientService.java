@@ -40,15 +40,35 @@ public class PatientService {
     public Patient update(Integer id, Patient data) {
         Patient existing = patientDAO.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Patient not found with id " + id));
-        existing.setDni(data.getDni());
-        existing.setFirstName(data.getFirstName());
-        existing.setSecondName(data.getSecondName());
-        existing.setLastName(data.getLastName());
-        existing.setSecondLastName(data.getSecondLastName());
-        existing.setEmail(data.getEmail());
-        existing.setPhone(data.getPhone());
-        existing.setBirthDate(data.getBirthDate());
-        existing.setAddress(data.getAddress());
+
+        // Actualización parcial: solo actualizar campos no vacíos
+        if (data.getDni() != null && !data.getDni().isBlank()) {
+            existing.setDni(data.getDni());
+        }
+        if (data.getFirstName() != null && !data.getFirstName().isBlank()) {
+            existing.setFirstName(data.getFirstName());
+        }
+        if (data.getSecondName() != null && !data.getSecondName().isBlank()) {
+            existing.setSecondName(data.getSecondName());
+        }
+        if (data.getLastName() != null && !data.getLastName().isBlank()) {
+            existing.setLastName(data.getLastName());
+        }
+        if (data.getSecondLastName() != null && !data.getSecondLastName().isBlank()) {
+            existing.setSecondLastName(data.getSecondLastName());
+        }
+        if (data.getEmail() != null && !data.getEmail().isBlank()) {
+            existing.setEmail(data.getEmail());
+        }
+        if (data.getPhone() != null && !data.getPhone().isBlank()) {
+            existing.setPhone(data.getPhone());
+        }
+        if (data.getBirthDate() != null) {
+            existing.setBirthDate(data.getBirthDate());
+        }
+        if (data.getAddress() != null && !data.getAddress().isBlank()) {
+            existing.setAddress(data.getAddress());
+        }
         return patientDAO.save(existing);
     }
 
