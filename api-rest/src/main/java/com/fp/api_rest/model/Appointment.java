@@ -16,20 +16,21 @@ public class Appointment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "datetime", nullable = false)
+    @Column(name = "dateTime", nullable = false)
     private LocalDateTime dateTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "patientid", nullable = false)
+    @JoinColumn(name = "patientId", nullable = false)
     private Patient patient;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "doctorid", nullable = false)
+    @JoinColumn(name = "doctorId", nullable = false)
     private Doctor doctor;
 
     @Column(length = 500)
     private String reason;
 
+    @Enumerated(EnumType.STRING)
     @Column(length = 50, nullable = false)
     private StateAppointment status;
 }

@@ -18,7 +18,7 @@ import java.util.List;
 @Table(name = "patients")
 public class Patient extends Person {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    @Column(name = "birthdate", nullable = false)
+    @Column(name = "birthDate")
     private LocalDate birthDate;
 
     @Column(length = 200)
