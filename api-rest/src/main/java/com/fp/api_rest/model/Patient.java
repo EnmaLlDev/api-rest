@@ -14,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
+
 @Entity
 @Table(name = "patients")
 public class Patient extends Person {

@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DoctorDTO {
-    private Integer id;              // acepta nulos
+    private Integer id;
     private String firstName;
     private String secondName;
     private String lastName;
