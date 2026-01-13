@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PatientDAO extends JpaRepository<Patient, Integer> {
-    Optional<Patient> findById(Long id);
     List<Patient> findByAddressContaining(String address);
     void deleteAll();
 }

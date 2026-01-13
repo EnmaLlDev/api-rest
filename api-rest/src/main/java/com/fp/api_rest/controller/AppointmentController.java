@@ -34,8 +34,8 @@ public class AppointmentController {
     }
 
     @PutMapping("/update/{id}")
-    public void updatePatient(@RequestBody AppointmentDTO appointment) {
-        appointmentService.save(appointment);
+    public void updatePatient(@PathVariable Integer id, @RequestBody AppointmentDTO appointment) {
+        appointmentService.update(id, appointment);
         System.out.println("Updated, doctor id  " + appointment.getId());
     }
 
