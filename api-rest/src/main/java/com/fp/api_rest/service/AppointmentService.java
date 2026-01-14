@@ -1,13 +1,10 @@
 package com.fp.api_rest.service;
 
 import com.fp.api_rest.model.Appointment;
-import com.fp.api_rest.model.Doctor;
-import com.fp.api_rest.model.dto.DoctorDTO;
 import com.fp.api_rest.repository.dao.AppointmentDAO;
 import com.fp.api_rest.model.dto.AppointmentDTO;
 import com.fp.api_rest.model.dto.mapper.AppointmentMapper;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,7 +32,7 @@ public class AppointmentService {
                 .orElse(null);
     }
 
-    public Appointment update(Integer id, AppointmentDTO data) {
+    public AppointmentDTO update(Integer id, AppointmentDTO data) {
         Appointment existing = appointmentDAO.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Appoinment not found with id " + id));
 
@@ -55,7 +52,8 @@ public class AppointmentService {
         if (data.getStatus() != null) {
             existing.setStatus(data.getStatus());
         }
-        return appointmentDAO.save(existing);
+        Appointment saved = appointmentDAO.save(existing);
+        return AppointmentMapper.toDTO(saved);
     }
 
     public AppointmentDTO save(AppointmentDTO dto) {

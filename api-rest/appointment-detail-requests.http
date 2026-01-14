@@ -1,0 +1,60 @@
+### Obtener todos los detalles de citas
+GET http://localhost:8080/api/appointment-detail/getAll
+
+###
+### Obtener detalle por ID
+GET http://localhost:8080/api/appointment-detail/1
+
+###
+### Obtener detalle por ID de cita
+GET http://localhost:8080/api/appointment-detail/appointment/1
+
+###
+### CREAR un nuevo detalle - CORRECTO (no enviar el ID, solo appointmentId)
+### Nota: appointmentId 1, 2 y 3 ya tienen detalles en la BD
+### Primero debes crear una nueva appointment sin detalle, por ejemplo appointmentId: 4
+POST http://localhost:8080/api/appointment-detail/create
+Content-Type: application/json
+
+{
+  "appointmentId": 4,
+  "diagnosis": "Diabetes tipo 2",
+  "prescription": "Metformina 850mg cada 12 horas",
+  "notes": "Paciente presenta niveles elevados de glucosa en ayunas",
+  "treatment": "Dieta controlada en carbohidratos, ejercicio regular",
+  "followUp": "Control de glucosa en 15 días - 2026-01-28"
+}
+
+###
+### CREAR - Esto dará error 409 CONFLICT porque appointmentId 1 ya tiene detalle
+POST http://localhost:8080/api/appointment-detail/create
+Content-Type: application/json
+
+{
+  "appointmentId": 1,
+  "diagnosis": "Prueba",
+  "prescription": "Prueba",
+  "notes": "Esto fallará porque la cita 1 ya tiene detalle",
+  "treatment": "Prueba",
+  "followUp": "Prueba"
+}
+
+###
+### ACTUALIZAR detalle existente (PUT)
+PUT http://localhost:8080/api/appointment-detail/update/1
+Content-Type: application/json
+
+{
+  "diagnosis": "Hipertensión arterial controlada",
+  "prescription": "Lisinopril 10mg - continuar tratamiento",
+  "notes": "Paciente responde bien al tratamiento. Presión arterial normalizada.",
+  "treatment": "Mantener cambios en estilo de vida, dieta hiposódica",
+  "followUp": "Próximo control en 60 días - 2026-03-13"
+}
+
+###
+### ELIMINAR detalle por ID
+DELETE http://localhost:8080/api/appointment-detail/delete/1
+
+###
+
