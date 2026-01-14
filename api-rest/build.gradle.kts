@@ -26,12 +26,12 @@ repositories {
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation ("org.postgresql:postgresql:42.7.7")
+    implementation("com.mysql:mysql-connector-j:8.2.0")
 	implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.apache.commons:commons-csv:1.9.0")
 	compileOnly("org.projectlombok:lombok")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
-	runtimeOnly("org.postgresql:postgresql")
+	runtimeOnly("com.mysql:mysql-connector-j")
 	annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")

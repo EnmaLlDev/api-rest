@@ -4,7 +4,7 @@ import com.fp.api_rest.model.Appointment;
 import com.fp.api_rest.repository.dao.AppointmentDAO;
 import com.fp.api_rest.model.dto.AppointmentDTO;
 import com.fp.api_rest.model.dto.mapper.AppointmentMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,7 +30,30 @@ public class AppointmentService {
         return appointmentDAO.findById(id)
                 .map(AppointmentMapper::toDTO)
                 .orElse(null);
+    }
 
+    public AppointmentDTO update(Integer id, AppointmentDTO data) {
+        Appointment existing = appointmentDAO.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Appoinment not found with id " + id));
+
+        // Actualización parcial: solo actualizar campos no vacíos
+        if (data.getDateTime() != null) {
+            existing.setDateTime(data.getDateTime());
+        }
+        if (data.getPatient() != null) {
+            existing.setPatient(data.getPatient());
+        }
+        if (data.getDoctor() != null) {
+            existing.setDoctor(data.getDoctor());
+        }
+        if (data.getReason() != null) {
+            existing.setReason(data.getReason());
+        }
+        if (data.getStatus() != null) {
+            existing.setStatus(data.getStatus());
+        }
+        Appointment saved = appointmentDAO.save(existing);
+        return AppointmentMapper.toDTO(saved);
     }
 
     public AppointmentDTO save(AppointmentDTO dto) {
@@ -42,5 +65,4 @@ public class AppointmentService {
     public void deleteById(int id) {
         appointmentDAO.deleteById(id);
     }
-
 }

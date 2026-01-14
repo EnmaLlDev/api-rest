@@ -1,40 +1,38 @@
 package com.fp.api_rest.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
-
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@SuperBuilder
 @Entity
 @Table(name = "appointments")
 public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
-    @Column(nullable = false)
-    private LocalDateTime datetime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @Column(name = "dateTime", nullable = false)
+    private LocalDate dateTime;
 
-    @ManyToOne
-    @JoinColumn(name = "patientid", nullable = false)
-    private Patient patientId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "patientId", nullable = false)
+    private Patient patient;
 
-    @ManyToOne
-    @JoinColumn(name = "doctorid", nullable = false)
-    private Doctor doctorId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "doctorId", nullable = false)
+    private Doctor doctor;
 
     @Column(length = 500)
     private String reason;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    public StateAppointment status = StateAppointment.NO_ATTEND;
+    @Column(length = 50, nullable = false)
+    private StateAppointment status;
 }
-

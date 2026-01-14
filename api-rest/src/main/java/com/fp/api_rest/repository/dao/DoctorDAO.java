@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface DoctorDAO extends JpaRepository<Doctor, Integer> {
-
-    Optional<Doctor> findById(Long id);
     Optional<Doctor> findByLicenseNumber(String licenseNumber);
     List<Doctor> findBySpecialtyContainingIgnoreCase(String keyword);
 }

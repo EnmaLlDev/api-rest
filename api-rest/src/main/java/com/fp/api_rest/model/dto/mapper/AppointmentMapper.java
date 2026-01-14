@@ -1,8 +1,6 @@
 package com.fp.api_rest.model.dto.mapper;
 
 import com.fp.api_rest.model.Appointment;
-import com.fp.api_rest.model.Doctor;
-import com.fp.api_rest.model.Patient;
 import com.fp.api_rest.model.dto.AppointmentDTO;
 
 public class AppointmentMapper {
@@ -10,11 +8,9 @@ public class AppointmentMapper {
     public static AppointmentDTO toDTO (Appointment appointment) {
         AppointmentDTO dto = new AppointmentDTO();
         dto.setId(appointment.getId());
-        dto.setDateTime(appointment.getDatetime());
-        dto.setPatientDTO(appointment.getPatientId() != null ?
-                PatientMapper.toDTO(appointment.getPatientId()).getId() : null);
-        dto.setDoctorDTO(appointment.getDoctorId() != null ?
-                DoctorMapper.toDTO(appointment.getDoctorId()).getId() : null);
+        dto.setDateTime(appointment.getDateTime());
+        dto.setPatient(appointment.getPatient());
+        dto.setDoctor(appointment.getDoctor());
         dto.setReason(appointment.getReason());
         dto.setStatus(appointment.getStatus());
         return dto;
@@ -22,16 +18,18 @@ public class AppointmentMapper {
 
     public static Appointment toEntity(AppointmentDTO dto) {
         Appointment appointment = new Appointment();
-        appointment.setId(dto.getId());
-        appointment.setDatetime(dto.getDateTime());
+        appointment.setDateTime(dto.getDateTime());
         appointment.setReason(dto.getReason());
         appointment.setStatus(dto.getStatus());
-        Patient patient = new Patient();
-            patient.setId(dto.getPatientDTO());
-            appointment.setPatientId(patient);
-        Doctor doctor = new Doctor();
-            doctor.setId(dto.getDoctorDTO());
-            appointment.setDoctorId(doctor);
+
+        // Asignar las entidades Patient y Doctor directamente del DTO
+        if (dto.getPatient() != null) {
+            appointment.setPatient(dto.getPatient());
+        }
+        if (dto.getDoctor() != null) {
+            appointment.setDoctor(dto.getDoctor());
+        }
+
         return appointment;
     }
 }

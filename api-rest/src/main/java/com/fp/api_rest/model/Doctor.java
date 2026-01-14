@@ -16,13 +16,13 @@ import java.util.List;
 @Table(name = "doctors")
 public class Doctor extends Person {
 
-    @Column(name = "licensenumber", nullable = false, length = 20)
+    @Column(name = "licenseNumber", nullable = false, length = 20)
     private String licenseNumber;
 
     @Column(name = "specialty", length = 100)
     private String specialty;
 
-    @OneToMany(mappedBy = "doctorId", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany(mappedBy = "doctor", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Appointment> appointments;
 
 }

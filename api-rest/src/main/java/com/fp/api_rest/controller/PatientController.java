@@ -41,8 +41,8 @@ public class PatientController {
         patientService.deletePatient(id);
     }
 
-    @GetMapping("/adress/{address}")
-    public List<PatientDTO> getPatientsByAddress(@PathVariable String address) {
+    @GetMapping("/address/{address}")
+    public List<PatientDTO> getPatientsByAddress(@PathVariable("address") String address) {
         return patientService.findByAddressContaining(address);
     }
 }
