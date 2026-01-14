@@ -41,6 +41,22 @@ CREATE TABLE appointments
     CONSTRAINT fk_doctor  FOREIGN KEY (doctorId)  REFERENCES doctors  (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- Tabla appointment_details
+CREATE TABLE appointment_details
+(
+    id            INT AUTO_INCREMENT PRIMARY KEY,
+    appointmentId INT          NOT NULL UNIQUE,
+    diagnosis     VARCHAR(1000),
+    prescription  VARCHAR(1000),
+    notes         VARCHAR(2000),
+    treatment     VARCHAR(500),
+    followUp      VARCHAR(500),
+    CONSTRAINT fk_appointment FOREIGN KEY (appointmentId) REFERENCES appointments (id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+
+
 -- Datos de prueba
 INSERT INTO doctors (dni, firstName, secondName, lastName, secondLastName, email, phone, licenseNumber, specialty)
 VALUES
@@ -56,9 +72,15 @@ VALUES
 
 INSERT INTO appointments (dateTime, patientId, doctorId, reason, status)
 VALUES
-    ('2025-10-18 10:00:00', 1, 1, 'Chequeo general', 'SCHEDULED'),
-    ('2025-10-18 11:30:00', 2, 2, 'Dolor de garganta', 'SCHEDULED'),
-    ('2025-10-19 09:00:00', 3, 3, 'Revisión de piel', 'SCHEDULED');
+    ('2025-11-10 10:00:00', 1, 1, 'Chequeo general', 'SCHEDULED'),
+    ('2025-10-15 14:30:00', 2, 2, 'Dolor de garganta', 'COMPLETED'),
+    ('2025-10-16 09:00:00', 3, 3, 'Erupción cutánea', 'COMPLETED');
+
+INSERT INTO appointment_details (appointmentId, diagnosis, prescription, notes, treatment, followUp)
+VALUES
+    (1, 'Hipertensión', 'Lisinopril 10mg', 'Controlar presión arterial', 'Cambios en el estilo de vida', '2025-11-18'),
+    (2, 'Faringitis', 'Amoxicilina 500mg', 'Evitar irritantes', 'Reposo y líquidos', '2025-10-25'),
+    (3, 'Dermatitis', 'Crema hidrocortisona', 'Evitar rascarse', 'Mantener la piel hidratada', '2025-10-26');
 
 
 SHOW COLUMNS FROM patients;
