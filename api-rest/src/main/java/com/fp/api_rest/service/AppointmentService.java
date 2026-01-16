@@ -65,4 +65,18 @@ public class AppointmentService {
     public void deleteById(int id) {
         appointmentDAO.deleteById(id);
     }
+
+    public List<AppointmentDTO> findByReason(String reason) {
+        return appointmentDAO.findByReason(reason)
+                .stream()
+                .map(AppointmentMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List<AppointmentDTO> findByStatus(String status) {
+        return appointmentDAO.findByStatus(Enum.valueOf(com.fp.api_rest.model.StateAppointment.class, status))
+                .stream()
+                .map(AppointmentMapper::toDTO)
+                .collect(Collectors.toList());
+    }
 }

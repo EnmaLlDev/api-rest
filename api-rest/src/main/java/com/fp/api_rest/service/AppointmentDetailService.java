@@ -45,12 +45,12 @@ public class AppointmentDetailService {
     }
 
     public AppointmentDetailDTO save(AppointmentDetailDTO dto) {
-        // Verificar que el appointment exista
+
         if (dto.getAppointmentId() != null) {
             Appointment appointment = appointmentDAO.findById(dto.getAppointmentId())
                     .orElseThrow(() -> new EntityNotFoundException("Appointment not found with id " + dto.getAppointmentId()));
 
-            // Verificar que no exista ya un detalle para esta cita
+
             if (appointmentDetailDAO.findByAppointmentId(dto.getAppointmentId()).isPresent()) {
                 throw new IllegalStateException("Appointment detail already exists for appointment with id " + dto.getAppointmentId());
             }

@@ -1,6 +1,5 @@
 package com.fp.api_rest.controller;
 
-import com.fp.api_rest.model.Doctor;
 import com.fp.api_rest.service.DoctorService;
 import org.springframework.web.bind.annotation.*;
 import com.fp.api_rest.model.dto.DoctorDTO;
