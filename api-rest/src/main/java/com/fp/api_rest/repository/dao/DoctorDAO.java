@@ -1,8 +1,6 @@
 package com.fp.api_rest.repository.dao;
 
 import com.fp.api_rest.model.Doctor;
-import com.fp.api_rest.model.Patient;
-import com.fp.api_rest.repository.dao.base.BaseDAO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

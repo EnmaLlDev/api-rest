@@ -54,7 +54,6 @@ CREATE TABLE appointment_details
     CONSTRAINT fk_appointment FOREIGN KEY (appointmentId) REFERENCES appointments (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-
 -- Datos de prueba
 INSERT INTO doctors (dni, firstName, secondName, lastName, secondLastName, email, phone, licenseNumber, specialty)
 VALUES

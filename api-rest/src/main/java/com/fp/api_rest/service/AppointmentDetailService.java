@@ -38,38 +38,32 @@ public class AppointmentDetailService {
                 .orElse(null);
     }
 
-    public AppointmentDetailDTO findByAppointmentId(Integer appointmentId) {
+    public List<AppointmentDetailDTO> findByAppointmentId(Integer appointmentId) {
         return appointmentDetailDAO.findByAppointmentId(appointmentId)
+                .stream()
                 .map(AppointmentDetailMapper::toDTO)
-                .orElse(null);
+                .collect(Collectors.toList());
     }
 
     public AppointmentDetailDTO save(AppointmentDetailDTO dto) {
-
-        if (dto.getAppointmentId() != null) {
-            Appointment appointment = appointmentDAO.findById(dto.getAppointmentId())
-                    .orElseThrow(() -> new EntityNotFoundException("Appointment not found with id " + dto.getAppointmentId()));
-
-
-            if (appointmentDetailDAO.findByAppointmentId(dto.getAppointmentId()).isPresent()) {
-                throw new IllegalStateException("Appointment detail already exists for appointment with id " + dto.getAppointmentId());
-            }
-
-            AppointmentDetail detail = AppointmentDetailMapper.toEntity(dto);
-            detail.setAppointment(appointment);
-
-            AppointmentDetail saved = appointmentDetailDAO.save(detail);
-            return AppointmentDetailMapper.toDTO(saved);
+        if (dto.getAppointmentId() == null) {
+            throw new IllegalArgumentException("Appointment ID is required");
         }
 
-        throw new IllegalArgumentException("Appointment ID is required");
+        Appointment appointment = appointmentDAO.findById(dto.getAppointmentId())
+                .orElseThrow(() -> new EntityNotFoundException("Appointment not found with id " + dto.getAppointmentId()));
+
+        AppointmentDetail detail = AppointmentDetailMapper.toEntity(dto);
+        detail.setAppointment(appointment);
+
+        AppointmentDetail saved = appointmentDetailDAO.save(detail);
+        return AppointmentDetailMapper.toDTO(saved);
     }
 
     public AppointmentDetailDTO update(Integer id, AppointmentDetailDTO dto) {
         AppointmentDetail existing = appointmentDetailDAO.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("AppointmentDetail not found with id " + id));
 
-        // Actualización parcial: solo actualizar campos no vacíos
         if (dto.getDiagnosis() != null) {
             existing.setDiagnosis(dto.getDiagnosis());
         }

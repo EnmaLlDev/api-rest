@@ -15,8 +15,8 @@ public class AppointmentDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "appointmentId", nullable = false, unique = true)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "appointmentId", nullable = false)
     private Appointment appointment;
 
     @Column(length = 1000)
