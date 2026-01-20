@@ -45,7 +45,7 @@ CREATE TABLE appointments
 CREATE TABLE appointment_details
 (
     id            INT AUTO_INCREMENT PRIMARY KEY,
-    appointmentId INT          NOT NULL UNIQUE,
+    appointmentId INT          NOT NULL,
     diagnosis     VARCHAR(1000),
     prescription  VARCHAR(1000),
     notes         VARCHAR(2000),
@@ -53,8 +53,6 @@ CREATE TABLE appointment_details
     followUp      VARCHAR(500),
     CONSTRAINT fk_appointment FOREIGN KEY (appointmentId) REFERENCES appointments (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-
 
 
 -- Datos de prueba
@@ -81,6 +79,3 @@ VALUES
     (1, 'Hipertensión', 'Lisinopril 10mg', 'Controlar presión arterial', 'Cambios en el estilo de vida', '2025-11-18'),
     (2, 'Faringitis', 'Amoxicilina 500mg', 'Evitar irritantes', 'Reposo y líquidos', '2025-10-25'),
     (3, 'Dermatitis', 'Crema hidrocortisona', 'Evitar rascarse', 'Mantener la piel hidratada', '2025-10-26');
-
-
-SHOW COLUMNS FROM patients;

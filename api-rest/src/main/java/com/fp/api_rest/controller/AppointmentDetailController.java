@@ -3,6 +3,7 @@ package com.fp.api_rest.controller;
 import com.fp.api_rest.model.dto.AppointmentDetailDTO;
 import com.fp.api_rest.service.AppointmentDetailService;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,12 +36,12 @@ public class AppointmentDetailController {
     }
 
     @GetMapping("/appointment/{appointmentId}")
-    public ResponseEntity<AppointmentDetailDTO> getAppointmentDetailByAppointmentId(@PathVariable Integer appointmentId) {
-        AppointmentDetailDTO dto = appointmentDetailService.findByAppointmentId(appointmentId);
-        if (dto == null) {
+    public ResponseEntity<List<AppointmentDetailDTO>> getAppointmentDetailsByAppointmentId(@PathVariable Integer appointmentId) {
+        List<AppointmentDetailDTO> dtos = appointmentDetailService.findByAppointmentId(appointmentId);
+        if (dtos == null || dtos.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(dto);
+        return ResponseEntity.ok(dtos);
     }
 
     @PostMapping("/create")
@@ -50,6 +51,9 @@ public class AppointmentDetailController {
             return ResponseEntity.status(HttpStatus.CREATED).body(created);
         } catch (EntityNotFoundException ex) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+        } catch (DataIntegrityViolationException ex) {
+            String message = ex.getRootCause() != null ? ex.getRootCause().getMessage() : ex.getMessage();
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(message);
         } catch (IllegalStateException ex) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
         } catch (IllegalArgumentException ex) {
