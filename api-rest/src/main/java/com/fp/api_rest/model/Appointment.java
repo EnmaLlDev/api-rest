@@ -21,12 +21,12 @@ public class Appointment {
     @Column(name = "dateTime", nullable = false)
     private LocalDate dateTime;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "patientId", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "patient", nullable = false)
     private Patient patient;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "doctorId", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "doctor", nullable = false)
     private Doctor doctor;
 
     @Column(length = 500)

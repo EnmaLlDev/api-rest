@@ -2,7 +2,7 @@ package com.fp.api_rest.service;
 
 import com.fp.api_rest.model.Appointment;
 import com.fp.api_rest.model.AppointmentDetail;
-import com.fp.api_rest.model.dto.AppointmentDetailDTO;
+import com.fp.api_rest.model.dto.DetailsDTO;
 import com.fp.api_rest.model.dto.mapper.AppointmentDetailMapper;
 import com.fp.api_rest.repository.dao.AppointmentDAO;
 import com.fp.api_rest.repository.dao.AppointmentDetailDAO;
@@ -15,37 +15,37 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
-public class AppointmentDetailService {
+public class DetailsService {
 
     private final AppointmentDetailDAO appointmentDetailDAO;
     private final AppointmentDAO appointmentDAO;
 
-    public AppointmentDetailService(AppointmentDetailDAO appointmentDetailDAO, AppointmentDAO appointmentDAO) {
+    public DetailsService(AppointmentDetailDAO appointmentDetailDAO, AppointmentDAO appointmentDAO) {
         this.appointmentDetailDAO = appointmentDetailDAO;
         this.appointmentDAO = appointmentDAO;
     }
 
-    public List<AppointmentDetailDTO> findAll() {
+    public List<DetailsDTO> findAll() {
         return appointmentDetailDAO.findAll()
                 .stream()
                 .map(AppointmentDetailMapper::toDTO)
                 .collect(Collectors.toList());
     }
 
-    public AppointmentDetailDTO findById(Integer id) {
+    public DetailsDTO findById(Integer id) {
         return appointmentDetailDAO.findById(id)
                 .map(AppointmentDetailMapper::toDTO)
                 .orElse(null);
     }
 
-    public List<AppointmentDetailDTO> findByAppointmentId(Integer appointmentId) {
+    public List<DetailsDTO> findByAppointmentId(Integer appointmentId) {
         return appointmentDetailDAO.findByAppointmentId(appointmentId)
                 .stream()
                 .map(AppointmentDetailMapper::toDTO)
                 .collect(Collectors.toList());
     }
 
-    public AppointmentDetailDTO save(AppointmentDetailDTO dto) {
+    public DetailsDTO save(DetailsDTO dto) {
         if (dto.getAppointmentId() == null) {
             throw new IllegalArgumentException("Appointment ID is required");
         }
@@ -60,7 +60,7 @@ public class AppointmentDetailService {
         return AppointmentDetailMapper.toDTO(saved);
     }
 
-    public AppointmentDetailDTO update(Integer id, AppointmentDetailDTO dto) {
+    public DetailsDTO update(Integer id, DetailsDTO dto) {
         AppointmentDetail existing = appointmentDetailDAO.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("AppointmentDetail not found with id " + id));
 

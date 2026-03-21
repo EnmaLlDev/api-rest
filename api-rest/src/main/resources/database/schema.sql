@@ -33,25 +33,25 @@ CREATE TABLE appointments
 (
     id         INT AUTO_INCREMENT PRIMARY KEY,
     dateTime   DATETIME    NOT NULL,
-    patientId  INT         NOT NULL,
-    doctorId   INT         NOT NULL,
+    patient    INT         NOT NULL,
+    doctor     INT         NOT NULL,
     reason     VARCHAR(500),
     status     VARCHAR(50) NOT NULL,
-    CONSTRAINT fk_patient FOREIGN KEY (patientId) REFERENCES patients (id) ON DELETE CASCADE,
-    CONSTRAINT fk_doctor  FOREIGN KEY (doctorId)  REFERENCES doctors  (id) ON DELETE CASCADE
+    CONSTRAINT fk_patient FOREIGN KEY (patient) REFERENCES patients (id) ON DELETE CASCADE,
+    CONSTRAINT fk_doctor  FOREIGN KEY (doctor)  REFERENCES doctors  (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Tabla appointment_details
 CREATE TABLE appointment_details
 (
     id            INT AUTO_INCREMENT PRIMARY KEY,
-    appointmentId INT          NOT NULL,
+    appointment   INT          NOT NULL,
     diagnosis     VARCHAR(1000),
     prescription  VARCHAR(1000),
     notes         VARCHAR(2000),
     treatment     VARCHAR(500),
     followUp      VARCHAR(500),
-    CONSTRAINT fk_appointment FOREIGN KEY (appointmentId) REFERENCES appointments (id) ON DELETE CASCADE
+    CONSTRAINT fk_appointment FOREIGN KEY (appointment) REFERENCES appointments (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Datos de prueba
@@ -67,13 +67,13 @@ VALUES
     ('88822233B', 'Laura', 'Beatriz', 'Ruiz', 'Mendoza', 'l.ruiz@mail.com', '555-5000', '1985-11-30 00:00:00', 'Calle Norte 55'),
     ('77733344C', 'Ana', 'María', 'Castro', 'Ramos', 'a.castro@mail.com', '555-6000', '2000-07-22 00:00:00', 'Boulevard Sur 23');
 
-INSERT INTO appointments (dateTime, patientId, doctorId, reason, status)
+INSERT INTO appointments (dateTime, patient, doctor, reason, status)
 VALUES
     ('2025-11-10 10:00:00', 1, 1, 'Chequeo general', 'SCHEDULED'),
     ('2025-10-15 14:30:00', 2, 2, 'Dolor de garganta', 'COMPLETED'),
     ('2025-10-16 09:00:00', 3, 3, 'Erupción cutánea', 'COMPLETED');
 
-INSERT INTO appointment_details (appointmentId, diagnosis, prescription, notes, treatment, followUp)
+INSERT INTO appointment_details (appointment, diagnosis, prescription, notes, treatment, followUp)
 VALUES
     (1, 'Hipertensión', 'Lisinopril 10mg', 'Controlar presión arterial', 'Cambios en el estilo de vida', '2025-11-18'),
     (2, 'Faringitis', 'Amoxicilina 500mg', 'Evitar irritantes', 'Reposo y líquidos', '2025-10-25'),

@@ -17,16 +17,16 @@ public abstract class Person {
     @Column(unique = true, nullable = false, length = 20)
     private String dni;
 
-    @Column(name = "firstName", nullable = false, length = 50)
+    @Column(nullable = false, length = 50)
     private String firstName;
 
-    @Column(name = "secondName", length = 50)
+    @Column(length = 50)
     private String secondName;
 
-    @Column(name = "lastName", nullable = false, length = 50)
+    @Column(nullable = false, length = 50)
     private String lastName;
 
-    @Column(name = "secondLastName", length = 50)
+    @Column(length = 50)
     private String secondLastName;
 
     @Column(nullable = false, length = 100)

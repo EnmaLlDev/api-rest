@@ -6,7 +6,7 @@ import com.fp.api_rest.model.dto.DoctorDTO;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/doctors")
+@RequestMapping("/api/doctor")
 public class DoctorController {
 
     private final DoctorService doctorService;

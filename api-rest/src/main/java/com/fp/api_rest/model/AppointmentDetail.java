@@ -16,7 +16,7 @@ public class AppointmentDetail {
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "appointmentId", nullable = false)
+    @JoinColumn(name = "appointment", nullable = false)
     private Appointment appointment;
 
     @Column(length = 1000)

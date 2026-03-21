@@ -2,16 +2,16 @@ package com.fp.api_rest.model.dto.mapper;
 
 import com.fp.api_rest.model.Appointment;
 import com.fp.api_rest.model.AppointmentDetail;
-import com.fp.api_rest.model.dto.AppointmentDetailDTO;
+import com.fp.api_rest.model.dto.DetailsDTO;
 
 public class AppointmentDetailMapper {
 
-    public static AppointmentDetailDTO toDTO(AppointmentDetail detail) {
+    public static DetailsDTO toDTO(AppointmentDetail detail) {
         if (detail == null) {
             return null;
         }
 
-        AppointmentDetailDTO dto = new AppointmentDetailDTO();
+        DetailsDTO dto = new DetailsDTO();
         dto.setId(detail.getId());
         dto.setAppointmentId(detail.getAppointment() != null ? detail.getAppointment().getId() : null);
         dto.setDiagnosis(detail.getDiagnosis());
@@ -22,7 +22,7 @@ public class AppointmentDetailMapper {
         return dto;
     }
 
-    public static AppointmentDetail toEntity(AppointmentDetailDTO dto) {
+    public static AppointmentDetail toEntity(DetailsDTO dto) {
         if (dto == null) {
             return null;
         }

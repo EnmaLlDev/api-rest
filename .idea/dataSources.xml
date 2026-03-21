@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="clinica_db@localhost" uuid="631baf9b-1549-496c-8302-05ea125e3ba7">
+    <data-source source="LOCAL" name="clinica@localhost" uuid="d6683c95-5917-4079-93ab-90bbfbb9a48d">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
+      <remarks>BBDD API</remarks>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/clinica_db</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3306/clinica</jdbc-url>
       <jdbc-additional-properties>
         <property name="com.intellij.clouds.kubernetes.db.host.port" />
         <property name="com.intellij.clouds.kubernetes.db.enabled" value="false" />
