@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/api-rest.iml" filepath="$PROJECT_DIR$/.idea/api-rest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/api-rest.main.iml" filepath="$PROJECT_DIR$/.idea/modules/api-rest.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/api-rest.test.iml" filepath="$PROJECT_DIR$/.idea/modules/api-rest.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.fp.api-rest.main.iml" filepath="$PROJECT_DIR$/.idea/modules/com.fp.api-rest.main.iml" />
     </modules>
   </component>

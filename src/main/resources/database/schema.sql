@@ -54,6 +54,40 @@ CREATE TABLE appointment_details
     CONSTRAINT fk_appointment FOREIGN KEY (appointment) REFERENCES appointments (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- Tablas de autenticacion
+CREATE TABLE roles
+(
+    id   BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) UNIQUE NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE users
+(
+    id       BIGINT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255)        NOT NULL,
+    enabled  BOOLEAN             NOT NULL DEFAULT TRUE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE user_roles
+(
+    user_id BIGINT NOT NULL,
+    role_id BIGINT NOT NULL,
+    PRIMARY KEY (user_id, role_id),
+    CONSTRAINT fk_user_roles_user FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
+    CONSTRAINT fk_user_roles_role FOREIGN KEY (role_id) REFERENCES roles (id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE refresh_tokens
+(
+    id         BIGINT AUTO_INCREMENT PRIMARY KEY,
+    token      VARCHAR(255) UNIQUE NOT NULL,
+    user_id    BIGINT             NOT NULL,
+    expires_at DATETIME           NOT NULL,
+    revoked    BOOLEAN            NOT NULL DEFAULT FALSE,
+    CONSTRAINT fk_refresh_user FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 -- Datos de prueba
 INSERT INTO doctors (dni, firstName, secondName, lastName, secondLastName, email, phone, licenseNumber, specialty)
 VALUES
@@ -78,3 +112,19 @@ VALUES
     (1, 'Hipertensión', 'Lisinopril 10mg', 'Controlar presión arterial', 'Cambios en el estilo de vida', '2025-11-18'),
     (2, 'Faringitis', 'Amoxicilina 500mg', 'Evitar irritantes', 'Reposo y líquidos', '2025-10-25'),
     (3, 'Dermatitis', 'Crema hidrocortisona', 'Evitar rascarse', 'Mantener la piel hidratada', '2025-10-26');
+
+INSERT INTO roles (name)
+VALUES ('ROLE_ADMIN'), ('ROLE_DOCTOR'), ('ROLE_PATIENT');
+
+-- Password para todos: ChangeMe123!
+INSERT INTO users (username, password, enabled)
+VALUES
+    ('admin', '$2a$10$WJf6oSE6z6z74Q.6fYz3TeQ4v5Qf9Q2MBOsE0f3VfGlVc2N1Q8K1K', TRUE),
+    ('doctor', '$2a$10$WJf6oSE6z6z74Q.6fYz3TeQ4v5Qf9Q2MBOsE0f3VfGlVc2N1Q8K1K', TRUE),
+    ('patient', '$2a$10$WJf6oSE6z6z74Q.6fYz3TeQ4v5Qf9Q2MBOsE0f3VfGlVc2N1Q8K1K', TRUE);
+
+INSERT INTO user_roles (user_id, role_id)
+VALUES
+    (1, 1),
+    (2, 2),
+    (3, 3);
