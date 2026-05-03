@@ -4,6 +4,8 @@ import com.fp.api_rest.model.RefreshToken;
 import com.fp.api_rest.model.User;
 import com.fp.api_rest.model.dto.auth.*;
 import com.fp.api_rest.repository.dao.UserDAO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,6 +15,8 @@ import java.util.List;
 
 @Service
 public class AuthService {
+    // LOGs para trackear la salida del endpoint
+    private static final Logger logger = LoggerFactory.getLogger(AuthService.class);
 
     private final AuthenticationManager authenticationManager;
     private final UserDAO userDAO;
@@ -33,25 +37,45 @@ public class AuthService {
     }
 
     public AuthResponse login(LoginRequest request) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
-        );
+        logger.info("Intento de login para usuario: {}", request.getUsername());
 
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        User user = userDAO.findByUsername(userDetails.getUsername())
-                .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado"));
+        try {
+            // Verificar que el usuario existe en la BD
+            User user = userDAO.findByUsername(request.getUsername())
+                    .orElseThrow(() -> {
+                        logger.warn("Usuario no encontrado: {}", request.getUsername());
+                        return new BadCredentialsException("Usuario o contraseña inválidos");
+                    });
 
-        String accessToken = jwtService.generateAccessToken(userDetails);
-        RefreshToken refreshToken = refreshTokenService.createToken(user);
+            logger.debug("Usuario encontrado: {}", user.getUsername());
 
-        return AuthResponse.builder()
-                .accessToken(accessToken)
-                .refreshToken(refreshToken.getToken())
-                .tokenType("Bearer")
-                .expiresInMs(900000L)
-                .username(user.getUsername())
-                .roles(user.getRoles().stream().map(r -> r.getName()).toList())
-                .build();
+            // Autenticar
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
+            );
+
+            logger.info("Autenticación exitosa para: {}", request.getUsername());
+
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+            String accessToken = jwtService.generateAccessToken(userDetails);
+            RefreshToken refreshToken = refreshTokenService.createToken(user);
+
+            return AuthResponse.builder()
+                    .accessToken(accessToken)
+                    .refreshToken(refreshToken.getToken())
+                    .tokenType("Bearer")
+                    .expiresInMs(900000L)
+                    .username(user.getUsername())
+                    .roles(user.getRoles().stream().map(r -> r.getName()).toList())
+                    .build();
+        } catch (BadCredentialsException e) {
+            logger.error("Credenciales inválidas para usuario: {}", request.getUsername());
+            throw new BadCredentialsException("Usuario o contraseña inválidos");
+        } catch (Exception e) {
+            logger.error("Error durante autenticación: ", e);
+            throw new BadCredentialsException("Error en la autenticación");
+        }
     }
 
     public AuthResponse refresh(RefreshRequest request) {

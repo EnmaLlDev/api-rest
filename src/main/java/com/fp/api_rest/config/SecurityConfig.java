@@ -45,7 +45,8 @@ public class SecurityConfig {
                         })
                 )
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/**").permitAll()
+                        // Permitir endpoints públicos
+                        .requestMatchers("/auth/login", "/auth/refresh", "/auth/generate-hash", "/auth/logout").permitAll()
                         .requestMatchers("/api/doctor/**").hasAnyRole("ADMIN", "DOCTOR")
                         .requestMatchers("/api/patient/**").hasAnyRole("ADMIN", "DOCTOR", "PATIENT")
                         .requestMatchers("/api/appointment/**").hasAnyRole("ADMIN", "DOCTOR")

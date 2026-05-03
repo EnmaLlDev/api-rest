@@ -119,12 +119,15 @@ VALUES ('ROLE_ADMIN'), ('ROLE_DOCTOR'), ('ROLE_PATIENT');
 -- Password para todos: ChangeMe123!
 INSERT INTO users (username, password, enabled)
 VALUES
-    ('admin', '$2a$10$WJf6oSE6z6z74Q.6fYz3TeQ4v5Qf9Q2MBOsE0f3VfGlVc2N1Q8K1K', TRUE),
-    ('doctor', '$2a$10$WJf6oSE6z6z74Q.6fYz3TeQ4v5Qf9Q2MBOsE0f3VfGlVc2N1Q8K1K', TRUE),
-    ('patient', '$2a$10$WJf6oSE6z6z74Q.6fYz3TeQ4v5Qf9Q2MBOsE0f3VfGlVc2N1Q8K1K', TRUE);
+    ('admin', '$2a$10$BA0eOc/tUJPP0.4qXg5MoeD41DzIt2Fpl2eMk6rOp9OSnurH3I9yq', TRUE),
+    ('doctor', '$2a$10$BA0eOc/tUJPP0.4qXg5MoeD41DzIt2Fpl2eMk6rOp9OSnurH3I9yq', TRUE),
+    ('patient', '$2a$10$BA0eOc/tUJPP0.4qXg5MoeD41DzIt2Fpl2eMk6rOp9OSnurH3I9yq', TRUE);
 
 INSERT INTO user_roles (user_id, role_id)
 VALUES
     (1, 1),
     (2, 2),
     (3, 3);
+
+UPDATE users SET password = '$2a$10$BA0eOc/tUJPP0.4qXg5MoeD41DzIt2Fpl2eMk6rOp9OSnurH3I9yq' WHERE username IN ('admin', 'doctor', 'patient');
+SELECT id, username, password FROM users;
