@@ -82,4 +82,10 @@ public class PatientService {
                 .map(PatientMapper::toDTO)
                 .toList();
     }
+
+    public PatientDTO findByEmail(String email) {
+        return patientDAO.findByEmail(email)
+                .map(PatientMapper::toDTO)
+                .orElse(null);
+    }
 }

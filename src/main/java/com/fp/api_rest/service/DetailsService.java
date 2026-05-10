@@ -6,6 +6,7 @@ import com.fp.api_rest.model.dto.DetailsDTO;
 import com.fp.api_rest.model.dto.mapper.AppointmentDetailMapper;
 import com.fp.api_rest.repository.dao.AppointmentDAO;
 import com.fp.api_rest.repository.dao.AppointmentDetailDAO;
+import com.fp.api_rest.repository.dao.PatientDAO;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,10 +20,12 @@ public class DetailsService {
 
     private final AppointmentDetailDAO appointmentDetailDAO;
     private final AppointmentDAO appointmentDAO;
+    private final PatientDAO patientDAO;
 
-    public DetailsService(AppointmentDetailDAO appointmentDetailDAO, AppointmentDAO appointmentDAO) {
+    public DetailsService(AppointmentDetailDAO appointmentDetailDAO, AppointmentDAO appointmentDAO, PatientDAO patientDAO) {
         this.appointmentDetailDAO = appointmentDetailDAO;
         this.appointmentDAO = appointmentDAO;
+        this.patientDAO = patientDAO;
     }
 
     public List<DetailsDTO> findAll() {
@@ -89,5 +92,14 @@ public class DetailsService {
             throw new EntityNotFoundException("AppointmentDetail not found with id " + id);
         }
         appointmentDetailDAO.deleteById(id);
+    }
+
+    public List<DetailsDTO> findByPatientEmail(String email) {
+        return patientDAO.findByEmail(email)
+                .map(patient -> appointmentDetailDAO.findByPatientId(patient.getId()))
+                .orElse(List.of())
+                .stream()
+                .map(AppointmentDetailMapper::toDTO)
+                .collect(Collectors.toList());
     }
 }

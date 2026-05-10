@@ -44,4 +44,9 @@ dependencies {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+	val byteBuddyAgent = configurations.testRuntimeClasspath.get().files.firstOrNull { it.name.startsWith("byte-buddy-agent") }
+	if (byteBuddyAgent != null) {
+		jvmArgs("-javaagent:${byteBuddyAgent.absolutePath}")
+	}
+	jvmArgs("-Xshare:off")
 }

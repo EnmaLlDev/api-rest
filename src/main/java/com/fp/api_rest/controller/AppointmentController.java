@@ -5,6 +5,7 @@ import com.fp.api_rest.service.AppointmentService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -54,5 +55,12 @@ public class AppointmentController {
     public ResponseEntity<Void> deleteAppointment(@PathVariable int id) {
         appointmentService.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/my")
+    public ResponseEntity<List<AppointmentDTO>> getMyAppointments(Authentication authentication) {
+        String email = authentication.getName();
+        List<AppointmentDTO> appointments = appointmentService.findByPatientEmail(email);
+        return ResponseEntity.ok(appointments);
     }
 }

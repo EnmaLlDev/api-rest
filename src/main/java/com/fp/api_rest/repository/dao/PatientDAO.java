@@ -4,8 +4,10 @@ import com.fp.api_rest.model.Patient;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PatientDAO extends JpaRepository<Patient, Integer> {
     List<Patient> findByAddressContaining(String address);
     void deleteAll();
+    Optional<Patient> findByEmail(String email);
 }

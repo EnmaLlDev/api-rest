@@ -48,8 +48,11 @@ public class SecurityConfig {
                         // Permitir endpoints públicos
                         .requestMatchers("/auth/login", "/auth/refresh", "/auth/generate-hash", "/auth/logout").permitAll()
                         .requestMatchers("/api/doctor/**").hasAnyRole("ADMIN", "DOCTOR")
-                        .requestMatchers("/api/patient/**").hasAnyRole("ADMIN", "DOCTOR", "PATIENT")
+                        .requestMatchers("/api/patient/me").hasAnyRole("ADMIN", "DOCTOR", "PATIENT")
+                        .requestMatchers("/api/patient/**").hasAnyRole("ADMIN", "DOCTOR")
+                        .requestMatchers("/api/appointment/my").hasAnyRole("ADMIN", "DOCTOR", "PATIENT")
                         .requestMatchers("/api/appointment/**").hasAnyRole("ADMIN", "DOCTOR")
+                        .requestMatchers("/api/details/my").hasAnyRole("ADMIN", "DOCTOR", "PATIENT")
                         .requestMatchers("/api/details/**").hasAnyRole("ADMIN", "DOCTOR")
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()

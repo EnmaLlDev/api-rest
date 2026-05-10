@@ -6,6 +6,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -84,5 +85,12 @@ public class DetailsController {
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting appointment detail");
         }
+    }
+
+    @GetMapping("/my")
+    public ResponseEntity<List<DetailsDTO>> getMyDetails(Authentication authentication) {
+        String email = authentication.getName();
+        List<DetailsDTO> details = appointmentDetailService.findByPatientEmail(email);
+        return ResponseEntity.ok(details);
     }
 }

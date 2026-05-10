@@ -2,11 +2,10 @@ package com.fp.api_rest.service;
 
 import com.fp.api_rest.model.User;
 import com.fp.api_rest.repository.dao.UserDAO;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import com.fp.api_rest.security.UserPrincipal;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.Service;
-
-import java.util.stream.Collectors;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
@@ -18,20 +17,11 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     @Override
+    @Cacheable(value = "userDetails", key = "#username")
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userDAO.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado"));
 
-        return new org.springframework.security.core.userdetails.User(
-                user.getUsername(),
-                user.getPassword(),
-                user.isEnabled(),
-                true,
-                true,
-                true,
-                user.getRoles().stream()
-                        .map(r -> new SimpleGrantedAuthority(r.getName()))
-                        .collect(Collectors.toSet())
-        );
+        return new UserPrincipal(user);
     }
 }

@@ -10,4 +10,7 @@ import java.util.List;
 public interface AppointmentDetailDAO extends JpaRepository<AppointmentDetail, Integer> {
     @Query("SELECT ad FROM AppointmentDetail ad WHERE ad.appointment.id = :appointmentId")
     List<AppointmentDetail> findByAppointmentId(@Param("appointmentId") Integer appointmentId);
+
+    @Query("SELECT ad FROM AppointmentDetail ad WHERE ad.appointment.patient.id = :patientId")
+    List<AppointmentDetail> findByPatientId(@Param("patientId") Integer patientId);
 }

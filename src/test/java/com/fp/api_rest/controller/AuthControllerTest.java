@@ -115,6 +115,7 @@ class AuthControllerTest {
 
     private MeResponse sampleMeResponse() {
         return MeResponse.builder()
+                .id(1L)
                 .username("admin")
                 .roles(List.of("ROLE_ADMIN"))
                 .build();

@@ -4,6 +4,7 @@ import com.fp.api_rest.model.Appointment;
 import com.fp.api_rest.model.Doctor;
 import com.fp.api_rest.model.Patient;
 import com.fp.api_rest.repository.dao.AppointmentDAO;
+import com.fp.api_rest.repository.dao.PatientDAO;
 import com.fp.api_rest.model.dto.AppointmentDTO;
 import com.fp.api_rest.model.dto.mapper.AppointmentMapper;
 import jakarta.persistence.EntityNotFoundException;
@@ -16,9 +17,11 @@ import java.util.stream.Collectors;
 public class AppointmentService {
 
     private final AppointmentDAO appointmentDAO;
+    private final PatientDAO patientDAO;
 
-    public AppointmentService(AppointmentDAO appointmentDAO) {
+    public AppointmentService(AppointmentDAO appointmentDAO, PatientDAO patientDAO) {
         this.appointmentDAO = appointmentDAO;
+        this.patientDAO = patientDAO;
     }
 
     public List<AppointmentDTO> findAll() {
@@ -80,6 +83,15 @@ public class AppointmentService {
 
     public List<AppointmentDTO> findByStatus(String status) {
         return appointmentDAO.findByStatus(Enum.valueOf(com.fp.api_rest.model.StateAppointment.class, status))
+                .stream()
+                .map(AppointmentMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List<AppointmentDTO> findByPatientEmail(String email) {
+        return patientDAO.findByEmail(email)
+                .map(patient -> appointmentDAO.findByPatientId(patient.getId()))
+                .orElse(List.of())
                 .stream()
                 .map(AppointmentMapper::toDTO)
                 .collect(Collectors.toList());

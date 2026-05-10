@@ -4,6 +4,8 @@ import com.fp.api_rest.model.Patient;
 import com.fp.api_rest.model.dto.PatientDTO;
 import com.fp.api_rest.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -44,5 +46,15 @@ public class PatientController {
     @GetMapping("/address/{address}")
     public List<PatientDTO> getPatientsByAddress(@PathVariable("address") String address) {
         return patientService.findByAddressContaining(address);
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<PatientDTO> getMyData(Authentication authentication) {
+        String email = authentication.getName();
+        PatientDTO patient = patientService.findByEmail(email);
+        if (patient == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(patient);
     }
 }

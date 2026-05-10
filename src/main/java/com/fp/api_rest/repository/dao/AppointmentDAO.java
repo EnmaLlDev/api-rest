@@ -9,4 +9,5 @@ import java.util.List;
 public interface AppointmentDAO extends JpaRepository<Appointment, Integer> {
     List<Appointment> findByReason(String reason);
     List<Appointment> findByStatus(StateAppointment status);
+    List<Appointment> findByPatientId(Integer patientId);
 }

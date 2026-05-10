@@ -10,6 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class MeResponse {
+    private Long id;
     private String username;
     private List<String> roles;
 }
