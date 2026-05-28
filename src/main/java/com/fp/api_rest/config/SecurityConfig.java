@@ -3,6 +3,7 @@ package com.fp.api_rest.config;
 import com.fp.api_rest.service.CustomUserDetailsService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.*;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.*;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -45,8 +46,9 @@ public class SecurityConfig {
                         })
                 )
                 .authorizeHttpRequests(auth -> auth
-                        // Permitir endpoints públicos
                         .requestMatchers("/auth/login", "/auth/refresh", "/auth/generate-hash", "/auth/logout").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/public/**").hasAnyRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/contact/create").permitAll()
                         .requestMatchers("/api/doctor/**").hasAnyRole("ADMIN", "DOCTOR")
                         .requestMatchers("/api/patient/me").hasAnyRole("ADMIN", "DOCTOR", "PATIENT")
                         .requestMatchers("/api/patient/**").hasAnyRole("ADMIN", "DOCTOR")

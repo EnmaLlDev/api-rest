@@ -88,6 +88,21 @@ CREATE TABLE refresh_tokens
     CONSTRAINT fk_refresh_user FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- Tabla contact_messages para mensajes de contacto desde la app móvil
+CREATE TABLE contact_messages
+(
+    id               BIGINT AUTO_INCREMENT PRIMARY KEY,
+    nombre           VARCHAR(100)  NOT NULL,
+    apellido         VARCHAR(100)  NOT NULL,
+    email            VARCHAR(150)  NOT NULL,
+    telefono         VARCHAR(20),
+    mensaje          TEXT          NOT NULL,
+    revisado         BOOLEAN       NOT NULL DEFAULT FALSE,
+    fecha_creacion   DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    INDEX idx_email (email),
+    INDEX idx_revisado (revisado)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 -- Datos de prueba
 INSERT INTO doctors (dni, firstName, secondName, lastName, secondLastName, email, phone, licenseNumber, specialty)
 VALUES
