@@ -4,8 +4,16 @@ package com.fp.api_rest.model.dto.mapper;
 import com.fp.api_rest.model.dto.DoctorDTO;
 import com.fp.api_rest.model.Doctor;
 
+/**
+ * Clase de utilidad para mapear entre Doctor y DoctorDTO.
+ */
 public class DoctorMapper {
 
+    /**
+     * Convierte una entidad Doctor a DoctorDTO.
+     * @param doctor entidad a convertir
+     * @return DTO equivalente
+     */
     public static DoctorDTO toDTO(Doctor doctor) {
         DoctorDTO dto = new DoctorDTO();
         dto.setId(doctor.getId());
@@ -21,6 +29,11 @@ public class DoctorMapper {
         return dto;
     }
 
+    /**
+     * Convierte un DoctorDTO a entidad Doctor.
+     * @param dto DTO a convertir
+     * @return entidad equivalente
+     */
     public static Doctor toEntity(DoctorDTO dto) {
         Doctor doctor = new Doctor();
         doctor.setId(dto.getId());

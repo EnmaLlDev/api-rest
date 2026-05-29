@@ -118,15 +118,17 @@ VALUES
 
 INSERT INTO appointments (dateTime, patient, doctor, reason, status)
 VALUES
-    ('2025-11-10 10:00:00', 1, 1, 'Chequeo general', 'SCHEDULED'),
-    ('2025-10-15 14:30:00', 2, 2, 'Dolor de garganta', 'COMPLETED'),
-    ('2025-10-16 09:00:00', 3, 3, 'Erupción cutánea', 'COMPLETED');
+    ('2025-11-10 10:00:00', 1, 1, 'Visión borrosa de lejos', 'SCHEDULED'),
+    ('2025-10-15 14:30:00', 2, 2, 'Sequedad, ardor y enrojecimiento ocular', 'COMPLETED'),
+    ('2025-10-16 09:00:00', 3, 3, 'Aparición de manchas flotantes en la visión', 'COMPLETED');
 
 INSERT INTO appointment_details (appointment, diagnosis, prescription, notes, treatment, followUp)
 VALUES
-    (1, 'Hipertensión', 'Lisinopril 10mg', 'Controlar presión arterial', 'Cambios en el estilo de vida', '2025-11-18'),
-    (2, 'Faringitis', 'Amoxicilina 500mg', 'Evitar irritantes', 'Reposo y líquidos', '2025-10-25'),
-    (3, 'Dermatitis', 'Crema hidrocortisona', 'Evitar rascarse', 'Mantener la piel hidratada', '2025-10-26');
+    (1, 'Miopía y Astigmatismo', 'Gafas graduadas (OD: -2.00, OI: -2.50)', 'Renovación de cristales necesaria', 'Uso constante de lentes correctoras', '2025-11-18'),
+    (2, 'Síndrome del ojo seco', 'Lágrimas artificiales (Hialuronato 0.4%)', 'Descansar la vista usando la regla 20-20-20', 'Aplicar 1 gota en cada ojo cada 4 horas', '2025-10-25'),
+    (3, 'Miodesopsias (Moscas volantes)', 'Ninguna', 'Fondo de ojo normal, retina sin desgarros', 'Observación y revisión ante cambios repentinos', '2025-10-26');
+
+
 
 INSERT INTO roles (name)
 VALUES ('ROLE_ADMIN'), ('ROLE_DOCTOR'), ('ROLE_PATIENT');
@@ -146,3 +148,6 @@ VALUES
 
 UPDATE users SET password = '$2a$10$BA0eOc/tUJPP0.4qXg5MoeD41DzIt2Fpl2eMk6rOp9OSnurH3I9yq' WHERE username IN ('admin', 'doctor', 'patient');
 SELECT id, username, password FROM users;
+
+
+UPDATE users SET username = 'a.castro@mail.com' WHERE id = 3;

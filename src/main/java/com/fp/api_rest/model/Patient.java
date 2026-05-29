@@ -17,6 +17,9 @@ import java.util.List;
 
 @Entity
 @Table(name = "patients")
+/**
+ * Entidad JPA que representa un paciente de la clínica.
+ */
 public class Patient extends Person {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @Column(name = "birthDate")

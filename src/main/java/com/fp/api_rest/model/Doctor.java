@@ -14,6 +14,9 @@ import java.util.List;
 @SuperBuilder
 @Entity
 @Table(name = "doctors")
+/**
+ * Entidad JPA que representa un médico de la clínica.
+ */
 public class Doctor extends Person {
 
     @Column(name = "licenseNumber", nullable = false, length = 20)

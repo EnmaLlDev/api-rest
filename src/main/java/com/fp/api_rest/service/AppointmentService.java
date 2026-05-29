@@ -13,6 +13,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Servicio para la gestión de citas médicas.
+ */
 @Service
 public class AppointmentService {
 
@@ -24,6 +27,10 @@ public class AppointmentService {
         this.patientDAO = patientDAO;
     }
 
+    /**
+     * Lista todas las citas.
+     * @return lista de citas como DTO
+     */
     public List<AppointmentDTO> findAll() {
         return appointmentDAO.findAll()
                 .stream()
@@ -31,12 +38,23 @@ public class AppointmentService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Busca una cita por su ID.
+     * @param id identificador de la cita
+     * @return DTO de la cita o null si no existe
+     */
     public AppointmentDTO findById(int id) {
         return appointmentDAO.findById(id)
                 .map(AppointmentMapper::toDTO)
                 .orElse(null);
     }
 
+    /**
+     * Actualiza una cita existente de forma parcial.
+     * @param id identificador de la cita
+     * @param data datos a actualizar
+     * @return DTO de la cita actualizada
+     */
     public AppointmentDTO update(Integer id, AppointmentDTO data) {
         Appointment existing = appointmentDAO.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Appointment not found with id " + id));
@@ -64,16 +82,30 @@ public class AppointmentService {
         return AppointmentMapper.toDTO(saved);
     }
 
+    /**
+     * Crea una nueva cita.
+     * @param dto datos de la cita
+     * @return DTO de la cita creada
+     */
     public AppointmentDTO save(AppointmentDTO dto) {
         Appointment appointment = AppointmentMapper.toEntity(dto);
         Appointment saved = appointmentDAO.save(appointment);
         return AppointmentMapper.toDTO(saved);
     }
 
+    /**
+     * Elimina una cita por su ID.
+     * @param id identificador de la cita
+     */
     public void deleteById(int id) {
         appointmentDAO.deleteById(id);
     }
 
+    /**
+     * Busca citas por motivo.
+     * @param reason motivo de la cita
+     * @return lista de citas coincidentes
+     */
     public List<AppointmentDTO> findByReason(String reason) {
         return appointmentDAO.findByReason(reason)
                 .stream()
@@ -81,6 +113,11 @@ public class AppointmentService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Busca citas por estado.
+     * @param status estado de la cita
+     * @return lista de citas en ese estado
+     */
     public List<AppointmentDTO> findByStatus(String status) {
         return appointmentDAO.findByStatus(Enum.valueOf(com.fp.api_rest.model.StateAppointment.class, status))
                 .stream()
@@ -88,6 +125,11 @@ public class AppointmentService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Busca las citas asociadas a un paciente por su email.
+     * @param email email del paciente
+     * @return lista de citas del paciente
+     */
     public List<AppointmentDTO> findByPatientEmail(String email) {
         return patientDAO.findByEmail(email)
                 .map(patient -> appointmentDAO.findByPatientId(patient.getId()))

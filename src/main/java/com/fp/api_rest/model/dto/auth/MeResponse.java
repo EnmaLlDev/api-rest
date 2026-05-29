@@ -9,6 +9,9 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @Builder
+/**
+ * DTO que representa la información del usuario autenticado.
+ */
 public class MeResponse {
     private Long id;
     private String username;

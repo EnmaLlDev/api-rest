@@ -4,8 +4,16 @@ import com.fp.api_rest.model.Appointment;
 import com.fp.api_rest.model.AppointmentDetail;
 import com.fp.api_rest.model.dto.DetailsDTO;
 
+/**
+ * Clase de utilidad para mapear entre AppointmentDetail y DetailsDTO.
+ */
 public class AppointmentDetailMapper {
 
+    /**
+     * Convierte un AppointmentDetail a DetailsDTO.
+     * @param detail entidad a convertir
+     * @return DTO equivalente o null si la entrada es null
+     */
     public static DetailsDTO toDTO(AppointmentDetail detail) {
         if (detail == null) {
             return null;
@@ -22,6 +30,11 @@ public class AppointmentDetailMapper {
         return dto;
     }
 
+    /**
+     * Convierte un DetailsDTO a AppointmentDetail.
+     * @param dto DTO a convertir
+     * @return entidad equivalente o null si la entrada es null
+     */
     public static AppointmentDetail toEntity(DetailsDTO dto) {
         if (dto == null) {
             return null;

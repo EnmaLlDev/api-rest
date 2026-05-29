@@ -10,6 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+/**
+ * Servicio para la gestión de tokens de refresco.
+ */
 @Service
 @Transactional
 public class RefreshTokenService {
@@ -23,6 +26,11 @@ public class RefreshTokenService {
         this.refreshTokenDAO = refreshTokenDAO;
     }
 
+    /**
+     * Crea un nuevo refresh token para un usuario.
+     * @param user usuario asociado
+     * @return refresh token guardado
+     */
     public RefreshToken createToken(User user) {
         RefreshToken token = RefreshToken.builder()
                 .token(UUID.randomUUID().toString())
@@ -33,6 +41,11 @@ public class RefreshTokenService {
         return refreshTokenDAO.save(token);
     }
 
+    /**
+     * Verifica que el refresh token sea válido y no esté revocado.
+     * @param tokenValue valor del token
+     * @return refresh token verificado
+     */
     public RefreshToken verifyUsableToken(String tokenValue) {
         RefreshToken token = refreshTokenDAO.findByToken(tokenValue)
                 .orElseThrow(() -> new IllegalArgumentException("Refresh token invalido"));
@@ -43,6 +56,10 @@ public class RefreshTokenService {
         return token;
     }
 
+    /**
+     * Revoca un refresh token.
+     * @param tokenValue valor del token a revocar
+     */
     public void revokeToken(String tokenValue) {
         refreshTokenDAO.findByToken(tokenValue).ifPresent(token -> {
             token.setRevoked(true);
@@ -50,6 +67,10 @@ public class RefreshTokenService {
         });
     }
 
+    /**
+     * Revoca todos los refresh tokens de un usuario.
+     * @param user usuario cuyos tokens se revocarán
+     */
     public void revokeAllByUser(User user) {
         refreshTokenDAO.deleteByUser(user);
     }

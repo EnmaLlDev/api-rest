@@ -10,6 +10,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+/**
+ * Controlador REST para la gestión de detalles clínicos de citas.
+ */
 @RestController
 @RequestMapping("/api/details")
 public class DetailsController {
@@ -20,12 +23,21 @@ public class DetailsController {
         this.appointmentDetailService = appointmentDetailService;
     }
 
+    /**
+     * Lista todos los detalles clínicos.
+     * @return lista de detalles
+     */
     @GetMapping("/getAll")
     public ResponseEntity<List<DetailsDTO>> getAllAppointmentDetails() {
         List<DetailsDTO> details = appointmentDetailService.findAll();
         return ResponseEntity.ok(details);
     }
 
+    /**
+     * Obtiene un detalle clínico por su ID.
+     * @param id identificador del detalle
+     * @return detalle encontrado o 404
+     */
     @GetMapping("/{id}")
     public ResponseEntity<DetailsDTO> getAppointmentDetailById(@PathVariable Integer id) {
         DetailsDTO dto = appointmentDetailService.findById(id);
@@ -35,6 +47,11 @@ public class DetailsController {
         return ResponseEntity.ok(dto);
     }
 
+    /**
+     * Obtiene los detalles clínicos de una cita específica.
+     * @param appointmentId identificador de la cita
+     * @return lista de detalles o 404
+     */
     @GetMapping("/appointment/{appointmentId}")
     public ResponseEntity<List<DetailsDTO>> getAppointmentDetailsByAppointmentId(@PathVariable Integer appointmentId) {
         List<DetailsDTO> dtos = appointmentDetailService.findByAppointmentId(appointmentId);
@@ -44,6 +61,11 @@ public class DetailsController {
         return ResponseEntity.ok(dtos);
     }
 
+    /**
+     * Crea un nuevo detalle clínico.
+     * @param appointmentDetail datos del detalle
+     * @return detalle creado o error
+     */
     @PostMapping("/create")
     public ResponseEntity<?> createAppointmentDetail(@RequestBody DetailsDTO appointmentDetail) {
         try {
@@ -63,6 +85,12 @@ public class DetailsController {
         }
     }
 
+    /**
+     * Actualiza un detalle clínico existente.
+     * @param id identificador del detalle
+     * @param appointmentDetail datos a actualizar
+     * @return detalle actualizado o error
+     */
     @PutMapping("/update/{id}")
     public ResponseEntity<?> updateAppointmentDetail(@PathVariable Integer id, @RequestBody DetailsDTO appointmentDetail) {
         try {
@@ -75,6 +103,11 @@ public class DetailsController {
         }
     }
 
+    /**
+     * Elimina un detalle clínico por su ID.
+     * @param id identificador del detalle
+     * @return respuesta sin contenido o error
+     */
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteAppointmentDetail(@PathVariable Integer id) {
         try {
@@ -87,6 +120,11 @@ public class DetailsController {
         }
     }
 
+    /**
+     * Obtiene los detalles clínicos del usuario autenticado.
+     * @param authentication autenticación del usuario
+     * @return lista de detalles del paciente
+     */
     @GetMapping("/my")
     public ResponseEntity<List<DetailsDTO>> getMyDetails(Authentication authentication) {
         String email = authentication.getName();

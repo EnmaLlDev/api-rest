@@ -14,6 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Servicio para la gestión de los detalles clínicos de las citas.
+ */
 @Service
 @Transactional
 public class DetailsService {
@@ -28,6 +31,10 @@ public class DetailsService {
         this.patientDAO = patientDAO;
     }
 
+    /**
+     * Lista todos los detalles clínicos.
+     * @return lista de detalles como DTO
+     */
     public List<DetailsDTO> findAll() {
         return appointmentDetailDAO.findAll()
                 .stream()
@@ -35,12 +42,22 @@ public class DetailsService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Busca un detalle clínico por su ID.
+     * @param id identificador del detalle
+     * @return DTO del detalle o null si no existe
+     */
     public DetailsDTO findById(Integer id) {
         return appointmentDetailDAO.findById(id)
                 .map(AppointmentDetailMapper::toDTO)
                 .orElse(null);
     }
 
+    /**
+     * Busca detalles clínicos por ID de cita.
+     * @param appointmentId identificador de la cita
+     * @return lista de detalles asociados
+     */
     public List<DetailsDTO> findByAppointmentId(Integer appointmentId) {
         return appointmentDetailDAO.findByAppointmentId(appointmentId)
                 .stream()
@@ -48,6 +65,11 @@ public class DetailsService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Crea un nuevo detalle clínico asociado a una cita.
+     * @param dto datos del detalle
+     * @return DTO del detalle creado
+     */
     public DetailsDTO save(DetailsDTO dto) {
         if (dto.getAppointmentId() == null) {
             throw new IllegalArgumentException("Appointment ID is required");
@@ -63,6 +85,12 @@ public class DetailsService {
         return AppointmentDetailMapper.toDTO(saved);
     }
 
+    /**
+     * Actualiza un detalle clínico de forma parcial.
+     * @param id identificador del detalle
+     * @param dto datos a actualizar
+     * @return DTO del detalle actualizado
+     */
     public DetailsDTO update(Integer id, DetailsDTO dto) {
         AppointmentDetail existing = appointmentDetailDAO.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("AppointmentDetail not found with id " + id));
@@ -87,6 +115,10 @@ public class DetailsService {
         return AppointmentDetailMapper.toDTO(saved);
     }
 
+    /**
+     * Elimina un detalle clínico por su ID.
+     * @param id identificador del detalle
+     */
     public void deleteById(Integer id) {
         if (!appointmentDetailDAO.existsById(id)) {
             throw new EntityNotFoundException("AppointmentDetail not found with id " + id);
@@ -94,6 +126,11 @@ public class DetailsService {
         appointmentDetailDAO.deleteById(id);
     }
 
+    /**
+     * Busca detalles clínicos por email del paciente.
+     * @param email email del paciente
+     * @return lista de detalles del paciente
+     */
     public List<DetailsDTO> findByPatientEmail(String email) {
         return patientDAO.findByEmail(email)
                 .map(patient -> appointmentDetailDAO.findByPatientId(patient.getId()))

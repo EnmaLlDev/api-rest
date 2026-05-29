@@ -9,6 +9,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+/**
+ * DTO que representa un mensaje de contacto para transferencia de datos.
+ */
 public class ContactMessageDTO {
     private String nombre;
     private String apellido;

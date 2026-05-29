@@ -9,6 +9,9 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @Builder
+/**
+ * DTO que encapsula la respuesta de autenticación del servidor.
+ */
 public class AuthResponse {
     private String accessToken;
     private String refreshToken;

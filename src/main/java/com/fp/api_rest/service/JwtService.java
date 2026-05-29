@@ -14,6 +14,9 @@ import java.time.Instant;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Servicio para la generación y validación de tokens JWT.
+ */
 @Service
 public class JwtService {
 
@@ -23,6 +26,11 @@ public class JwtService {
     @Value("${app.security.jwt.access-token-expiration-ms}")
     private long accessTokenExpirationMs;
 
+    /**
+     * Genera un token de acceso JWT.
+     * @param userDetails detalles del usuario
+     * @return token JWT firmado
+     */
     public String generateAccessToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("roles", userDetails.getAuthorities().stream()
@@ -31,10 +39,20 @@ public class JwtService {
         return buildToken(claims, userDetails.getUsername(), accessTokenExpirationMs);
     }
 
+    /**
+     * Extrae el nombre de usuario del token.
+     * @param token token JWT
+     * @return nombre de usuario
+     */
     public String extractUsername(String token) {
         return extractAllClaims(token).getSubject();
     }
 
+    /**
+     * Extrae los roles del token.
+     * @param token token JWT
+     * @return lista de roles
+     */
     public List<String> extractRoles(String token) {
         Object roles = extractAllClaims(token).get("roles");
         if (roles instanceof List<?> list) {
@@ -43,6 +61,12 @@ public class JwtService {
         return List.of();
     }
 
+    /**
+     * Verifica si el token es válido para el usuario dado.
+     * @param token token JWT
+     * @param userDetails detalles del usuario
+     * @return true si es válido y no ha expirado
+     */
     public boolean isTokenValid(String token, UserDetails userDetails) {
         String username = extractUsername(token);
         return username.equals(userDetails.getUsername()) && !isTokenExpired(token);

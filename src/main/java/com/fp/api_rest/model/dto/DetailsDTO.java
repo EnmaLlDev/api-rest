@@ -9,6 +9,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+/**
+ * DTO que representa el detalle clínico de una cita para transferencia de datos.
+ */
 public class DetailsDTO {
     private Integer id;
     private Integer appointmentId;

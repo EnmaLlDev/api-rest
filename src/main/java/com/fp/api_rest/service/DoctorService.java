@@ -8,6 +8,9 @@ import java.util.List;
 import com.fp.api_rest.model.dto.DoctorDTO;
 import com.fp.api_rest.model.dto.mapper.DoctorMapper;
 
+/**
+ * Servicio para la gestión de médicos.
+ */
 @Service
 public class DoctorService {
 
@@ -18,6 +21,10 @@ public class DoctorService {
         this.doctorDAO = doctorDAO;
     }
 
+    /**
+     * Lista todos los médicos.
+     * @return lista de médicos como DTO
+     */
     public List<DoctorDTO> findAll() {
         return doctorDAO.findAll()
                 .stream()
@@ -25,18 +32,34 @@ public class DoctorService {
                 .toList();
     }
 
+    /**
+     * Busca un médico por su ID.
+     * @param id identificador del médico
+     * @return DTO del médico o null si no existe
+     */
     public DoctorDTO findById(Integer id) {
         return doctorDAO.findById(id)
                 .map(DoctorMapper::toDTO)
                 .orElse(null);
     }
 
+    /**
+     * Crea un nuevo médico.
+     * @param dto datos del médico
+     * @return DTO del médico creado
+     */
     public DoctorDTO save(DoctorDTO dto) {
         Doctor doctor = DoctorMapper.toEntity(dto);
         Doctor saved = doctorDAO.save(doctor);
         return DoctorMapper.toDTO(saved);
     }
 
+    /**
+     * Actualiza un médico existente de forma parcial.
+     * @param id identificador del médico
+     * @param data datos a actualizar
+     * @return médico actualizado
+     */
     public Doctor update(Integer id, DoctorDTO data) {
         Doctor existing = doctorDAO.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Doctor not found with id " + id));
@@ -71,11 +94,20 @@ public class DoctorService {
         }
         return doctorDAO.save(existing);
     }
+    /**
+     * Elimina un médico por su ID.
+     * @param id identificador del médico
+     */
     public void deleteById(Integer id) {
         doctorDAO.deleteById(id);
     }
     
 
+    /**
+     * Busca médicos por número de licencia.
+     * @param licenseNumber número de licencia
+     * @return lista de médicos coincidentes
+     */
     public List<DoctorDTO> findByLicenseNumber (String licenseNumber) {
         return doctorDAO.findByLicenseNumber(licenseNumber)
                 .stream()
@@ -83,6 +115,11 @@ public class DoctorService {
                 .toList();
     }
 
+    /**
+     * Busca médicos por especialidad ignorando mayúsculas.
+     * @param specialty especialidad a buscar
+     * @return lista de médicos coincidentes
+     */
     public List<DoctorDTO> findBySpecialtyContainingIgnoreCase(String specialty) {
         return doctorDAO.findBySpecialtyContainingIgnoreCase(specialty)
                 .stream()

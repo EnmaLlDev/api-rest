@@ -15,6 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * Servicio de autenticación y autorización de usuarios.
+ */
 @Service
 public class AuthService {
     // LOGs para trackear la salida del endpoint
@@ -38,6 +41,11 @@ public class AuthService {
         this.customUserDetailsService = customUserDetailsService;
     }
 
+    /**
+     * Autentica un usuario y genera tokens de acceso y refresco.
+     * @param request credenciales de inicio de sesión
+     * @return respuesta con tokens y datos del usuario
+     */
     @Transactional
     public AuthResponse login(LoginRequest request) {
         logger.info("Intento de login para usuario: {}", request.getUsername());
@@ -78,6 +86,11 @@ public class AuthService {
         }
     }
 
+    /**
+     * Renueva el access token a partir de un refresh token válido.
+     * @param request solicitud con el refresh token
+     * @return respuesta con nuevo access token y refresh token rotado
+     */
     @Transactional
     public AuthResponse refresh(RefreshRequest request) {
         RefreshToken stored = refreshTokenService.verifyUsableToken(request.getRefreshToken());
@@ -101,6 +114,11 @@ public class AuthService {
                 .build();
     }
 
+    /**
+     * Obtiene la información del usuario autenticado.
+     * @param username nombre de usuario
+     * @return datos del usuario y sus roles
+     */
     @Transactional
     public MeResponse me(String username) {
         User user = userDAO.findByUsername(username)
@@ -113,6 +131,10 @@ public class AuthService {
                 .build();
     }
 
+    /**
+     * Cierra la sesión revocando el refresh token.
+     * @param refreshToken token de refresco a revocar
+     */
     public void logout(String refreshToken) {
         if (refreshToken != null && !refreshToken.isBlank()) {
             refreshTokenService.revokeToken(refreshToken);

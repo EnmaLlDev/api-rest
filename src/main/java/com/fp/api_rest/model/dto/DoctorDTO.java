@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+/**
+ * DTO que representa un médico para transferencia de datos.
+ */
 public class DoctorDTO {
     private Integer id;
     private String firstName;

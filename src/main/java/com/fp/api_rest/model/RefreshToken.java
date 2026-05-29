@@ -12,6 +12,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+/**
+ * Entidad JPA que representa un token de refresco para la autenticación.
+ */
 public class RefreshToken {
 
     @Id

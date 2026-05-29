@@ -7,9 +7,15 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.net.URI;
 
+/**
+ * Abre automáticamente Swagger UI en el navegador al iniciar la aplicación.
+ */
 @Component
 public class OpenBrowserOnStartup {
 
+    /**
+     * Lanza el navegador con la URL de Swagger UI tras el arranque.
+     */
     @EventListener(ApplicationReadyEvent.class)
     public void openSwaggerOnStartup() {
         String url = "http://localhost:8080/swagger-ui/index.html?url=/v3/api-docs";

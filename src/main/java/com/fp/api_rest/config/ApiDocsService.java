@@ -16,6 +16,9 @@ import java.nio.file.Paths;
 import java.nio.charset.StandardCharsets;
 import java.nio.charset.MalformedInputException;
 
+/**
+ * Servicio que carga y expone la documentación de la API desde un fichero JSON.
+ */
 @Service
 public class ApiDocsService implements ApplicationListener<ApplicationReadyEvent> {
 
@@ -24,11 +27,17 @@ public class ApiDocsService implements ApplicationListener<ApplicationReadyEvent
     private final ObjectMapper objectMapper = new ObjectMapper();
     private volatile JsonNode apiDocs;
 
+    /**
+     * Carga la documentación al arrancar la aplicación.
+     */
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
         loadApiDocs();
     }
 
+    /**
+     * Carga el fichero api-docs.json desde classpath o filesystem con soporte UTF-8/UTF-16.
+     */
     public synchronized void loadApiDocs() {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("api-docs.json")) {
             if (is != null) {
@@ -61,6 +70,10 @@ public class ApiDocsService implements ApplicationListener<ApplicationReadyEvent
         }
     }
 
+    /**
+     * Devuelve la documentación de la API cargada.
+     * @return nodo JSON con la documentación o null
+     */
     public JsonNode getApiDocs() {
         return apiDocs;
     }

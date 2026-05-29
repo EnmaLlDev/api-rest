@@ -12,6 +12,9 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Entity
 @Table(name = "appointments")
+/**
+ * Entidad JPA que representa una cita médica.
+ */
 public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

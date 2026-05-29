@@ -10,6 +10,9 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+/**
+ * Entidad JPA que representa un rol de usuario en el sistema.
+ */
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

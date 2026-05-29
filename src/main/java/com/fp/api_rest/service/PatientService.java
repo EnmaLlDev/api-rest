@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Servicio para la gestión de pacientes.
+ */
 @Service
 public class PatientService {
 
@@ -20,6 +23,10 @@ public class PatientService {
         this.patientDAO = patientDAO;
     }
 
+    /**
+     * Lista todos los pacientes.
+     * @return lista de pacientes como DTO
+     */
     public List<PatientDTO> getAllPatients() {
         return patientDAO.findAll()
                 .stream()
@@ -27,18 +34,34 @@ public class PatientService {
                 .toList();
     }
 
+    /**
+     * Busca un paciente por su ID.
+     * @param id identificador del paciente
+     * @return DTO del paciente o null si no existe
+     */
     public PatientDTO findById(Integer id) {
         return patientDAO.findById(id)
                 .map(PatientMapper::toDTO)
                 .orElse(null);
     }
 
+    /**
+     * Crea un nuevo paciente.
+     * @param patientDTO datos del paciente
+     * @return DTO del paciente creado
+     */
     public PatientDTO save(PatientDTO patientDTO) {
         Patient patient = PatientMapper.toEntity(patientDTO);
         Patient saved = patientDAO.save(patient);
         return PatientMapper.toDTO(saved);
     }
 
+    /**
+     * Actualiza un paciente existente de forma parcial.
+     * @param id identificador del paciente
+     * @param data datos a actualizar
+     * @return DTO del paciente actualizado
+     */
     public PatientDTO update(Integer id, PatientDTO data) {
         Patient existing = patientDAO.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Patient not found with id " + id));
@@ -74,10 +97,19 @@ public class PatientService {
         return PatientMapper.toDTO(patientDAO.save(existing));
     }
 
+    /**
+     * Elimina un paciente por su ID.
+     * @param id identificador del paciente
+     */
     public void deletePatient(Integer id) {
         patientDAO.deleteById(id);
     }
 
+    /**
+     * Busca pacientes por dirección.
+     * @param address dirección a buscar
+     * @return lista de pacientes coincidentes
+     */
     public List<PatientDTO> findByAddressContaining(String address ) {
         return patientDAO.findByAddressContaining( address)
                 .stream()
@@ -85,6 +117,11 @@ public class PatientService {
                 .toList();
     }
 
+    /**
+     * Busca un paciente por su email.
+     * @param email email del paciente
+     * @return DTO del paciente o null si no existe
+     */
     public PatientDTO findByEmail(String email) {
         return patientDAO.findByEmail(email)
                 .map(PatientMapper::toDTO)

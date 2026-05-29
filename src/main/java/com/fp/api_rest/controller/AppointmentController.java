@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controlador REST para la gestión de citas médicas.
+ */
 @RestController
 @RequestMapping("/api/appointment")
 public class AppointmentController {
@@ -19,11 +22,20 @@ public class AppointmentController {
         this.appointmentService = appointmentService;
     }
 
+    /**
+     * Lista todas las citas.
+     * @return lista de citas
+     */
     @GetMapping("/getAll")
     public List<AppointmentDTO> getAllAppointments() {
         return appointmentService.findAll();
     }
 
+    /**
+     * Obtiene una cita por su ID.
+     * @param id identificador de la cita
+     * @return cita encontrada o 404
+     */
     @GetMapping("/{id}")
     public ResponseEntity<AppointmentDTO> getAppointmentById(@PathVariable int id) {
         AppointmentDTO dto = appointmentService.findById(id);
@@ -33,12 +45,23 @@ public class AppointmentController {
         return ResponseEntity.ok(dto);
     }
 
+    /**
+     * Crea una nueva cita.
+     * @param appointment datos de la cita
+     * @return cita creada
+     */
     @PostMapping("/create")
     public ResponseEntity<AppointmentDTO> createAppointment(@RequestBody AppointmentDTO appointment) {
         AppointmentDTO created = appointmentService.save(appointment);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
 
+    /**
+     * Actualiza una cita existente.
+     * @param id identificador de la cita
+     * @param appointment datos a actualizar
+     * @return cita actualizada o error
+     */
     @PutMapping("/update/{id}")
     public ResponseEntity<AppointmentDTO> updateAppointment(@PathVariable Integer id, @RequestBody AppointmentDTO appointment) {
         try {
@@ -51,12 +74,22 @@ public class AppointmentController {
         }
     }
 
+    /**
+     * Elimina una cita por su ID.
+     * @param id identificador de la cita
+     * @return respuesta sin contenido
+     */
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteAppointment(@PathVariable int id) {
         appointmentService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 
+    /**
+     * Obtiene las citas del usuario autenticado.
+     * @param authentication autenticación del usuario
+     * @return lista de citas del paciente
+     */
     @GetMapping("/my")
     public ResponseEntity<List<AppointmentDTO>> getMyAppointments(Authentication authentication) {
         String email = authentication.getName();

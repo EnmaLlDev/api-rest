@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Controlador para exponer la documentación de la API.
+ */
 @RestController
 @RequestMapping("/api")
 public class ApiDocsController {
@@ -22,6 +25,10 @@ public class ApiDocsController {
         this.apiDocsService = apiDocsService;
     }
 
+    /**
+     * Devuelve la documentación de la API en formato JSON.
+     * @return documentación de la API
+     */
     @GetMapping("/docs")
     public ResponseEntity<JsonNode> getApiDocs() {
         JsonNode node = apiDocsService.getApiDocs();

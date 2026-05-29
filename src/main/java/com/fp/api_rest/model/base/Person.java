@@ -9,6 +9,9 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder
 @MappedSuperclass
+/**
+ * Clase base abstracta para entidades de personas (pacientes, médicos, etc.).
+ */
 public abstract class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Controlador REST para la gestión de mensajes de contacto.
+ */
 @RestController
 @RequestMapping("/api/contact")
 public class ContactController {
@@ -23,6 +26,11 @@ public class ContactController {
         this.contactService = contactService;
     }
 
+    /**
+     * Crea un nuevo mensaje de contacto.
+     * @param contactDTO datos del contacto
+     * @return mensaje de éxito o error
+     */
     @PostMapping("/create")
     public ResponseEntity<Map<String, Object>> createContact(@RequestBody ContactMessageDTO contactDTO) {
         logger.info("Contacto recibido: nombre='{}', apellido='{}', email='{}'",

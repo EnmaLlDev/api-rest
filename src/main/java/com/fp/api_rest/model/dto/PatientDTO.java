@@ -11,6 +11,9 @@ import java.time.LocalDate;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+/**
+ * DTO que representa un paciente para transferencia de datos.
+ */
 public class PatientDTO {
     private Integer id;
     private String dni;

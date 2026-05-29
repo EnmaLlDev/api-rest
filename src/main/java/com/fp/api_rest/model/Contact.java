@@ -13,6 +13,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+/**
+ * Entidad JPA que representa un mensaje de contacto enviado a la clínica.
+ */
 public class Contact {
 
     @Id
@@ -40,6 +43,9 @@ public class Contact {
     @Column(nullable = false, updatable = false, name = "fecha_creacion")
     private LocalDateTime fechaCreacion;
 
+    /**
+     * Establece la fecha de creación automáticamente antes de persistir.
+     */
     @PrePersist
     protected void onCreate() {
         fechaCreacion = LocalDateTime.now();

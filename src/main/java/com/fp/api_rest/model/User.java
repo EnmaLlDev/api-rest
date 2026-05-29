@@ -13,6 +13,9 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+/**
+ * Entidad JPA que representa un usuario del sistema.
+ */
 public class User {
 
     @Id

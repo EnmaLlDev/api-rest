@@ -10,6 +10,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "appointment_details")
+/**
+ * Entidad JPA que representa el detalle clínico de una cita médica.
+ */
 public class AppointmentDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
