@@ -33,11 +33,13 @@ public class PatientService {
                 .orElse(null);
     }
 
-    public Patient save(Patient patient) {
-        return  patientDAO.save(patient);
+    public PatientDTO save(PatientDTO patientDTO) {
+        Patient patient = PatientMapper.toEntity(patientDTO);
+        Patient saved = patientDAO.save(patient);
+        return PatientMapper.toDTO(saved);
     }
 
-    public Patient update(Integer id, Patient data) {
+    public PatientDTO update(Integer id, PatientDTO data) {
         Patient existing = patientDAO.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Patient not found with id " + id));
 
@@ -69,7 +71,7 @@ public class PatientService {
         if (data.getAddress() != null && !data.getAddress().isBlank()) {
             existing.setAddress(data.getAddress());
         }
-        return patientDAO.save(existing);
+        return PatientMapper.toDTO(patientDAO.save(existing));
     }
 
     public void deletePatient(Integer id) {

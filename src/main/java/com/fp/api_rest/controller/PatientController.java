@@ -1,6 +1,5 @@
 package com.fp.api_rest.controller;
 
-import com.fp.api_rest.model.Patient;
 import com.fp.api_rest.model.dto.PatientDTO;
 import com.fp.api_rest.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,14 +27,13 @@ public class PatientController {
     }
 
     @PostMapping("/create")
-    public Patient createPatient(@RequestBody Patient patient) {
-        return patientService.save(patient);
+    public PatientDTO createPatient(@RequestBody PatientDTO patientDTO) {
+        return patientService.save(patientDTO);
     }
 
     @PutMapping("/update/{id}")
-    public void updatePatient(@PathVariable Integer id,@RequestBody Patient patient) {
-        patientService.update(id, patient);
-        System.out.println("Patient updated");
+    public PatientDTO updatePatient(@PathVariable Integer id, @RequestBody PatientDTO patientDTO) {
+        return patientService.update(id, patientDTO);
     }
 
     @DeleteMapping("/delete/{id}")

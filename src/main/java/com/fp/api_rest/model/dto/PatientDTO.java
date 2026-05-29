@@ -1,5 +1,6 @@
 package com.fp.api_rest.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,7 +12,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PatientDTO {
-    private int id;
+    private Integer id;
     private String dni;
     private String firstName;
     private String secondName;
@@ -19,6 +20,7 @@ public class PatientDTO {
     private String secondLastName;
     private String email;
     private String phone;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
     private String address;
 }

@@ -1,0 +1,1414 @@
+﻿{
+    "openapi":  "3.0.1",
+    "info":  {
+                 "title":  "API REST - Ocularis",
+                 "description":  "Documentación de la API REST del proyecto api-rest",
+                 "version":  "0.0.1-SNAPSHOT"
+             },
+    "servers":  [
+                    {
+                        "url":  "http://localhost:8080",
+                        "description":  "Generated server url"
+                    }
+                ],
+    "paths":  {
+                  "/api/patient/update/{id}":  {
+                                                   "put":  {
+                                                               "tags":  [
+                                                                            "patient-controller"
+                                                                        ],
+                                                               "operationId":  "updatePatient",
+                                                               "parameters":  [
+                                                                                  {
+                                                                                      "name":  "id",
+                                                                                      "in":  "path",
+                                                                                      "required":  true,
+                                                                                      "schema":  {
+                                                                                                     "type":  "integer",
+                                                                                                     "format":  "int32"
+                                                                                                 }
+                                                                                  }
+                                                                              ],
+                                                               "requestBody":  {
+                                                                                   "content":  {
+                                                                                                   "application/json":  {
+                                                                                                                            "schema":  {
+                                                                                                                                           "$ref":  "#/components/schemas/Patient"
+                                                                                                                                       }
+                                                                                                                        }
+                                                                                               },
+                                                                                   "required":  true
+                                                                               },
+                                                               "responses":  {
+                                                                                 "200":  {
+                                                                                             "description":  "OK"
+                                                                                         }
+                                                                             }
+                                                           }
+                                               },
+                  "/api/doctor/update/{id}":  {
+                                                  "put":  {
+                                                              "tags":  [
+                                                                           "doctor-controller"
+                                                                       ],
+                                                              "operationId":  "updateDoctor",
+                                                              "parameters":  [
+                                                                                 {
+                                                                                     "name":  "id",
+                                                                                     "in":  "path",
+                                                                                     "required":  true,
+                                                                                     "schema":  {
+                                                                                                    "type":  "integer",
+                                                                                                    "format":  "int32"
+                                                                                                }
+                                                                                 }
+                                                                             ],
+                                                              "requestBody":  {
+                                                                                  "content":  {
+                                                                                                  "application/json":  {
+                                                                                                                           "schema":  {
+                                                                                                                                          "$ref":  "#/components/schemas/DoctorDTO"
+                                                                                                                                      }
+                                                                                                                       }
+                                                                                              },
+                                                                                  "required":  true
+                                                                              },
+                                                              "responses":  {
+                                                                                "200":  {
+                                                                                            "description":  "OK"
+                                                                                        }
+                                                                            }
+                                                          }
+                                              },
+                  "/api/details/update/{id}":  {
+                                                   "put":  {
+                                                               "tags":  [
+                                                                            "details-controller"
+                                                                        ],
+                                                               "operationId":  "updateAppointmentDetail",
+                                                               "parameters":  [
+                                                                                  {
+                                                                                      "name":  "id",
+                                                                                      "in":  "path",
+                                                                                      "required":  true,
+                                                                                      "schema":  {
+                                                                                                     "type":  "integer",
+                                                                                                     "format":  "int32"
+                                                                                                 }
+                                                                                  }
+                                                                              ],
+                                                               "requestBody":  {
+                                                                                   "content":  {
+                                                                                                   "application/json":  {
+                                                                                                                            "schema":  {
+                                                                                                                                           "$ref":  "#/components/schemas/DetailsDTO"
+                                                                                                                                       }
+                                                                                                                        }
+                                                                                               },
+                                                                                   "required":  true
+                                                                               },
+                                                               "responses":  {
+                                                                                 "200":  {
+                                                                                             "description":  "OK",
+                                                                                             "content":  {
+                                                                                                             "*/*":  {
+                                                                                                                         "schema":  {
+                                                                                                                                        "type":  "object"
+                                                                                                                                    }
+                                                                                                                     }
+                                                                                                         }
+                                                                                         }
+                                                                             }
+                                                           }
+                                               },
+                  "/api/contact/{id}/mark-reviewed":  {
+                                                          "put":  {
+                                                                      "tags":  [
+                                                                                   "contact-controller"
+                                                                               ],
+                                                                      "operationId":  "markAsReviewed",
+                                                                      "parameters":  [
+                                                                                         {
+                                                                                             "name":  "id",
+                                                                                             "in":  "path",
+                                                                                             "required":  true,
+                                                                                             "schema":  {
+                                                                                                            "type":  "integer",
+                                                                                                            "format":  "int64"
+                                                                                                        }
+                                                                                         }
+                                                                                     ],
+                                                                      "responses":  {
+                                                                                        "200":  {
+                                                                                                    "description":  "OK",
+                                                                                                    "content":  {
+                                                                                                                    "*/*":  {
+                                                                                                                                "schema":  {
+                                                                                                                                               "type":  "object",
+                                                                                                                                               "additionalProperties":  {
+                                                                                                                                                                            "type":  "object"
+                                                                                                                                                                        }
+                                                                                                                                           }
+                                                                                                                            }
+                                                                                                                }
+                                                                                                }
+                                                                                    }
+                                                                  }
+                                                      },
+                  "/api/appointment/update/{id}":  {
+                                                       "put":  {
+                                                                   "tags":  [
+                                                                                "appointment-controller"
+                                                                            ],
+                                                                   "operationId":  "updateAppointment",
+                                                                   "parameters":  [
+                                                                                      {
+                                                                                          "name":  "id",
+                                                                                          "in":  "path",
+                                                                                          "required":  true,
+                                                                                          "schema":  {
+                                                                                                         "type":  "integer",
+                                                                                                         "format":  "int32"
+                                                                                                     }
+                                                                                      }
+                                                                                  ],
+                                                                   "requestBody":  {
+                                                                                       "content":  {
+                                                                                                       "application/json":  {
+                                                                                                                                "schema":  {
+                                                                                                                                               "$ref":  "#/components/schemas/AppointmentDTO"
+                                                                                                                                           }
+                                                                                                                            }
+                                                                                                   },
+                                                                                       "required":  true
+                                                                                   },
+                                                                   "responses":  {
+                                                                                     "200":  {
+                                                                                                 "description":  "OK",
+                                                                                                 "content":  {
+                                                                                                                 "*/*":  {
+                                                                                                                             "schema":  {
+                                                                                                                                            "$ref":  "#/components/schemas/AppointmentDTO"
+                                                                                                                                        }
+                                                                                                                         }
+                                                                                                             }
+                                                                                             }
+                                                                                 }
+                                                               }
+                                                   },
+                  "/auth/refresh":  {
+                                        "post":  {
+                                                     "tags":  [
+                                                                  "auth-controller"
+                                                              ],
+                                                     "operationId":  "refresh",
+                                                     "requestBody":  {
+                                                                         "content":  {
+                                                                                         "application/json":  {
+                                                                                                                  "schema":  {
+                                                                                                                                 "$ref":  "#/components/schemas/RefreshRequest"
+                                                                                                                             }
+                                                                                                              }
+                                                                                     },
+                                                                         "required":  true
+                                                                     },
+                                                     "responses":  {
+                                                                       "200":  {
+                                                                                   "description":  "OK",
+                                                                                   "content":  {
+                                                                                                   "*/*":  {
+                                                                                                               "schema":  {
+                                                                                                                              "$ref":  "#/components/schemas/AuthResponse"
+                                                                                                                          }
+                                                                                                           }
+                                                                                               }
+                                                                               }
+                                                                   }
+                                                 }
+                                    },
+                  "/auth/logout":  {
+                                       "post":  {
+                                                    "tags":  [
+                                                                 "auth-controller"
+                                                             ],
+                                                    "operationId":  "logout",
+                                                    "requestBody":  {
+                                                                        "content":  {
+                                                                                        "application/json":  {
+                                                                                                                 "schema":  {
+                                                                                                                                "$ref":  "#/components/schemas/RefreshRequest"
+                                                                                                                            }
+                                                                                                             }
+                                                                                    }
+                                                                    },
+                                                    "responses":  {
+                                                                      "200":  {
+                                                                                  "description":  "OK"
+                                                                              }
+                                                                  }
+                                                }
+                                   },
+                  "/auth/login":  {
+                                      "post":  {
+                                                   "tags":  [
+                                                                "auth-controller"
+                                                            ],
+                                                   "operationId":  "login",
+                                                   "requestBody":  {
+                                                                       "content":  {
+                                                                                       "application/json":  {
+                                                                                                                "schema":  {
+                                                                                                                               "$ref":  "#/components/schemas/LoginRequest"
+                                                                                                                           }
+                                                                                                            }
+                                                                                   },
+                                                                       "required":  true
+                                                                   },
+                                                   "responses":  {
+                                                                     "200":  {
+                                                                                 "description":  "OK",
+                                                                                 "content":  {
+                                                                                                 "*/*":  {
+                                                                                                             "schema":  {
+                                                                                                                            "$ref":  "#/components/schemas/AuthResponse"
+                                                                                                                        }
+                                                                                                         }
+                                                                                             }
+                                                                             }
+                                                                 }
+                                               }
+                                  },
+                  "/auth/generate-hash":  {
+                                              "post":  {
+                                                           "tags":  [
+                                                                        "auth-controller"
+                                                                    ],
+                                                           "operationId":  "generateHash",
+                                                           "requestBody":  {
+                                                                               "content":  {
+                                                                                               "application/json":  {
+                                                                                                                        "schema":  {
+                                                                                                                                       "type":  "object",
+                                                                                                                                       "additionalProperties":  {
+                                                                                                                                                                    "type":  "string"
+                                                                                                                                                                }
+                                                                                                                                   }
+                                                                                                                    }
+                                                                                           },
+                                                                               "required":  true
+                                                                           },
+                                                           "responses":  {
+                                                                             "200":  {
+                                                                                         "description":  "OK",
+                                                                                         "content":  {
+                                                                                                         "*/*":  {
+                                                                                                                     "schema":  {
+                                                                                                                                    "type":  "object",
+                                                                                                                                    "additionalProperties":  {
+                                                                                                                                                                 "type":  "string"
+                                                                                                                                                             }
+                                                                                                                                }
+                                                                                                                 }
+                                                                                                     }
+                                                                                     }
+                                                                         }
+                                                       }
+                                          },
+                  "/api/patient/create":  {
+                                              "post":  {
+                                                           "tags":  [
+                                                                        "patient-controller"
+                                                                    ],
+                                                           "operationId":  "createPatient",
+                                                           "requestBody":  {
+                                                                               "content":  {
+                                                                                               "application/json":  {
+                                                                                                                        "schema":  {
+                                                                                                                                       "$ref":  "#/components/schemas/Patient"
+                                                                                                                                   }
+                                                                                                                    }
+                                                                                           },
+                                                                               "required":  true
+                                                                           },
+                                                           "responses":  {
+                                                                             "200":  {
+                                                                                         "description":  "OK",
+                                                                                         "content":  {
+                                                                                                         "*/*":  {
+                                                                                                                     "schema":  {
+                                                                                                                                    "$ref":  "#/components/schemas/Patient"
+                                                                                                                                }
+                                                                                                                 }
+                                                                                                     }
+                                                                                     }
+                                                                         }
+                                                       }
+                                          },
+                  "/api/doctor/create":  {
+                                             "post":  {
+                                                          "tags":  [
+                                                                       "doctor-controller"
+                                                                   ],
+                                                          "operationId":  "createDoctor",
+                                                          "requestBody":  {
+                                                                              "content":  {
+                                                                                              "application/json":  {
+                                                                                                                       "schema":  {
+                                                                                                                                      "$ref":  "#/components/schemas/DoctorDTO"
+                                                                                                                                  }
+                                                                                                                   }
+                                                                                          },
+                                                                              "required":  true
+                                                                          },
+                                                          "responses":  {
+                                                                            "200":  {
+                                                                                        "description":  "OK",
+                                                                                        "content":  {
+                                                                                                        "*/*":  {
+                                                                                                                    "schema":  {
+                                                                                                                                   "$ref":  "#/components/schemas/DoctorDTO"
+                                                                                                                               }
+                                                                                                                }
+                                                                                                    }
+                                                                                    }
+                                                                        }
+                                                      }
+                                         },
+                  "/api/details/create":  {
+                                              "post":  {
+                                                           "tags":  [
+                                                                        "details-controller"
+                                                                    ],
+                                                           "operationId":  "createAppointmentDetail",
+                                                           "requestBody":  {
+                                                                               "content":  {
+                                                                                               "application/json":  {
+                                                                                                                        "schema":  {
+                                                                                                                                       "$ref":  "#/components/schemas/DetailsDTO"
+                                                                                                                                   }
+                                                                                                                    }
+                                                                                           },
+                                                                               "required":  true
+                                                                           },
+                                                           "responses":  {
+                                                                             "200":  {
+                                                                                         "description":  "OK",
+                                                                                         "content":  {
+                                                                                                         "*/*":  {
+                                                                                                                     "schema":  {
+                                                                                                                                    "type":  "object"
+                                                                                                                                }
+                                                                                                                 }
+                                                                                                     }
+                                                                                     }
+                                                                         }
+                                                       }
+                                          },
+                  "/api/contact/create":  {
+                                              "post":  {
+                                                           "tags":  [
+                                                                        "contact-controller"
+                                                                    ],
+                                                           "operationId":  "createContact",
+                                                           "requestBody":  {
+                                                                               "content":  {
+                                                                                               "application/json":  {
+                                                                                                                        "schema":  {
+                                                                                                                                       "$ref":  "#/components/schemas/ContactMessageDTO"
+                                                                                                                                   }
+                                                                                                                    }
+                                                                                           },
+                                                                               "required":  true
+                                                                           },
+                                                           "responses":  {
+                                                                             "200":  {
+                                                                                         "description":  "OK",
+                                                                                         "content":  {
+                                                                                                         "*/*":  {
+                                                                                                                     "schema":  {
+                                                                                                                                    "type":  "object",
+                                                                                                                                    "additionalProperties":  {
+                                                                                                                                                                 "type":  "object"
+                                                                                                                                                             }
+                                                                                                                                }
+                                                                                                                 }
+                                                                                                     }
+                                                                                     }
+                                                                         }
+                                                       }
+                                          },
+                  "/api/appointment/create":  {
+                                                  "post":  {
+                                                               "tags":  [
+                                                                            "appointment-controller"
+                                                                        ],
+                                                               "operationId":  "createAppointment",
+                                                               "requestBody":  {
+                                                                                   "content":  {
+                                                                                                   "application/json":  {
+                                                                                                                            "schema":  {
+                                                                                                                                           "$ref":  "#/components/schemas/AppointmentDTO"
+                                                                                                                                       }
+                                                                                                                        }
+                                                                                               },
+                                                                                   "required":  true
+                                                                               },
+                                                               "responses":  {
+                                                                                 "200":  {
+                                                                                             "description":  "OK",
+                                                                                             "content":  {
+                                                                                                             "*/*":  {
+                                                                                                                         "schema":  {
+                                                                                                                                        "$ref":  "#/components/schemas/AppointmentDTO"
+                                                                                                                                    }
+                                                                                                                     }
+                                                                                                         }
+                                                                                         }
+                                                                             }
+                                                           }
+                                              },
+                  "/home":  {
+                                "get":  {
+                                            "tags":  [
+                                                         "main-controller"
+                                                     ],
+                                            "operationId":  "homePath",
+                                            "responses":  {
+                                                              "200":  {
+                                                                          "description":  "OK",
+                                                                          "content":  {
+                                                                                          "*/*":  {
+                                                                                                      "schema":  {
+                                                                                                                     "type":  "string"
+                                                                                                                 }
+                                                                                                  }
+                                                                                      }
+                                                                      }
+                                                          }
+                                        }
+                            },
+                  "/auth/me":  {
+                                   "get":  {
+                                               "tags":  [
+                                                            "auth-controller"
+                                                        ],
+                                               "operationId":  "me",
+                                               "responses":  {
+                                                                 "200":  {
+                                                                             "description":  "OK",
+                                                                             "content":  {
+                                                                                             "*/*":  {
+                                                                                                         "schema":  {
+                                                                                                                        "$ref":  "#/components/schemas/MeResponse"
+                                                                                                                    }
+                                                                                                     }
+                                                                                         }
+                                                                         }
+                                                             }
+                                           }
+                               },
+                  "/api/patient/me":  {
+                                          "get":  {
+                                                      "tags":  [
+                                                                   "patient-controller"
+                                                               ],
+                                                      "operationId":  "getMyData",
+                                                      "responses":  {
+                                                                        "200":  {
+                                                                                    "description":  "OK",
+                                                                                    "content":  {
+                                                                                                    "*/*":  {
+                                                                                                                "schema":  {
+                                                                                                                               "$ref":  "#/components/schemas/PatientDTO"
+                                                                                                                           }
+                                                                                                            }
+                                                                                                }
+                                                                                }
+                                                                    }
+                                                  }
+                                      },
+                  "/api/patient/getAll":  {
+                                              "get":  {
+                                                          "tags":  [
+                                                                       "patient-controller"
+                                                                   ],
+                                                          "operationId":  "getAllPatients",
+                                                          "responses":  {
+                                                                            "200":  {
+                                                                                        "description":  "OK",
+                                                                                        "content":  {
+                                                                                                        "*/*":  {
+                                                                                                                    "schema":  {
+                                                                                                                                   "type":  "array",
+                                                                                                                                   "items":  {
+                                                                                                                                                 "$ref":  "#/components/schemas/PatientDTO"
+                                                                                                                                             }
+                                                                                                                               }
+                                                                                                                }
+                                                                                                    }
+                                                                                    }
+                                                                        }
+                                                      }
+                                          },
+                  "/api/patient/get/{id}":  {
+                                                "get":  {
+                                                            "tags":  [
+                                                                         "patient-controller"
+                                                                     ],
+                                                            "operationId":  "getPatientById",
+                                                            "parameters":  [
+                                                                               {
+                                                                                   "name":  "id",
+                                                                                   "in":  "path",
+                                                                                   "required":  true,
+                                                                                   "schema":  {
+                                                                                                  "type":  "integer",
+                                                                                                  "format":  "int32"
+                                                                                              }
+                                                                               }
+                                                                           ],
+                                                            "responses":  {
+                                                                              "200":  {
+                                                                                          "description":  "OK",
+                                                                                          "content":  {
+                                                                                                          "*/*":  {
+                                                                                                                      "schema":  {
+                                                                                                                                     "$ref":  "#/components/schemas/PatientDTO"
+                                                                                                                                 }
+                                                                                                                  }
+                                                                                                      }
+                                                                                      }
+                                                                          }
+                                                        }
+                                            },
+                  "/api/patient/address/{address}":  {
+                                                         "get":  {
+                                                                     "tags":  [
+                                                                                  "patient-controller"
+                                                                              ],
+                                                                     "operationId":  "getPatientsByAddress",
+                                                                     "parameters":  [
+                                                                                        {
+                                                                                            "name":  "address",
+                                                                                            "in":  "path",
+                                                                                            "required":  true,
+                                                                                            "schema":  {
+                                                                                                           "type":  "string"
+                                                                                                       }
+                                                                                        }
+                                                                                    ],
+                                                                     "responses":  {
+                                                                                       "200":  {
+                                                                                                   "description":  "OK",
+                                                                                                   "content":  {
+                                                                                                                   "*/*":  {
+                                                                                                                               "schema":  {
+                                                                                                                                              "type":  "array",
+                                                                                                                                              "items":  {
+                                                                                                                                                            "$ref":  "#/components/schemas/PatientDTO"
+                                                                                                                                                        }
+                                                                                                                                          }
+                                                                                                                           }
+                                                                                                               }
+                                                                                               }
+                                                                                   }
+                                                                 }
+                                                     },
+                  "/api/doctor/{id}":  {
+                                           "get":  {
+                                                       "tags":  [
+                                                                    "doctor-controller"
+                                                                ],
+                                                       "operationId":  "getDoctorById",
+                                                       "parameters":  [
+                                                                          {
+                                                                              "name":  "id",
+                                                                              "in":  "path",
+                                                                              "required":  true,
+                                                                              "schema":  {
+                                                                                             "type":  "integer",
+                                                                                             "format":  "int32"
+                                                                                         }
+                                                                          }
+                                                                      ],
+                                                       "responses":  {
+                                                                         "200":  {
+                                                                                     "description":  "OK",
+                                                                                     "content":  {
+                                                                                                     "*/*":  {
+                                                                                                                 "schema":  {
+                                                                                                                                "$ref":  "#/components/schemas/DoctorDTO"
+                                                                                                                            }
+                                                                                                             }
+                                                                                                 }
+                                                                                 }
+                                                                     }
+                                                   },
+                                           "delete":  {
+                                                          "tags":  [
+                                                                       "doctor-controller"
+                                                                   ],
+                                                          "operationId":  "deleteDoctor",
+                                                          "parameters":  [
+                                                                             {
+                                                                                 "name":  "id",
+                                                                                 "in":  "path",
+                                                                                 "required":  true,
+                                                                                 "schema":  {
+                                                                                                "type":  "integer",
+                                                                                                "format":  "int32"
+                                                                                            }
+                                                                             }
+                                                                         ],
+                                                          "responses":  {
+                                                                            "200":  {
+                                                                                        "description":  "OK"
+                                                                                    }
+                                                                        }
+                                                      }
+                                       },
+                  "/api/doctor/search/{terms}":  {
+                                                     "get":  {
+                                                                 "tags":  [
+                                                                              "doctor-controller"
+                                                                          ],
+                                                                 "operationId":  "findBySpecialtyContainingIgnoreCase",
+                                                                 "parameters":  [
+                                                                                    {
+                                                                                        "name":  "terms",
+                                                                                        "in":  "path",
+                                                                                        "required":  true,
+                                                                                        "schema":  {
+                                                                                                       "type":  "string"
+                                                                                                   }
+                                                                                    }
+                                                                                ],
+                                                                 "responses":  {
+                                                                                   "200":  {
+                                                                                               "description":  "OK",
+                                                                                               "content":  {
+                                                                                                               "*/*":  {
+                                                                                                                           "schema":  {
+                                                                                                                                          "type":  "array",
+                                                                                                                                          "items":  {
+                                                                                                                                                        "$ref":  "#/components/schemas/DoctorDTO"
+                                                                                                                                                    }
+                                                                                                                                      }
+                                                                                                                       }
+                                                                                                           }
+                                                                                           }
+                                                                               }
+                                                             }
+                                                 },
+                  "/api/doctor/license/{licenseNumber}":  {
+                                                              "get":  {
+                                                                          "tags":  [
+                                                                                       "doctor-controller"
+                                                                                   ],
+                                                                          "operationId":  "getDoctorsByLicenseNumber",
+                                                                          "parameters":  [
+                                                                                             {
+                                                                                                 "name":  "licenseNumber",
+                                                                                                 "in":  "path",
+                                                                                                 "required":  true,
+                                                                                                 "schema":  {
+                                                                                                                "type":  "string"
+                                                                                                            }
+                                                                                             }
+                                                                                         ],
+                                                                          "responses":  {
+                                                                                            "200":  {
+                                                                                                        "description":  "OK",
+                                                                                                        "content":  {
+                                                                                                                        "*/*":  {
+                                                                                                                                    "schema":  {
+                                                                                                                                                   "type":  "array",
+                                                                                                                                                   "items":  {
+                                                                                                                                                                 "$ref":  "#/components/schemas/DoctorDTO"
+                                                                                                                                                             }
+                                                                                                                                               }
+                                                                                                                                }
+                                                                                                                    }
+                                                                                                    }
+                                                                                        }
+                                                                      }
+                                                          },
+                  "/api/doctor/getAll":  {
+                                             "get":  {
+                                                         "tags":  [
+                                                                      "doctor-controller"
+                                                                  ],
+                                                         "operationId":  "getAllDoctors",
+                                                         "responses":  {
+                                                                           "200":  {
+                                                                                       "description":  "OK",
+                                                                                       "content":  {
+                                                                                                       "*/*":  {
+                                                                                                                   "schema":  {
+                                                                                                                                  "type":  "array",
+                                                                                                                                  "items":  {
+                                                                                                                                                "$ref":  "#/components/schemas/DoctorDTO"
+                                                                                                                                            }
+                                                                                                                              }
+                                                                                                               }
+                                                                                                   }
+                                                                                   }
+                                                                       }
+                                                     }
+                                         },
+                  "/api/details/{id}":  {
+                                            "get":  {
+                                                        "tags":  [
+                                                                     "details-controller"
+                                                                 ],
+                                                        "operationId":  "getAppointmentDetailById",
+                                                        "parameters":  [
+                                                                           {
+                                                                               "name":  "id",
+                                                                               "in":  "path",
+                                                                               "required":  true,
+                                                                               "schema":  {
+                                                                                              "type":  "integer",
+                                                                                              "format":  "int32"
+                                                                                          }
+                                                                           }
+                                                                       ],
+                                                        "responses":  {
+                                                                          "200":  {
+                                                                                      "description":  "OK",
+                                                                                      "content":  {
+                                                                                                      "*/*":  {
+                                                                                                                  "schema":  {
+                                                                                                                                 "$ref":  "#/components/schemas/DetailsDTO"
+                                                                                                                             }
+                                                                                                              }
+                                                                                                  }
+                                                                                  }
+                                                                      }
+                                                    }
+                                        },
+                  "/api/details/my":  {
+                                          "get":  {
+                                                      "tags":  [
+                                                                   "details-controller"
+                                                               ],
+                                                      "operationId":  "getMyDetails",
+                                                      "responses":  {
+                                                                        "200":  {
+                                                                                    "description":  "OK",
+                                                                                    "content":  {
+                                                                                                    "*/*":  {
+                                                                                                                "schema":  {
+                                                                                                                               "type":  "array",
+                                                                                                                               "items":  {
+                                                                                                                                             "$ref":  "#/components/schemas/DetailsDTO"
+                                                                                                                                         }
+                                                                                                                           }
+                                                                                                            }
+                                                                                                }
+                                                                                }
+                                                                    }
+                                                  }
+                                      },
+                  "/api/details/getAll":  {
+                                              "get":  {
+                                                          "tags":  [
+                                                                       "details-controller"
+                                                                   ],
+                                                          "operationId":  "getAllAppointmentDetails",
+                                                          "responses":  {
+                                                                            "200":  {
+                                                                                        "description":  "OK",
+                                                                                        "content":  {
+                                                                                                        "*/*":  {
+                                                                                                                    "schema":  {
+                                                                                                                                   "type":  "array",
+                                                                                                                                   "items":  {
+                                                                                                                                                 "$ref":  "#/components/schemas/DetailsDTO"
+                                                                                                                                             }
+                                                                                                                               }
+                                                                                                                }
+                                                                                                    }
+                                                                                    }
+                                                                        }
+                                                      }
+                                          },
+                  "/api/details/appointment/{appointmentId}":  {
+                                                                   "get":  {
+                                                                               "tags":  [
+                                                                                            "details-controller"
+                                                                                        ],
+                                                                               "operationId":  "getAppointmentDetailsByAppointmentId",
+                                                                               "parameters":  [
+                                                                                                  {
+                                                                                                      "name":  "appointmentId",
+                                                                                                      "in":  "path",
+                                                                                                      "required":  true,
+                                                                                                      "schema":  {
+                                                                                                                     "type":  "integer",
+                                                                                                                     "format":  "int32"
+                                                                                                                 }
+                                                                                                  }
+                                                                                              ],
+                                                                               "responses":  {
+                                                                                                 "200":  {
+                                                                                                             "description":  "OK",
+                                                                                                             "content":  {
+                                                                                                                             "*/*":  {
+                                                                                                                                         "schema":  {
+                                                                                                                                                        "type":  "array",
+                                                                                                                                                        "items":  {
+                                                                                                                                                                      "$ref":  "#/components/schemas/DetailsDTO"
+                                                                                                                                                                  }
+                                                                                                                                                    }
+                                                                                                                                     }
+                                                                                                                         }
+                                                                                                         }
+                                                                                             }
+                                                                           }
+                                                               },
+                  "/api/contact/unreviewed":  {
+                                                  "get":  {
+                                                              "tags":  [
+                                                                           "contact-controller"
+                                                                       ],
+                                                              "operationId":  "getUnreviewedContacts",
+                                                              "responses":  {
+                                                                                "200":  {
+                                                                                            "description":  "OK",
+                                                                                            "content":  {
+                                                                                                            "*/*":  {
+                                                                                                                        "schema":  {
+                                                                                                                                       "type":  "object",
+                                                                                                                                       "additionalProperties":  {
+                                                                                                                                                                    "type":  "object"
+                                                                                                                                                                }
+                                                                                                                                   }
+                                                                                                                    }
+                                                                                                        }
+                                                                                        }
+                                                                            }
+                                                          }
+                                              },
+                  "/api/contact/all":  {
+                                           "get":  {
+                                                       "tags":  [
+                                                                    "contact-controller"
+                                                                ],
+                                                       "operationId":  "getAllContacts",
+                                                       "responses":  {
+                                                                         "200":  {
+                                                                                     "description":  "OK",
+                                                                                     "content":  {
+                                                                                                     "*/*":  {
+                                                                                                                 "schema":  {
+                                                                                                                                "type":  "object",
+                                                                                                                                "additionalProperties":  {
+                                                                                                                                                             "type":  "object"
+                                                                                                                                                         }
+                                                                                                                            }
+                                                                                                             }
+                                                                                                 }
+                                                                                 }
+                                                                     }
+                                                   }
+                                       },
+                  "/api/appointment/{id}":  {
+                                                "get":  {
+                                                            "tags":  [
+                                                                         "appointment-controller"
+                                                                     ],
+                                                            "operationId":  "getAppointmentById",
+                                                            "parameters":  [
+                                                                               {
+                                                                                   "name":  "id",
+                                                                                   "in":  "path",
+                                                                                   "required":  true,
+                                                                                   "schema":  {
+                                                                                                  "type":  "integer",
+                                                                                                  "format":  "int32"
+                                                                                              }
+                                                                               }
+                                                                           ],
+                                                            "responses":  {
+                                                                              "200":  {
+                                                                                          "description":  "OK",
+                                                                                          "content":  {
+                                                                                                          "*/*":  {
+                                                                                                                      "schema":  {
+                                                                                                                                     "$ref":  "#/components/schemas/AppointmentDTO"
+                                                                                                                                 }
+                                                                                                                  }
+                                                                                                      }
+                                                                                      }
+                                                                          }
+                                                        }
+                                            },
+                  "/api/appointment/my":  {
+                                              "get":  {
+                                                          "tags":  [
+                                                                       "appointment-controller"
+                                                                   ],
+                                                          "operationId":  "getMyAppointments",
+                                                          "responses":  {
+                                                                            "200":  {
+                                                                                        "description":  "OK",
+                                                                                        "content":  {
+                                                                                                        "*/*":  {
+                                                                                                                    "schema":  {
+                                                                                                                                   "type":  "array",
+                                                                                                                                   "items":  {
+                                                                                                                                                 "$ref":  "#/components/schemas/AppointmentDTO"
+                                                                                                                                             }
+                                                                                                                               }
+                                                                                                                }
+                                                                                                    }
+                                                                                    }
+                                                                        }
+                                                      }
+                                          },
+                  "/api/appointment/getAll":  {
+                                                  "get":  {
+                                                              "tags":  [
+                                                                           "appointment-controller"
+                                                                       ],
+                                                              "operationId":  "getAllAppointments",
+                                                              "responses":  {
+                                                                                "200":  {
+                                                                                            "description":  "OK",
+                                                                                            "content":  {
+                                                                                                            "*/*":  {
+                                                                                                                        "schema":  {
+                                                                                                                                       "type":  "array",
+                                                                                                                                       "items":  {
+                                                                                                                                                     "$ref":  "#/components/schemas/AppointmentDTO"
+                                                                                                                                                 }
+                                                                                                                                   }
+                                                                                                                    }
+                                                                                                        }
+                                                                                        }
+                                                                            }
+                                                          }
+                                              },
+                  "/api/patient/delete/{id}":  {
+                                                   "delete":  {
+                                                                  "tags":  [
+                                                                               "patient-controller"
+                                                                           ],
+                                                                  "operationId":  "deletePatient",
+                                                                  "parameters":  [
+                                                                                     {
+                                                                                         "name":  "id",
+                                                                                         "in":  "path",
+                                                                                         "required":  true,
+                                                                                         "schema":  {
+                                                                                                        "type":  "integer",
+                                                                                                        "format":  "int32"
+                                                                                                    }
+                                                                                     }
+                                                                                 ],
+                                                                  "responses":  {
+                                                                                    "200":  {
+                                                                                                "description":  "OK"
+                                                                                            }
+                                                                                }
+                                                              }
+                                               },
+                  "/api/details/delete/{id}":  {
+                                                   "delete":  {
+                                                                  "tags":  [
+                                                                               "details-controller"
+                                                                           ],
+                                                                  "operationId":  "deleteAppointmentDetail",
+                                                                  "parameters":  [
+                                                                                     {
+                                                                                         "name":  "id",
+                                                                                         "in":  "path",
+                                                                                         "required":  true,
+                                                                                         "schema":  {
+                                                                                                        "type":  "integer",
+                                                                                                        "format":  "int32"
+                                                                                                    }
+                                                                                     }
+                                                                                 ],
+                                                                  "responses":  {
+                                                                                    "200":  {
+                                                                                                "description":  "OK",
+                                                                                                "content":  {
+                                                                                                                "*/*":  {
+                                                                                                                            "schema":  {
+                                                                                                                                           "type":  "object"
+                                                                                                                                       }
+                                                                                                                        }
+                                                                                                            }
+                                                                                            }
+                                                                                }
+                                                              }
+                                               },
+                  "/api/appointment/delete/{id}":  {
+                                                       "delete":  {
+                                                                      "tags":  [
+                                                                                   "appointment-controller"
+                                                                               ],
+                                                                      "operationId":  "deleteAppointment",
+                                                                      "parameters":  [
+                                                                                         {
+                                                                                             "name":  "id",
+                                                                                             "in":  "path",
+                                                                                             "required":  true,
+                                                                                             "schema":  {
+                                                                                                            "type":  "integer",
+                                                                                                            "format":  "int32"
+                                                                                                        }
+                                                                                         }
+                                                                                     ],
+                                                                      "responses":  {
+                                                                                        "200":  {
+                                                                                                    "description":  "OK"
+                                                                                                }
+                                                                                    }
+                                                                  }
+                                                   }
+              },
+    "components":  {
+                       "schemas":  {
+                                       "Appointment":  {
+                                                           "type":  "object",
+                                                           "properties":  {
+                                                                              "id":  {
+                                                                                         "type":  "integer",
+                                                                                         "format":  "int32"
+                                                                                     },
+                                                                              "dateTime":  {
+                                                                                               "type":  "string",
+                                                                                               "format":  "date"
+                                                                                           },
+                                                                              "patient":  {
+                                                                                              "$ref":  "#/components/schemas/Patient"
+                                                                                          },
+                                                                              "doctor":  {
+                                                                                             "$ref":  "#/components/schemas/Doctor"
+                                                                                         },
+                                                                              "reason":  {
+                                                                                             "type":  "string"
+                                                                                         },
+                                                                              "status":  {
+                                                                                             "type":  "string",
+                                                                                             "enum":  [
+                                                                                                          "SCHEDULED",
+                                                                                                          "CONFIRMED",
+                                                                                                          "CANCELED",
+                                                                                                          "COMPLETED",
+                                                                                                          "NO_ATTEND"
+                                                                                                      ]
+                                                                                         }
+                                                                          }
+                                                       },
+                                       "Doctor":  {
+                                                      "type":  "object",
+                                                      "properties":  {
+                                                                         "id":  {
+                                                                                    "type":  "integer",
+                                                                                    "format":  "int32"
+                                                                                },
+                                                                         "dni":  {
+                                                                                     "type":  "string"
+                                                                                 },
+                                                                         "firstName":  {
+                                                                                           "type":  "string"
+                                                                                       },
+                                                                         "secondName":  {
+                                                                                            "type":  "string"
+                                                                                        },
+                                                                         "lastName":  {
+                                                                                          "type":  "string"
+                                                                                      },
+                                                                         "secondLastName":  {
+                                                                                                "type":  "string"
+                                                                                            },
+                                                                         "email":  {
+                                                                                       "type":  "string"
+                                                                                   },
+                                                                         "phone":  {
+                                                                                       "type":  "string"
+                                                                                   },
+                                                                         "licenseNumber":  {
+                                                                                               "type":  "string"
+                                                                                           },
+                                                                         "specialty":  {
+                                                                                           "type":  "string"
+                                                                                       },
+                                                                         "appointments":  {
+                                                                                              "type":  "array",
+                                                                                              "items":  {
+                                                                                                            "$ref":  "#/components/schemas/Appointment"
+                                                                                                        }
+                                                                                          }
+                                                                     }
+                                                  },
+                                       "Patient":  {
+                                                       "type":  "object",
+                                                       "properties":  {
+                                                                          "id":  {
+                                                                                     "type":  "integer",
+                                                                                     "format":  "int32"
+                                                                                 },
+                                                                          "dni":  {
+                                                                                      "type":  "string"
+                                                                                  },
+                                                                          "firstName":  {
+                                                                                            "type":  "string"
+                                                                                        },
+                                                                          "secondName":  {
+                                                                                             "type":  "string"
+                                                                                         },
+                                                                          "lastName":  {
+                                                                                           "type":  "string"
+                                                                                       },
+                                                                          "secondLastName":  {
+                                                                                                 "type":  "string"
+                                                                                             },
+                                                                          "email":  {
+                                                                                        "type":  "string"
+                                                                                    },
+                                                                          "phone":  {
+                                                                                        "type":  "string"
+                                                                                    },
+                                                                          "birthDate":  {
+                                                                                            "type":  "string",
+                                                                                            "format":  "date"
+                                                                                        },
+                                                                          "address":  {
+                                                                                          "type":  "string"
+                                                                                      },
+                                                                          "appointments":  {
+                                                                                               "type":  "array",
+                                                                                               "items":  {
+                                                                                                             "$ref":  "#/components/schemas/Appointment"
+                                                                                                         }
+                                                                                           }
+                                                                      }
+                                                   },
+                                       "DoctorDTO":  {
+                                                         "type":  "object",
+                                                         "properties":  {
+                                                                            "id":  {
+                                                                                       "type":  "integer",
+                                                                                       "format":  "int32"
+                                                                                   },
+                                                                            "firstName":  {
+                                                                                              "type":  "string"
+                                                                                          },
+                                                                            "secondName":  {
+                                                                                               "type":  "string"
+                                                                                           },
+                                                                            "lastName":  {
+                                                                                             "type":  "string"
+                                                                                         },
+                                                                            "secondLastName":  {
+                                                                                                   "type":  "string"
+                                                                                               },
+                                                                            "email":  {
+                                                                                          "type":  "string"
+                                                                                      },
+                                                                            "phone":  {
+                                                                                          "type":  "string"
+                                                                                      },
+                                                                            "dni":  {
+                                                                                        "type":  "string"
+                                                                                    },
+                                                                            "licenseNumber":  {
+                                                                                                  "type":  "string"
+                                                                                              },
+                                                                            "specialty":  {
+                                                                                              "type":  "string"
+                                                                                          }
+                                                                        }
+                                                     },
+                                       "DetailsDTO":  {
+                                                          "type":  "object",
+                                                          "properties":  {
+                                                                             "id":  {
+                                                                                        "type":  "integer",
+                                                                                        "format":  "int32"
+                                                                                    },
+                                                                             "appointmentId":  {
+                                                                                                   "type":  "integer",
+                                                                                                   "format":  "int32"
+                                                                                               },
+                                                                             "diagnosis":  {
+                                                                                               "type":  "string"
+                                                                                           },
+                                                                             "prescription":  {
+                                                                                                  "type":  "string"
+                                                                                              },
+                                                                             "notes":  {
+                                                                                           "type":  "string"
+                                                                                       },
+                                                                             "treatment":  {
+                                                                                               "type":  "string"
+                                                                                           },
+                                                                             "followUp":  {
+                                                                                              "type":  "string"
+                                                                                          }
+                                                                         }
+                                                      },
+                                       "AppointmentDTO":  {
+                                                              "type":  "object",
+                                                              "properties":  {
+                                                                                 "id":  {
+                                                                                            "type":  "integer",
+                                                                                            "format":  "int32"
+                                                                                        },
+                                                                                 "dateTime":  {
+                                                                                                  "type":  "string",
+                                                                                                  "format":  "date"
+                                                                                              },
+                                                                                 "patient":  {
+                                                                                                 "$ref":  "#/components/schemas/PatientDTO"
+                                                                                             },
+                                                                                 "doctor":  {
+                                                                                                "$ref":  "#/components/schemas/DoctorDTO"
+                                                                                            },
+                                                                                 "reason":  {
+                                                                                                "type":  "string"
+                                                                                            },
+                                                                                 "status":  {
+                                                                                                "type":  "string",
+                                                                                                "enum":  [
+                                                                                                             "SCHEDULED",
+                                                                                                             "CONFIRMED",
+                                                                                                             "CANCELED",
+                                                                                                             "COMPLETED",
+                                                                                                             "NO_ATTEND"
+                                                                                                         ]
+                                                                                            }
+                                                                             }
+                                                          },
+                                       "PatientDTO":  {
+                                                          "type":  "object",
+                                                          "properties":  {
+                                                                             "id":  {
+                                                                                        "type":  "integer",
+                                                                                        "format":  "int32"
+                                                                                    },
+                                                                             "dni":  {
+                                                                                         "type":  "string"
+                                                                                     },
+                                                                             "firstName":  {
+                                                                                               "type":  "string"
+                                                                                           },
+                                                                             "secondName":  {
+                                                                                                "type":  "string"
+                                                                                            },
+                                                                             "lastName":  {
+                                                                                              "type":  "string"
+                                                                                          },
+                                                                             "secondLastName":  {
+                                                                                                    "type":  "string"
+                                                                                                },
+                                                                             "email":  {
+                                                                                           "type":  "string"
+                                                                                       },
+                                                                             "phone":  {
+                                                                                           "type":  "string"
+                                                                                       },
+                                                                             "birthDate":  {
+                                                                                               "type":  "string",
+                                                                                               "format":  "date"
+                                                                                           },
+                                                                             "address":  {
+                                                                                             "type":  "string"
+                                                                                         }
+                                                                         }
+                                                      },
+                                       "RefreshRequest":  {
+                                                              "type":  "object",
+                                                              "properties":  {
+                                                                                 "refreshToken":  {
+                                                                                                      "type":  "string"
+                                                                                                  }
+                                                                             }
+                                                          },
+                                       "AuthResponse":  {
+                                                            "type":  "object",
+                                                            "properties":  {
+                                                                               "accessToken":  {
+                                                                                                   "type":  "string"
+                                                                                               },
+                                                                               "refreshToken":  {
+                                                                                                    "type":  "string"
+                                                                                                },
+                                                                               "tokenType":  {
+                                                                                                 "type":  "string"
+                                                                                             },
+                                                                               "expiresInMs":  {
+                                                                                                   "type":  "integer",
+                                                                                                   "format":  "int64"
+                                                                                               },
+                                                                               "username":  {
+                                                                                                "type":  "string"
+                                                                                            },
+                                                                               "roles":  {
+                                                                                             "type":  "array",
+                                                                                             "items":  {
+                                                                                                           "type":  "string"
+                                                                                                       }
+                                                                                         }
+                                                                           }
+                                                        },
+                                       "LoginRequest":  {
+                                                            "type":  "object",
+                                                            "properties":  {
+                                                                               "username":  {
+                                                                                                "type":  "string"
+                                                                                            },
+                                                                               "password":  {
+                                                                                                "type":  "string"
+                                                                                            }
+                                                                           }
+                                                        },
+                                       "ContactMessageDTO":  {
+                                                                 "type":  "object",
+                                                                 "properties":  {
+                                                                                    "nombre":  {
+                                                                                                   "type":  "string"
+                                                                                               },
+                                                                                    "apellido":  {
+                                                                                                     "type":  "string"
+                                                                                                 },
+                                                                                    "email":  {
+                                                                                                  "type":  "string"
+                                                                                              },
+                                                                                    "telefono":  {
+                                                                                                     "type":  "string"
+                                                                                                 },
+                                                                                    "mensaje":  {
+                                                                                                    "type":  "string"
+                                                                                                },
+                                                                                    "revisado":  {
+                                                                                                     "type":  "boolean"
+                                                                                                 }
+                                                                                }
+                                                             },
+                                       "MeResponse":  {
+                                                          "type":  "object",
+                                                          "properties":  {
+                                                                             "id":  {
+                                                                                        "type":  "integer",
+                                                                                        "format":  "int64"
+                                                                                    },
+                                                                             "username":  {
+                                                                                              "type":  "string"
+                                                                                          },
+                                                                             "roles":  {
+                                                                                           "type":  "array",
+                                                                                           "items":  {
+                                                                                                         "type":  "string"
+                                                                                                     }
+                                                                                       }
+                                                                         }
+                                                      }
+                                   }
+                   }
+}

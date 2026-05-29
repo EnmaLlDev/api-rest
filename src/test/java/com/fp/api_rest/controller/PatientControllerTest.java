@@ -1,6 +1,5 @@
 package com.fp.api_rest.controller;
 
-import com.fp.api_rest.model.Patient;
 import com.fp.api_rest.model.dto.PatientDTO;
 import com.fp.api_rest.service.PatientService;
 import org.junit.jupiter.api.Test;
@@ -50,9 +49,9 @@ class PatientControllerTest {
 
     @Test
     void createPatientReturnsSavedPatient() {
-        when(patientService.save(any(Patient.class))).thenReturn(samplePatientEntity());
+        when(patientService.save(any(PatientDTO.class))).thenReturn(samplePatientDto());
 
-        Patient result = controller.createPatient(samplePatientEntity());
+        PatientDTO result = controller.createPatient(samplePatientDto());
 
         assertEquals("99911122A", result.getDni());
         assertEquals("Av. Central 101", result.getAddress());
@@ -60,11 +59,11 @@ class PatientControllerTest {
 
     @Test
     void updatePatientDelegatesToService() {
-        when(patientService.update(eq(1), any(Patient.class))).thenReturn(samplePatientEntity());
+        when(patientService.update(eq(1), any(PatientDTO.class))).thenReturn(samplePatientDto());
 
-        controller.updatePatient(1, samplePatientEntity());
+        controller.updatePatient(1, samplePatientDto());
 
-        verify(patientService).update(eq(1), any(Patient.class));
+        verify(patientService).update(eq(1), any(PatientDTO.class));
     }
 
     @Test
@@ -101,15 +100,4 @@ class PatientControllerTest {
                 .build();
     }
 
-    private Patient samplePatientEntity() {
-        Patient patient = new Patient();
-        patient.setId(1);
-        patient.setDni("99911122A");
-        patient.setFirstName("Carlos");
-        patient.setLastName("Santos");
-        patient.setEmail("c.santos@mail.com");
-        patient.setBirthDate(LocalDate.of(1990, 3, 12));
-        patient.setAddress("Av. Central 101");
-        return patient;
-    }
 }

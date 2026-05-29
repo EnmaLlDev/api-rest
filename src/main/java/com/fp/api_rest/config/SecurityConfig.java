@@ -47,6 +47,14 @@ public class SecurityConfig {
                 )
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/login", "/auth/refresh", "/auth/generate-hash", "/auth/logout").permitAll()
+                        .requestMatchers(
+                            "/v3/api-docs/**",
+                            "/v3/api-docs.yaml",
+                            "/swagger-ui/**",
+                            "/swagger-ui.html",
+                            "/swagger-resources/**",
+                            "/webjars/**"
+                        ).permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/public/**").hasAnyRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/api/contact/create").permitAll()
                         .requestMatchers("/api/doctor/**").hasAnyRole("ADMIN", "DOCTOR")

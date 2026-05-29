@@ -27,7 +27,7 @@ public class DoctorMapper {
         doctor.setFirstName(dto.getFirstName());
         doctor.setSecondName(dto.getSecondName());
         doctor.setLastName(dto.getLastName());
-        doctor.setSecondLastName(dto.getLastName());
+        doctor.setSecondLastName(dto.getSecondLastName());
         doctor.setDni(dto.getDni());
         doctor.setEmail(dto.getEmail());
         doctor.setPhone(dto.getPhone());
