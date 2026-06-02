@@ -51,7 +51,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
             String requestPath = request.getRequestURI();
 
-            // Si no hay header Authorization o no comienza con Bearer, continúa el filtro
             if (authHeader == null || !authHeader.startsWith("Bearer ")) {
                 logger.debug("Sin token JWT para: {}", requestPath);
                 filterChain.doFilter(request, response);
