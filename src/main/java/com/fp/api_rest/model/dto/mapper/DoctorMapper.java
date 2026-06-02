@@ -1,8 +1,12 @@
 package com.fp.api_rest.model.dto.mapper;
 
 
-import com.fp.api_rest.model.dto.DoctorDTO;
 import com.fp.api_rest.model.Doctor;
+import com.fp.api_rest.model.Patient;
+import com.fp.api_rest.model.dto.DoctorDTO;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Clase de utilidad para mapear entre Doctor y DoctorDTO.
@@ -26,6 +30,10 @@ public class DoctorMapper {
         dto.setPhone(doctor.getPhone());
         dto.setLicenseNumber(doctor.getLicenseNumber());
         dto.setSpecialty(doctor.getSpecialty());
+        List<Patient> pats = doctor.getPatients();
+        dto.setPatientIds(pats != null
+                ? pats.stream().map(Patient::getId).collect(Collectors.toList())
+                : Collections.emptyList());
         return dto;
     }
 

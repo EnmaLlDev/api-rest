@@ -1,6 +1,7 @@
 package com.fp.api_rest.controller;
 
 import com.fp.api_rest.service.DoctorService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import com.fp.api_rest.model.dto.DoctorDTO;
 import java.util.List;
@@ -43,7 +44,7 @@ public class DoctorController {
      * @return médico creado
      */
     @PostMapping("/create")
-    public DoctorDTO createDoctor(@RequestBody DoctorDTO doctorDTO) {
+    public DoctorDTO createDoctor(@Valid @RequestBody DoctorDTO doctorDTO) {
         return doctorService.save(doctorDTO);
     }
 

@@ -26,4 +26,12 @@ public interface AppointmentDetailDAO extends JpaRepository<AppointmentDetail, I
      */
     @Query("SELECT ad FROM AppointmentDetail ad WHERE ad.appointment.patient.id = :patientId")
     List<AppointmentDetail> findByPatientId(@Param("patientId") Integer patientId);
+
+    /**
+     * Obtiene los detalles clínicos de las citas de un doctor por su ID.
+     * @param doctorId identificador del doctor (Doctor.id)
+     * @return lista de detalles del doctor
+     */
+    @Query("SELECT ad FROM AppointmentDetail ad WHERE ad.appointment.doctor.id = :doctorId")
+    List<AppointmentDetail> findByDoctorId(@Param("doctorId") Integer doctorId);
 }

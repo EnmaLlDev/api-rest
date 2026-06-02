@@ -28,6 +28,16 @@ CREATE TABLE patients
     address          VARCHAR(200)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- Tabla patient_doctors (relación ManyToMany entre pacientes y médicos)
+CREATE TABLE patient_doctors
+(
+    patient_id INT NOT NULL,
+    doctor_id  INT NOT NULL,
+    PRIMARY KEY (patient_id, doctor_id),
+    CONSTRAINT fk_pd_patient FOREIGN KEY (patient_id) REFERENCES patients (id) ON DELETE CASCADE,
+    CONSTRAINT fk_pd_doctor  FOREIGN KEY (doctor_id)  REFERENCES doctors  (id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 -- Tabla appointments
 CREATE TABLE appointments
 (
@@ -106,9 +116,9 @@ CREATE TABLE contact_messages
 -- Datos de prueba
 INSERT INTO doctors (dni, firstName, secondName, lastName, secondLastName, email, phone, licenseNumber, specialty)
 VALUES
-    ('12345678A', 'Luis', 'Andrés', 'Gómez', 'Martínez', 'l.gomez@clinic.com', '555-1010', 'LIC001', 'Cardiología'),
-    ('87654321B', 'María', NULL, 'Pérez', 'López', 'm.perez@clinic.com', '555-2020', 'LIC002', 'Pediatría'),
-    ('11223344C', 'Jorge', 'Luis', 'Fernández', 'Ruiz', 'j.fernandez@clinic.com', '555-3030', 'LIC003', 'Dermatología');
+    ('12345678A', 'Luis', 'Andrés', 'Gómez', 'Martínez', 'l.gomez@clinic.com', '555-1010', 'LIC001', 'Oftalmologia'),
+    ('87654321B', 'María', NULL, 'Pérez', 'López', 'm.perez@clinic.com', '555-2020', 'LIC002', 'Oftalmologia'),
+    ('11223344C', 'Jorge', 'Luis', 'Fernández', 'Ruiz', 'j.fernandez@clinic.com', '555-3030', 'LIC003', 'Oftalmologia');
 
 INSERT INTO patients (dni, firstName, secondName, lastName, secondLastName, email, phone, birthDate, address)
 VALUES
@@ -129,6 +139,13 @@ VALUES
     (3, 'Miodesopsias (Moscas volantes)', 'Ninguna', 'Fondo de ojo normal, retina sin desgarros', 'Observación y revisión ante cambios repentinos', '2025-10-26');
 
 
+
+-
+INSERT INTO patient_doctors (patient_id, doctor_id)
+VALUES
+    (1, 1),  -- Carlos Santos  -> Luis Gómez (Cardiología)
+    (2, 2),  -- Laura Ruiz     -> María Pérez (Pediatría)
+    (3, 3);  -- Ana Castro     -> Jorge Fernández (Dermatología)
 
 INSERT INTO roles (name)
 VALUES ('ROLE_ADMIN'), ('ROLE_DOCTOR'), ('ROLE_PATIENT');

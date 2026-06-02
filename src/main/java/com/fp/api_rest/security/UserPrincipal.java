@@ -25,7 +25,11 @@ public class UserPrincipal implements UserDetails {
     public UserPrincipal(User user) {
         this.user = user;
         this.authorities = user.getRoles().stream()
-                .map(r -> new SimpleGrantedAuthority(r.getName()))
+                .map(r -> {
+                    String raw = r.getName() == null ? "" : r.getName().trim();
+                    String normalized = raw.startsWith("ROLE_") ? raw.substring(5) : raw;
+                    return new SimpleGrantedAuthority(normalized);
+                })
                 .collect(Collectors.toSet());
     }
 

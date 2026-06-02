@@ -3,6 +3,7 @@ package com.fp.api_rest.model;
 import com.fp.api_rest.model.base.Person;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -27,5 +28,9 @@ public class Doctor extends Person {
 
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Appointment> appointments;
+
+    @Builder.Default
+    @ManyToMany(mappedBy = "doctors", fetch = FetchType.LAZY)
+    private List<Patient> patients = new java.util.ArrayList<>();
 
 }

@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.Optional;
 
+
 /**
  * Repositorio JPA para la entidad Doctor.
  */
@@ -22,4 +23,12 @@ public interface DoctorDAO extends JpaRepository<Doctor, Integer> {
      * @return lista de médicos coincidentes
      */
     List<Doctor> findBySpecialtyContainingIgnoreCase(String keyword);
+
+    /**
+     * Busca un doctor por su email, usado para resolver el ID del doctor autenticado.
+     * El email coincide con User.username en el sistema de autenticación.
+     * @param email email del doctor
+     * @return doctor encontrado, si existe
+     */
+    Optional<Doctor> findByEmail(String email);
 }

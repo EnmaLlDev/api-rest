@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Builder
@@ -26,4 +27,5 @@ public class PatientDTO {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
     private String address;
+    private List<Integer> doctorIds;
 }

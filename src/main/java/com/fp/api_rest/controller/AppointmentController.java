@@ -86,14 +86,31 @@ public class AppointmentController {
     }
 
     /**
+     * Obtiene todas las citas de un doctor por su ID.
+     * @param doctorId identificador del doctor
+     * @return lista de citas del doctor
+     */
+    @GetMapping("/doctor/{doctorId}")
+    public ResponseEntity<List<AppointmentDTO>> getAppointmentsByDoctor(@PathVariable Integer doctorId) {
+        return ResponseEntity.ok(appointmentService.findByDoctorId(doctorId));
+    }
+
+    /**
      * Obtiene las citas del usuario autenticado.
+     * Si el usuario tiene rol DOCTOR devuelve sus citas como médico.
+     * Si tiene rol PATIENT devuelve sus citas como paciente.
      * @param authentication autenticación del usuario
-     * @return lista de citas del paciente
+     * @return lista de citas filtrada por rol
      */
     @GetMapping("/my")
     public ResponseEntity<List<AppointmentDTO>> getMyAppointments(Authentication authentication) {
         String email = authentication.getName();
-        List<AppointmentDTO> appointments = appointmentService.findByPatientEmail(email);
+        boolean isDoctor = authentication.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equalsIgnoreCase("DOCTOR")
+                        || a.getAuthority().equalsIgnoreCase("ROLE_DOCTOR"));
+        List<AppointmentDTO> appointments = isDoctor
+                ? appointmentService.findByDoctorForEmail(email)
+                : appointmentService.findByPatientEmail(email);
         return ResponseEntity.ok(appointments);
     }
 }

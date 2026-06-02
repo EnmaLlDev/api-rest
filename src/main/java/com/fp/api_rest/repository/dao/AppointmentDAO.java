@@ -28,4 +28,11 @@ public interface AppointmentDAO extends JpaRepository<Appointment, Integer> {
      * @return lista de citas del paciente
      */
     List<Appointment> findByPatientId(Integer patientId);
+
+    /**
+     * Busca citas asociadas a un doctor por su email (username del sistema).
+     * @param Id identificador del doctorr
+     * @return lista de citas del doctor
+     */
+    List<Appointment> findByDoctorId(Integer Id);
 }

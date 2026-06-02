@@ -4,6 +4,7 @@ import com.fp.api_rest.repository.dao.DoctorDAO;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import com.fp.api_rest.model.dto.DoctorDTO;
 import com.fp.api_rest.model.dto.mapper.DoctorMapper;
@@ -16,15 +17,18 @@ public class DoctorService {
 
     @Autowired
     private final DoctorDAO doctorDAO;
+    private final UserProvisioningService userProvisioningService;
 
-    public DoctorService(DoctorDAO doctorDAO) {
+    public DoctorService(DoctorDAO doctorDAO, UserProvisioningService userProvisioningService) {
         this.doctorDAO = doctorDAO;
+        this.userProvisioningService = userProvisioningService;
     }
 
     /**
      * Lista todos los médicos.
      * @return lista de médicos como DTO
      */
+    @Transactional(readOnly = true)
     public List<DoctorDTO> findAll() {
         return doctorDAO.findAll()
                 .stream()
@@ -37,6 +41,7 @@ public class DoctorService {
      * @param id identificador del médico
      * @return DTO del médico o null si no existe
      */
+    @Transactional(readOnly = true)
     public DoctorDTO findById(Integer id) {
         return doctorDAO.findById(id)
                 .map(DoctorMapper::toDTO)
@@ -48,9 +53,11 @@ public class DoctorService {
      * @param dto datos del médico
      * @return DTO del médico creado
      */
+    @Transactional
     public DoctorDTO save(DoctorDTO dto) {
         Doctor doctor = DoctorMapper.toEntity(dto);
         Doctor saved = doctorDAO.save(doctor);
+        userProvisioningService.createDefaultUser(dto.getEmail(), "ROLE_DOCTOR");
         return DoctorMapper.toDTO(saved);
     }
 

@@ -1,7 +1,11 @@
 package com.fp.api_rest.model.dto.mapper;
 
+import com.fp.api_rest.model.Doctor;
 import com.fp.api_rest.model.Patient;
 import com.fp.api_rest.model.dto.PatientDTO;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Clase de utilidad para mapear entre Patient y PatientDTO.
@@ -15,6 +19,7 @@ public class PatientMapper {
     public static PatientDTO toDTO(Patient pacient) {
         PatientDTO dto = new PatientDTO();
         dto.setId(pacient.getId());
+        dto.setDni(pacient.getDni());
         dto.setFirstName(pacient.getFirstName());
         dto.setSecondName(pacient.getSecondName());
         dto.setLastName(pacient.getLastName());
@@ -23,6 +28,10 @@ public class PatientMapper {
         dto.setPhone(pacient.getPhone());
         dto.setBirthDate(pacient.getBirthDate());
         dto.setAddress(pacient.getAddress());
+        List<Doctor> docs = pacient.getDoctors();
+        dto.setDoctorIds(docs != null
+                ? docs.stream().map(Doctor::getId).collect(Collectors.toList())
+                : Collections.emptyList());
 
         return dto;
     }
@@ -35,6 +44,7 @@ public class PatientMapper {
     public static Patient toEntity(PatientDTO dto) {
         Patient patient = new Patient();
         patient.setId(dto.getId());
+        patient.setDni(dto.getDni());
         patient.setFirstName(dto.getFirstName());
         patient.setSecondName(dto.getSecondName());
         patient.setLastName(dto.getLastName());

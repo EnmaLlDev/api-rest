@@ -6,6 +6,7 @@ import com.fp.api_rest.model.dto.DetailsDTO;
 import com.fp.api_rest.model.dto.mapper.AppointmentDetailMapper;
 import com.fp.api_rest.repository.dao.AppointmentDAO;
 import com.fp.api_rest.repository.dao.AppointmentDetailDAO;
+import com.fp.api_rest.repository.dao.DoctorDAO;
 import com.fp.api_rest.repository.dao.PatientDAO;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
@@ -24,11 +25,14 @@ public class DetailsService {
     private final AppointmentDetailDAO appointmentDetailDAO;
     private final AppointmentDAO appointmentDAO;
     private final PatientDAO patientDAO;
+    private final DoctorDAO doctorDAO;
 
-    public DetailsService(AppointmentDetailDAO appointmentDetailDAO, AppointmentDAO appointmentDAO, PatientDAO patientDAO) {
+    public DetailsService(AppointmentDetailDAO appointmentDetailDAO, AppointmentDAO appointmentDAO,
+                          PatientDAO patientDAO, DoctorDAO doctorDAO) {
         this.appointmentDetailDAO = appointmentDetailDAO;
         this.appointmentDAO = appointmentDAO;
         this.patientDAO = patientDAO;
+        this.doctorDAO = doctorDAO;
     }
 
     /**
@@ -138,5 +142,29 @@ public class DetailsService {
                 .stream()
                 .map(AppointmentDetailMapper::toDTO)
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * Busca detalles clínicos de las citas de un doctor por su ID (Doctor.id, tipo Integer).
+     * @param doctorId identificador del doctor
+     * @return lista de detalles del doctor
+     */
+    public List<DetailsDTO> findByDoctorId(Integer doctorId) {
+        return appointmentDetailDAO.findByDoctorId(doctorId)
+                .stream()
+                .map(AppointmentDetailMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Resuelve el email del doctor autenticado a su Doctor.id y devuelve sus detalles.
+     * Flujo: email (User.username) → Doctor.email → Doctor.id → AppointmentDetailDAO.findByDoctorId.
+     * @param email email del doctor autenticado (authentication.getName())
+     * @return lista de detalles del doctor, o vacía si el doctor no existe
+     */
+    public List<DetailsDTO> findByDoctorForEmail(String email) {
+        return doctorDAO.findByEmail(email)
+                .map(doctor -> findByDoctorId(doctor.getId()))
+                .orElse(List.of());
     }
 }

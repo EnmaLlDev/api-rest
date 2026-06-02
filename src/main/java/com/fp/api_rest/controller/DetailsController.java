@@ -122,13 +122,20 @@ public class DetailsController {
 
     /**
      * Obtiene los detalles clínicos del usuario autenticado.
+     * Si el usuario tiene rol DOCTOR devuelve los detalles de sus citas.
+     * Si tiene rol PATIENT devuelve los detalles de sus propias citas.
      * @param authentication autenticación del usuario
-     * @return lista de detalles del paciente
+     * @return lista de detalles filtrada por rol
      */
     @GetMapping("/my")
     public ResponseEntity<List<DetailsDTO>> getMyDetails(Authentication authentication) {
         String email = authentication.getName();
-        List<DetailsDTO> details = appointmentDetailService.findByPatientEmail(email);
+        boolean isDoctor = authentication.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equalsIgnoreCase("DOCTOR")
+                        || a.getAuthority().equalsIgnoreCase("ROLE_DOCTOR"));
+        List<DetailsDTO> details = isDoctor
+                ? appointmentDetailService.findByDoctorForEmail(email)
+                : appointmentDetailService.findByPatientEmail(email);
         return ResponseEntity.ok(details);
     }
 }

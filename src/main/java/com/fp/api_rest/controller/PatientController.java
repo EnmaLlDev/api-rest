@@ -79,6 +79,28 @@ public class PatientController {
     }
 
     /**
+     * Asigna un doctor a un paciente.
+     * @param patientId identificador del paciente
+     * @param doctorId identificador del doctor
+     * @return paciente actualizado
+     */
+    @PostMapping("/{patientId}/doctor/{doctorId}")
+    public PatientDTO assignDoctor(@PathVariable Integer patientId, @PathVariable Integer doctorId) {
+        return patientService.assignDoctor(patientId, doctorId);
+    }
+
+    /**
+     * Elimina la asignación de un doctor a un paciente.
+     * @param patientId identificador del paciente
+     * @param doctorId identificador del doctor
+     * @return paciente actualizado
+     */
+    @DeleteMapping("/{patientId}/doctor/{doctorId}")
+    public PatientDTO removeDoctor(@PathVariable Integer patientId, @PathVariable Integer doctorId) {
+        return patientService.removeDoctor(patientId, doctorId);
+    }
+
+    /**
      * Obtiene los datos del paciente autenticado.
      * @param authentication autenticación del usuario
      * @return datos del paciente o 404

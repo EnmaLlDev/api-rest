@@ -1,8 +1,10 @@
 package com.fp.api_rest.model.dto;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.util.List;
 
 @Data
 @Builder
@@ -19,7 +21,9 @@ public class DoctorDTO {
     private String secondLastName;
     private String email;
     private String phone;
+    @NotBlank(message = "El DNI es obligatorio")
     private String dni;
     private String licenseNumber;
     private String specialty;
+    private List<Integer> patientIds;
 }
